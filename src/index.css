@@ -7739,3 +7739,983 @@ button {
   }
 }
 
+
+/* Phone landscape full-card correction: centered large card with logo restored */
+@media (max-width: 980px) and (orientation: landscape) and (max-height: 560px) {
+  .mobile-menu__art {
+    display: grid !important;
+    place-items: center !important;
+    padding:
+      max(8px, env(safe-area-inset-top))
+      max(48px, calc(env(safe-area-inset-right) + 48px))
+      max(8px, env(safe-area-inset-bottom))
+      max(12px, env(safe-area-inset-left)) !important;
+  }
+
+  .mobile-menu__content {
+    width: min(94vw, 880px) !important;
+    max-width: calc(100vw - 72px) !important;
+    max-height: calc(100dvh - 16px) !important;
+    margin: auto !important;
+    display: grid !important;
+    grid-template-columns: minmax(86px, 0.24fr) minmax(0, 1fr) !important;
+    grid-template-rows: minmax(0, 1fr) auto !important;
+    grid-template-areas:
+      "brand links"
+      "brand actions" !important;
+    align-items: center !important;
+    align-content: center !important;
+    justify-content: center !important;
+    gap: clamp(7px, 1.8dvh, 12px) clamp(9px, 2vw, 16px) !important;
+    padding: clamp(10px, 2.4dvh, 16px) clamp(12px, 2.4vw, 20px) !important;
+    border-radius: clamp(20px, 5dvh, 30px) !important;
+    overflow: hidden !important;
+    justify-self: center !important;
+    align-self: center !important;
+  }
+
+  .mobile-menu__brand {
+    grid-area: brand !important;
+    display: grid !important;
+    justify-items: center !important;
+    align-self: center !important;
+    justify-self: center !important;
+    gap: clamp(5px, 1.4dvh, 8px) !important;
+    margin: 0 !important;
+    min-width: 0 !important;
+    text-align: center !important;
+  }
+
+  .mobile-menu__logo-wrap {
+    display: grid !important;
+    place-items: center !important;
+    width: clamp(64px, 22dvh, 104px) !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    aspect-ratio: 1 !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+  }
+
+  .mobile-menu__logo {
+    display: block !important;
+    width: clamp(54px, 18dvh, 88px) !important;
+    height: auto !important;
+    max-width: none !important;
+    margin: auto !important;
+    object-fit: contain !important;
+  }
+
+  .mobile-menu__wordmark {
+    display: grid !important;
+    justify-items: center !important;
+    max-width: 134px !important;
+    padding: 5px 9px 6px !important;
+    margin: 0 auto !important;
+  }
+
+  .mobile-menu__wordmark strong {
+    display: block !important;
+    font-size: clamp(0.82rem, 3.2dvh, 1.12rem) !important;
+    line-height: 0.95 !important;
+    white-space: nowrap !important;
+  }
+
+  .mobile-menu__wordmark span {
+    display: none !important;
+  }
+
+  .mobile-menu__links {
+    grid-area: links !important;
+    align-self: end !important;
+    width: 100% !important;
+    display: grid !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    gap: clamp(4px, 0.9vw, 7px) !important;
+  }
+
+  .mobile-menu__links a {
+    height: clamp(28px, 8.2dvh, 36px) !important;
+    min-height: clamp(28px, 8.2dvh, 36px) !important;
+    max-height: 36px !important;
+    padding-inline: clamp(2px, 0.7vw, 6px) !important;
+    font-size: clamp(0.42rem, 1.18vw, 0.68rem) !important;
+    white-space: nowrap !important;
+    word-break: keep-all !important;
+    overflow-wrap: normal !important;
+    overflow: hidden !important;
+    text-overflow: clip !important;
+  }
+
+  .mobile-menu__actions {
+    grid-area: actions !important;
+    align-self: start !important;
+    justify-self: center !important;
+    width: min(100%, 520px) !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr) !important;
+    gap: clamp(5px, 1vw, 8px) !important;
+  }
+
+  .mobile-menu__call,
+  .mobile-menu__cta {
+    height: clamp(29px, 8.5dvh, 36px) !important;
+    min-height: clamp(29px, 8.5dvh, 36px) !important;
+    max-height: 36px !important;
+    font-size: clamp(0.48rem, 1.25vw, 0.7rem) !important;
+    padding-inline: clamp(5px, 1vw, 10px) !important;
+    white-space: nowrap !important;
+    word-break: keep-all !important;
+    overflow-wrap: normal !important;
+  }
+
+  .mobile-menu__call small {
+    display: none !important;
+  }
+
+  .mobile-menu__call strong {
+    display: inline !important;
+    white-space: nowrap !important;
+  }
+
+  .mobile-menu__close {
+    position: fixed !important;
+    top: max(8px, env(safe-area-inset-top)) !important;
+    right: max(9px, env(safe-area-inset-right)) !important;
+    left: auto !important;
+    bottom: auto !important;
+    translate: 0 0 !important;
+    transform: none !important;
+    z-index: 9999 !important;
+  }
+}
+
+@media (max-width: 700px) and (orientation: landscape) and (max-height: 500px) {
+  .mobile-menu__art {
+    padding-right: max(44px, calc(env(safe-area-inset-right) + 44px)) !important;
+    padding-left: max(8px, env(safe-area-inset-left)) !important;
+  }
+
+  .mobile-menu__content {
+    width: min(94vw, 650px) !important;
+    max-width: calc(100vw - 58px) !important;
+    grid-template-columns: minmax(62px, 0.18fr) minmax(0, 1fr) !important;
+    gap: 5px 7px !important;
+    padding: 8px 9px !important;
+  }
+
+  .mobile-menu__logo-wrap {
+    width: clamp(50px, 19dvh, 72px) !important;
+  }
+
+  .mobile-menu__logo {
+    width: clamp(42px, 16dvh, 62px) !important;
+  }
+
+  .mobile-menu__wordmark {
+    display: none !important;
+  }
+
+  .mobile-menu__links {
+    gap: 3px !important;
+  }
+
+  .mobile-menu__links a {
+    height: 27px !important;
+    min-height: 27px !important;
+    font-size: clamp(0.36rem, 1.08vw, 0.54rem) !important;
+    padding-inline: 2px !important;
+  }
+
+  .mobile-menu__actions {
+    width: min(100%, 420px) !important;
+  }
+
+  .mobile-menu__call,
+  .mobile-menu__cta {
+    height: 28px !important;
+    min-height: 28px !important;
+    font-size: clamp(0.42rem, 1.16vw, 0.58rem) !important;
+    padding-inline: 5px !important;
+  }
+}
+
+@media (max-width: 580px) and (orientation: landscape) and (max-height: 430px) {
+  .mobile-menu__content {
+    width: min(95vw, 540px) !important;
+    max-width: calc(100vw - 52px) !important;
+    grid-template-columns: minmax(46px, 0.14fr) minmax(0, 1fr) !important;
+  }
+
+  .mobile-menu__logo-wrap {
+    width: 44px !important;
+  }
+
+  .mobile-menu__logo {
+    width: 38px !important;
+  }
+
+  .mobile-menu__links a {
+    height: 25px !important;
+    min-height: 25px !important;
+    font-size: 0.34rem !important;
+  }
+
+  .mobile-menu__call,
+  .mobile-menu__cta {
+    height: 26px !important;
+    min-height: 26px !important;
+    font-size: 0.4rem !important;
+  }
+}
+
+
+/* Phone landscape menu refinement: logo above cards + better-scaled background image */
+@media (max-width: 980px) and (orientation: landscape) and (max-height: 560px) {
+  .mobile-menu__art {
+    place-items: center !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    background-size: min(96vw, 760px) auto !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    padding:
+      max(10px, env(safe-area-inset-top))
+      max(48px, calc(env(safe-area-inset-right) + 48px))
+      max(10px, env(safe-area-inset-bottom))
+      max(12px, env(safe-area-inset-left)) !important;
+  }
+
+  .mobile-menu__content {
+    width: min(92vw, 820px) !important;
+    max-width: calc(100vw - 72px) !important;
+    max-height: none !important;
+    min-height: min(220px, calc(100dvh - 20px)) !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto auto !important;
+    grid-template-areas:
+      "brand"
+      "links"
+      "actions" !important;
+    align-items: center !important;
+    align-content: center !important;
+    justify-items: center !important;
+    justify-content: center !important;
+    gap: clamp(7px, 2.1dvh, 12px) !important;
+    padding: clamp(10px, 2.4dvh, 16px) clamp(12px, 2.4vw, 20px) !important;
+    margin: auto !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  .mobile-menu__brand {
+    grid-area: brand !important;
+    display: grid !important;
+    grid-template-columns: auto auto !important;
+    align-items: center !important;
+    justify-content: center !important;
+    justify-items: center !important;
+    gap: clamp(8px, 1.8vw, 14px) !important;
+    width: min(100%, 360px) !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+  }
+
+  .mobile-menu__logo-wrap {
+    display: grid !important;
+    place-items: center !important;
+    width: clamp(48px, 15dvh, 74px) !important;
+    min-width: clamp(48px, 15dvh, 74px) !important;
+    aspect-ratio: 1 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .mobile-menu__logo {
+    display: block !important;
+    width: clamp(40px, 12.5dvh, 62px) !important;
+    height: auto !important;
+    margin: auto !important;
+    object-fit: contain !important;
+  }
+
+  .mobile-menu__wordmark {
+    display: grid !important;
+    justify-items: start !important;
+    max-width: 210px !important;
+    padding: 6px 12px 7px !important;
+    margin: 0 !important;
+  }
+
+  .mobile-menu__wordmark strong {
+    display: block !important;
+    font-size: clamp(0.95rem, 3.4dvh, 1.35rem) !important;
+    white-space: nowrap !important;
+  }
+
+  .mobile-menu__wordmark span {
+    display: block !important;
+    max-width: 180px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    font-size: clamp(0.45rem, 1.55dvh, 0.58rem) !important;
+    letter-spacing: 0.08em !important;
+  }
+
+  .mobile-menu__links {
+    grid-area: links !important;
+    align-self: center !important;
+    justify-self: center !important;
+    width: min(100%, 720px) !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    gap: clamp(4px, 0.95vw, 7px) !important;
+  }
+
+  .mobile-menu__links a {
+    height: clamp(28px, 8dvh, 36px) !important;
+    min-height: clamp(28px, 8dvh, 36px) !important;
+    font-size: clamp(0.42rem, 1.18vw, 0.68rem) !important;
+    white-space: nowrap !important;
+    overflow-wrap: normal !important;
+    word-break: keep-all !important;
+  }
+
+  .mobile-menu__actions {
+    grid-area: actions !important;
+    align-self: center !important;
+    justify-self: center !important;
+    width: min(100%, 500px) !important;
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr) !important;
+  }
+}
+
+@media (max-width: 700px) and (orientation: landscape) and (max-height: 500px) {
+  .mobile-menu__art {
+    background-size: min(104vw, 620px) auto !important;
+    background-position: center center !important;
+    padding-right: max(42px, calc(env(safe-area-inset-right) + 42px)) !important;
+  }
+
+  .mobile-menu__content {
+    width: min(92vw, 620px) !important;
+    max-width: calc(100vw - 58px) !important;
+    min-height: 0 !important;
+    gap: 6px !important;
+    padding: 8px 9px !important;
+  }
+
+  .mobile-menu__brand {
+    grid-template-columns: auto auto !important;
+    width: min(100%, 280px) !important;
+    gap: 7px !important;
+  }
+
+  .mobile-menu__logo-wrap {
+    width: clamp(42px, 15dvh, 58px) !important;
+    min-width: clamp(42px, 15dvh, 58px) !important;
+  }
+
+  .mobile-menu__logo {
+    width: clamp(36px, 12dvh, 50px) !important;
+  }
+
+  .mobile-menu__wordmark {
+    display: grid !important;
+    max-width: 150px !important;
+    padding: 5px 9px 6px !important;
+  }
+
+  .mobile-menu__wordmark strong {
+    font-size: clamp(0.78rem, 3dvh, 1rem) !important;
+  }
+
+  .mobile-menu__wordmark span {
+    display: none !important;
+  }
+
+  .mobile-menu__links {
+    width: min(100%, 540px) !important;
+    gap: 3px !important;
+  }
+
+  .mobile-menu__links a {
+    height: 26px !important;
+    min-height: 26px !important;
+    font-size: clamp(0.36rem, 1.05vw, 0.54rem) !important;
+  }
+
+  .mobile-menu__actions {
+    width: min(100%, 390px) !important;
+  }
+
+  .mobile-menu__call,
+  .mobile-menu__cta {
+    height: 27px !important;
+    min-height: 27px !important;
+  }
+}
+
+@media (max-width: 580px) and (orientation: landscape) and (max-height: 430px) {
+  .mobile-menu__art {
+    background-size: min(110vw, 540px) auto !important;
+  }
+
+  .mobile-menu__content {
+    width: min(93vw, 520px) !important;
+    max-width: calc(100vw - 52px) !important;
+    gap: 5px !important;
+    padding: 7px 8px !important;
+  }
+
+  .mobile-menu__brand {
+    width: min(100%, 220px) !important;
+  }
+
+  .mobile-menu__logo-wrap {
+    width: 38px !important;
+    min-width: 38px !important;
+  }
+
+  .mobile-menu__logo {
+    width: 32px !important;
+  }
+
+  .mobile-menu__wordmark {
+    max-width: 112px !important;
+    padding: 4px 7px 5px !important;
+  }
+
+  .mobile-menu__wordmark strong {
+    font-size: 0.72rem !important;
+  }
+
+  .mobile-menu__links a {
+    height: 24px !important;
+    min-height: 24px !important;
+    font-size: 0.33rem !important;
+  }
+
+  .mobile-menu__call,
+  .mobile-menu__cta {
+    height: 25px !important;
+    min-height: 25px !important;
+    font-size: 0.38rem !important;
+  }
+}
+
+
+/* Final sideways-phone menu layout: big centered card, stacked logo/PFS, X attached to card */
+@media (max-width: 980px) and (orientation: landscape) and (max-height: 560px) {
+  .mobile-menu__art {
+    display: grid !important;
+    place-items: center !important;
+    padding:
+      max(8px, env(safe-area-inset-top))
+      max(10px, env(safe-area-inset-right))
+      max(8px, env(safe-area-inset-bottom))
+      max(10px, env(safe-area-inset-left)) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    background-size: min(92vw, 720px) auto !important;
+    background-position: center center !important;
+  }
+
+  .mobile-menu__content {
+    position: relative !important;
+    width: min(96vw, 900px) !important;
+    max-width: calc(100vw - 20px) !important;
+    max-height: calc(100dvh - 16px) !important;
+    min-height: min(250px, calc(100dvh - 16px)) !important;
+    margin: auto !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto auto !important;
+    grid-template-areas:
+      "brand"
+      "links"
+      "actions" !important;
+    align-items: center !important;
+    align-content: center !important;
+    justify-items: center !important;
+    gap: clamp(7px, 2.1dvh, 12px) !important;
+    padding:
+      clamp(12px, 3dvh, 18px)
+      clamp(44px, 8vw, 64px)
+      clamp(10px, 2.5dvh, 16px)
+      clamp(14px, 3vw, 24px) !important;
+    border-radius: clamp(22px, 5.6dvh, 34px) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  .mobile-menu__close {
+    position: absolute !important;
+    top: clamp(8px, 2.2dvh, 12px) !important;
+    right: clamp(8px, 1.8vw, 14px) !important;
+    left: auto !important;
+    bottom: auto !important;
+    translate: 0 0 !important;
+    transform: none !important;
+    width: clamp(34px, 9.5dvh, 42px) !important;
+    height: clamp(34px, 9.5dvh, 42px) !important;
+    min-width: clamp(34px, 9.5dvh, 42px) !important;
+    min-height: clamp(34px, 9.5dvh, 42px) !important;
+    margin: 0 !important;
+    z-index: 20 !important;
+    font-size: clamp(1.35rem, 4.8dvh, 1.72rem) !important;
+    line-height: 1 !important;
+  }
+
+  .mobile-menu__brand {
+    grid-area: brand !important;
+    width: min(100%, 380px) !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto !important;
+    justify-items: center !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: clamp(5px, 1.4dvh, 8px) !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+  }
+
+  .mobile-menu__logo-wrap {
+    display: grid !important;
+    place-items: center !important;
+    width: clamp(52px, 16dvh, 86px) !important;
+    min-width: clamp(52px, 16dvh, 86px) !important;
+    aspect-ratio: 1 !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+  }
+
+  .mobile-menu__logo {
+    display: block !important;
+    width: clamp(44px, 13dvh, 72px) !important;
+    height: auto !important;
+    margin: auto !important;
+    object-fit: contain !important;
+  }
+
+  .mobile-menu__wordmark {
+    display: inline-grid !important;
+    justify-items: center !important;
+    width: auto !important;
+    max-width: min(78vw, 340px) !important;
+    padding: 6px 14px 7px !important;
+    margin: 0 auto !important;
+  }
+
+  .mobile-menu__wordmark strong {
+    display: block !important;
+    font-size: clamp(0.95rem, 3.4dvh, 1.4rem) !important;
+    line-height: 0.95 !important;
+    white-space: nowrap !important;
+  }
+
+  .mobile-menu__wordmark span {
+    display: block !important;
+    max-width: min(68vw, 300px) !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    font-size: clamp(0.45rem, 1.55dvh, 0.62rem) !important;
+    letter-spacing: 0.08em !important;
+  }
+
+  .mobile-menu__links {
+    grid-area: links !important;
+    width: min(100%, 760px) !important;
+    display: grid !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    gap: clamp(4px, 0.9vw, 8px) !important;
+    justify-self: center !important;
+  }
+
+  .mobile-menu__links a {
+    height: clamp(28px, 8.2dvh, 38px) !important;
+    min-height: clamp(28px, 8.2dvh, 38px) !important;
+    max-height: 38px !important;
+    font-size: clamp(0.42rem, 1.16vw, 0.7rem) !important;
+    padding-inline: clamp(2px, 0.8vw, 7px) !important;
+    white-space: nowrap !important;
+    word-break: keep-all !important;
+    overflow-wrap: normal !important;
+    overflow: hidden !important;
+  }
+
+  .mobile-menu__actions {
+    grid-area: actions !important;
+    width: min(100%, 540px) !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr) !important;
+    gap: clamp(5px, 1vw, 9px) !important;
+    justify-self: center !important;
+  }
+
+  .mobile-menu__call,
+  .mobile-menu__cta {
+    height: clamp(29px, 8.5dvh, 38px) !important;
+    min-height: clamp(29px, 8.5dvh, 38px) !important;
+    max-height: 38px !important;
+    font-size: clamp(0.48rem, 1.25vw, 0.72rem) !important;
+    white-space: nowrap !important;
+    word-break: keep-all !important;
+    overflow-wrap: normal !important;
+  }
+}
+
+@media (max-width: 700px) and (orientation: landscape) and (max-height: 500px) {
+  .mobile-menu__content {
+    width: min(97vw, 660px) !important;
+    max-width: calc(100vw - 16px) !important;
+    min-height: min(210px, calc(100dvh - 14px)) !important;
+    padding:
+      9px
+      clamp(38px, 8vw, 52px)
+      8px
+      10px !important;
+    gap: 5px !important;
+  }
+
+  .mobile-menu__close {
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    min-height: 34px !important;
+    top: 7px !important;
+    right: 7px !important;
+  }
+
+  .mobile-menu__logo-wrap {
+    width: clamp(42px, 14dvh, 58px) !important;
+    min-width: clamp(42px, 14dvh, 58px) !important;
+  }
+
+  .mobile-menu__logo {
+    width: clamp(36px, 11.5dvh, 50px) !important;
+  }
+
+  .mobile-menu__wordmark {
+    padding: 4px 10px 5px !important;
+  }
+
+  .mobile-menu__wordmark strong {
+    font-size: clamp(0.78rem, 3dvh, 1.05rem) !important;
+  }
+
+  .mobile-menu__wordmark span {
+    display: none !important;
+  }
+
+  .mobile-menu__links {
+    width: min(100%, 560px) !important;
+    gap: 3px !important;
+  }
+
+  .mobile-menu__links a {
+    height: 26px !important;
+    min-height: 26px !important;
+    font-size: clamp(0.36rem, 1.05vw, 0.56rem) !important;
+  }
+
+  .mobile-menu__actions {
+    width: min(100%, 420px) !important;
+  }
+
+  .mobile-menu__call,
+  .mobile-menu__cta {
+    height: 27px !important;
+    min-height: 27px !important;
+    font-size: clamp(0.42rem, 1.16vw, 0.6rem) !important;
+  }
+}
+
+
+/* Sideways-phone polish: larger PFS mark with a horizontal wordmark background */
+@media (max-width: 980px) and (orientation: landscape) and (max-height: 560px) {
+  .mobile-menu__brand {
+    width: min(100%, 520px) !important;
+    gap: clamp(6px, 1.6dvh, 10px) !important;
+  }
+
+  .mobile-menu__logo-wrap {
+    width: clamp(58px, 17dvh, 94px) !important;
+    min-width: clamp(58px, 17dvh, 94px) !important;
+  }
+
+  .mobile-menu__logo {
+    width: clamp(50px, 14dvh, 80px) !important;
+  }
+
+  .mobile-menu__wordmark {
+    width: min(74vw, 430px) !important;
+    max-width: min(74vw, 430px) !important;
+    min-height: clamp(34px, 9dvh, 48px) !important;
+    display: grid !important;
+    align-content: center !important;
+    justify-items: center !important;
+    gap: 2px !important;
+    padding: 6px clamp(18px, 4vw, 34px) 7px !important;
+    border-radius: 999px !important;
+    background:
+      linear-gradient(90deg, rgba(4, 13, 31, 0.24), rgba(4, 13, 31, 0.72) 18%, rgba(4, 13, 31, 0.82) 50%, rgba(4, 13, 31, 0.72) 82%, rgba(4, 13, 31, 0.24)),
+      radial-gradient(circle at 50% 0%, rgba(53, 213, 255, 0.18), transparent 70%) !important;
+    box-shadow:
+      0 0 28px rgba(53, 213, 255, 0.16),
+      inset 0 0 20px rgba(53, 213, 255, 0.1) !important;
+  }
+
+  .mobile-menu__wordmark strong {
+    font-size: clamp(1.12rem, 4dvh, 1.62rem) !important;
+    letter-spacing: 0.04em !important;
+  }
+
+  .mobile-menu__wordmark span {
+    display: block !important;
+    max-width: 100% !important;
+    font-size: clamp(0.5rem, 1.75dvh, 0.72rem) !important;
+    letter-spacing: 0.12em !important;
+  }
+}
+
+@media (max-width: 700px) and (orientation: landscape) and (max-height: 500px) {
+  .mobile-menu__brand {
+    width: min(100%, 430px) !important;
+    gap: 5px !important;
+  }
+
+  .mobile-menu__logo-wrap {
+    width: clamp(48px, 15dvh, 68px) !important;
+    min-width: clamp(48px, 15dvh, 68px) !important;
+  }
+
+  .mobile-menu__logo {
+    width: clamp(42px, 12dvh, 58px) !important;
+  }
+
+  .mobile-menu__wordmark {
+    display: grid !important;
+    width: min(76vw, 340px) !important;
+    max-width: min(76vw, 340px) !important;
+    min-height: 34px !important;
+    padding: 5px 18px 6px !important;
+  }
+
+  .mobile-menu__wordmark strong {
+    font-size: clamp(0.9rem, 3.3dvh, 1.18rem) !important;
+  }
+
+  .mobile-menu__wordmark span {
+    display: block !important;
+    font-size: clamp(0.42rem, 1.35dvh, 0.54rem) !important;
+    letter-spacing: 0.1em !important;
+  }
+}
+
+@media (max-width: 580px) and (orientation: landscape) and (max-height: 430px) {
+  .mobile-menu__brand {
+    width: min(100%, 330px) !important;
+  }
+
+  .mobile-menu__logo-wrap {
+    width: 42px !important;
+    min-width: 42px !important;
+  }
+
+  .mobile-menu__logo {
+    width: 36px !important;
+  }
+
+  .mobile-menu__wordmark {
+    width: min(72vw, 260px) !important;
+    max-width: min(72vw, 260px) !important;
+    min-height: 30px !important;
+    padding: 4px 14px 5px !important;
+  }
+
+  .mobile-menu__wordmark strong {
+    font-size: 0.82rem !important;
+  }
+
+  .mobile-menu__wordmark span {
+    display: none !important;
+  }
+}
+
+
+/* Sideways-phone polish: make the main logo larger with a horizontal pill background too */
+@media (max-width: 980px) and (orientation: landscape) and (max-height: 560px) {
+  .mobile-menu__brand {
+    width: min(100%, 560px) !important;
+  }
+
+  .mobile-menu__logo-wrap {
+    width: min(62vw, 360px) !important;
+    min-width: min(62vw, 360px) !important;
+    height: clamp(54px, 15dvh, 82px) !important;
+    min-height: clamp(54px, 15dvh, 82px) !important;
+    aspect-ratio: auto !important;
+    border-radius: 999px !important;
+    display: grid !important;
+    place-items: center !important;
+    padding: 5px clamp(22px, 5vw, 42px) !important;
+    margin: 0 auto !important;
+    background:
+      linear-gradient(90deg, rgba(4, 13, 31, 0.18), rgba(4, 13, 31, 0.68) 18%, rgba(4, 13, 31, 0.82) 50%, rgba(4, 13, 31, 0.68) 82%, rgba(4, 13, 31, 0.18)),
+      radial-gradient(circle at 50% 15%, rgba(53, 213, 255, 0.22), transparent 72%) !important;
+    box-shadow:
+      0 0 34px rgba(53, 213, 255, 0.18),
+      inset 0 0 26px rgba(139, 92, 246, 0.12),
+      inset 0 0 18px rgba(53, 213, 255, 0.1) !important;
+  }
+
+  .mobile-menu__logo {
+    width: clamp(72px, 22dvh, 122px) !important;
+    max-width: 42vw !important;
+    height: auto !important;
+    object-fit: contain !important;
+  }
+}
+
+@media (max-width: 700px) and (orientation: landscape) and (max-height: 500px) {
+  .mobile-menu__logo-wrap {
+    width: min(58vw, 285px) !important;
+    min-width: min(58vw, 285px) !important;
+    height: clamp(46px, 14dvh, 64px) !important;
+    min-height: clamp(46px, 14dvh, 64px) !important;
+    padding: 4px clamp(16px, 4vw, 30px) !important;
+  }
+
+  .mobile-menu__logo {
+    width: clamp(58px, 18dvh, 94px) !important;
+    max-width: 40vw !important;
+  }
+}
+
+@media (max-width: 580px) and (orientation: landscape) and (max-height: 430px) {
+  .mobile-menu__logo-wrap {
+    width: min(56vw, 230px) !important;
+    min-width: min(56vw, 230px) !important;
+    height: 42px !important;
+    min-height: 42px !important;
+    padding: 3px 16px !important;
+  }
+
+  .mobile-menu__logo {
+    width: 54px !important;
+    max-width: 34vw !important;
+  }
+}
+
+
+/* Sideways-phone correction: fit the existing main logo inside the horizontal pill without resizing the logo */
+@media (max-width: 980px) and (orientation: landscape) and (max-height: 560px) {
+  .mobile-menu__logo-wrap {
+    width: min(74vw, 440px) !important;
+    min-width: min(74vw, 440px) !important;
+    height: clamp(72px, 20dvh, 108px) !important;
+    min-height: clamp(72px, 20dvh, 108px) !important;
+    max-height: 108px !important;
+    display: grid !important;
+    place-items: center !important;
+    padding: clamp(8px, 2dvh, 14px) clamp(34px, 7vw, 58px) !important;
+    overflow: visible !important;
+  }
+}
+
+@media (max-width: 700px) and (orientation: landscape) and (max-height: 500px) {
+  .mobile-menu__logo-wrap {
+    width: min(72vw, 360px) !important;
+    min-width: min(72vw, 360px) !important;
+    height: clamp(62px, 18dvh, 84px) !important;
+    min-height: clamp(62px, 18dvh, 84px) !important;
+    padding: 7px clamp(28px, 6vw, 46px) !important;
+  }
+}
+
+@media (max-width: 580px) and (orientation: landscape) and (max-height: 430px) {
+  .mobile-menu__logo-wrap {
+    width: min(70vw, 300px) !important;
+    min-width: min(70vw, 300px) !important;
+    height: 58px !important;
+    min-height: 58px !important;
+    padding: 6px 30px !important;
+  }
+}
+
+
+/* Sideways-phone correction: vertically center the main-logo pill behind the unchanged logo */
+@media (max-width: 980px) and (orientation: landscape) and (max-height: 560px) {
+  .mobile-menu__brand {
+    align-items: center !important;
+    align-content: center !important;
+  }
+
+  .mobile-menu__logo-wrap {
+    position: relative !important;
+    display: grid !important;
+    place-items: center !important;
+    align-items: center !important;
+    justify-items: center !important;
+    box-sizing: border-box !important;
+    line-height: 0 !important;
+    padding-block: clamp(10px, 2.35dvh, 16px) !important;
+    padding-inline: clamp(34px, 7vw, 58px) !important;
+    translate: 0 0 !important;
+    transform: none !important;
+  }
+
+  .mobile-menu__logo {
+    align-self: center !important;
+    justify-self: center !important;
+    display: block !important;
+    margin: auto !important;
+    translate: 0 0 !important;
+    transform: none !important;
+    line-height: 0 !important;
+    vertical-align: middle !important;
+  }
+}
+
+@media (max-width: 700px) and (orientation: landscape) and (max-height: 500px) {
+  .mobile-menu__logo-wrap {
+    padding-block: 9px !important;
+    padding-inline: clamp(28px, 6vw, 46px) !important;
+  }
+}
+
+@media (max-width: 580px) and (orientation: landscape) and (max-height: 430px) {
+  .mobile-menu__logo-wrap {
+    padding-block: 8px !important;
+    padding-inline: 30px !important;
+  }
+}
+
+
+/* Sideways-phone correction: keep pill size/shape, vertically center the logo image inside it */
+@media (max-width: 980px) and (orientation: landscape) and (max-height: 560px) {
+  .mobile-menu__logo {
+    position: relative !important;
+    top: auto !important;
+    bottom: auto !important;
+    translate: 0 clamp(-10px, -2.2dvh, -5px) !important;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 700px) and (orientation: landscape) and (max-height: 500px) {
+  .mobile-menu__logo {
+    translate: 0 -6px !important;
+  }
+}
+
+@media (max-width: 580px) and (orientation: landscape) and (max-height: 430px) {
+  .mobile-menu__logo {
+    translate: 0 -4px !important;
+  }
+}
+
