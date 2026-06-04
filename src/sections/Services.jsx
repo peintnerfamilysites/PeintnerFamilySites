@@ -6,9 +6,9 @@ export function Services() {
   return (
     <section className="section shell" id="services">
       <SectionIntro
-        eyebrow="What PFS builds"
-        title="Professional websites with real business structure underneath."
-        text="The design should look impressive, but the layout still needs to sell clearly, load smoothly, and guide visitors toward the next step."
+        eyebrow="What we build"
+        title="Premium digital builds with strategy behind every screen."
+        text="A great website should look impressive, explain the offer clearly, load smoothly, and guide visitors toward the next step without confusion."
       />
 
       <div className="services-grid">

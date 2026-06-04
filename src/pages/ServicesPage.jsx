@@ -11,8 +11,8 @@ export function ServicesPage() {
       <Seo seo={pageSeo.services} />
       <PageHeader
         eyebrow="Services"
-        title="Premium websites, React builds, and launch systems built to feel expensive."
-        text="Every service is structured around trust, speed, mobile polish, and clear visitor actions — not just pretty screens."
+        title="Premium websites, web applications, and launch systems built to outperform templates."
+        text="Every service is built around strategy, clean design, responsive performance, and clear actions that help visitors become customers."
       />
       <Services />
       <Process compact />

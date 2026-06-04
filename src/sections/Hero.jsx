@@ -25,11 +25,11 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, ease: 'easeOut' }}
           >
-          <div className="eyebrow-pill">Premium web design studio</div>
+          <div className="eyebrow-pill">Premium web design & apps</div>
           <img className="hero__logo" src={mainLogo} alt="Peintner Family Sites" width="512" height="512" decoding="async" fetchPriority="high" />
-          <h1>Websites that make small brands feel elite.</h1>
+          <h1>Websites and applications built to make your business look elite.</h1>
           <p>
-            Peintner Family Sites builds sharp, fast, mobile-ready websites and custom React experiences with the kind of polish that makes visitors trust you before they ever call.
+            Peintner Family Sites designs and develops premium websites, landing pages, and custom web applications that feel modern, load fast, and turn visitors into real opportunities.
           </p>
           <div className="hero__actions">
             <Link className="button button--primary" to="/contact">Start a project</Link>
@@ -47,9 +47,9 @@ export function Hero() {
           aria-label="Brand visuals"
         >
           {[
-            { src: brandSlotInterface, alt: 'Futuristic interface design concept' },
-            { src: brandSlotArchitecture, alt: 'Holographic system and development concept' },
-            { src: brandSlotGrowth, alt: 'Launch and growth dashboard concept' },
+            { src: brandSlotInterface, alt: 'Premium website interface and user experience visual' },
+            { src: brandSlotArchitecture, alt: 'Custom web application architecture visual' },
+            { src: brandSlotGrowth, alt: 'Business growth and launch dashboard visual' },
           ].map((item, index) => (
             <img
               key={index}

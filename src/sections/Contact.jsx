@@ -6,9 +6,9 @@ export function Contact() {
       <div className="contact__card">
         <div>
           <span>Ready to build</span>
-          <h2>Let’s make PFS look like the studio people wish they hired first.</h2>
+          <h2>Let’s build the website or application your business should have had from the start.</h2>
           <p>
-            This is ready for your real contact form, scheduler, Google Business link, portfolio screenshots, and client proof once you want to connect them.
+            Whether you need a new website, a redesign, a landing page, or a custom React application, Peintner Family Sites can help turn the idea into a polished digital experience.
           </p>
         </div>
         <div className="contact__actions">

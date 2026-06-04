@@ -7,9 +7,9 @@ export function FeaturedWork() {
     <section className="section shell work-section" id="work">
       <div className="work-section__intro">
         <SectionIntro
-          eyebrow="Portfolio direction"
-          title="A site that feels like a premium developer studio, not a template."
-          text="This section is built to become real case studies as projects are finished. Each card already has space for screenshots, outcomes, and project details."
+          eyebrow="Featured direction"
+          title="Custom project directions built to feel polished, credible, and ready to scale."
+          text="These cards are prepared for real project screenshots and results. For now, they show the kind of premium website and application work Peintner Family Sites is built to deliver."
         />
       </div>
 

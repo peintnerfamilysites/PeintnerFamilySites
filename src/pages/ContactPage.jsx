@@ -10,8 +10,8 @@ export function ContactPage() {
       <Seo seo={pageSeo.contact} />
       <PageHeader
         eyebrow="Contact"
-        title="Ready to turn PFS into the site people remember?"
-        text="Use this page for your email, booking link, intake form, business profiles, and a stronger project-starting experience."
+        title="Ready to build a website or app that makes your business stand out?"
+        text="Tell Peintner Family Sites what you want to build, improve, or launch, and we will help map out the cleanest path forward."
       />
       <Contact standalone />
       <ContactForm />

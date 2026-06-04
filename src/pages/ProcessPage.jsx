@@ -11,8 +11,8 @@ export function ProcessPage() {
       <Seo seo={pageSeo.process} />
       <PageHeader
         eyebrow="Process"
-        title="A senior-dev workflow that keeps the site clean, scalable, and launch-ready."
-        text="The goal is not just a good-looking homepage. The goal is a real product structure you can keep improving without rebuilding from scratch."
+        title="A professional build process that turns ideas into polished, launch-ready digital products."
+        text="From planning to launch, every step is focused on clarity, performance, maintainability, and a final product that feels custom from the first click."
       />
       <Process />
       <TechStack />

@@ -6,9 +6,9 @@ export function Process() {
   return (
     <section className="section shell" id="process">
       <SectionIntro
-        eyebrow="Senior-dev workflow"
-        title="A cleaner process means a better launch."
-        text="The site is organized around reusable data, components, sections, and assets so it is easier to maintain as PFS grows."
+        eyebrow="Build process"
+        title="A clear process creates a stronger final product."
+        text="Every project starts with the business goal, then moves through design, development, testing, and launch with a clean structure that can keep growing."
         align="center"
       />
 

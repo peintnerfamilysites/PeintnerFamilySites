@@ -14,7 +14,7 @@ export const businessInfo = {
 export const defaultSeo = {
   title: 'Peintner Family Sites | Premium Web Design & React Development',
   description:
-    'Peintner Family Sites builds sharp, fast, mobile-ready websites and custom React experiences for small businesses that need trust, speed, and clear customer action.',
+    'Peintner Family Sites designs and develops premium websites, landing pages, and custom web applications for businesses that need trust, speed, polish, and clear customer action.',
   path: '/',
   image: '/og-image.webp',
 };
@@ -28,25 +28,25 @@ export const pageSeo = {
   services: {
     title: 'Web Design Services | Peintner Family Sites',
     description:
-      'Premium business websites, custom React experiences, brand systems, technical SEO structure, and launch support for service brands and small businesses.',
+      'Premium business websites, custom React applications, landing pages, brand polish, technical SEO structure, and launch support for businesses that want a stronger digital presence.',
     path: '/services',
   },
   work: {
-    title: 'Portfolio Direction | Peintner Family Sites',
+    title: 'Web Design Portfolio | Peintner Family Sites',
     description:
-      'Explore portfolio direction, web design concepts, React experiences, local business layouts, and growth-ready website structures from Peintner Family Sites.',
+      'Explore premium website and application work from Peintner Family Sites, including business websites, React experiences, local service layouts, and growth-ready digital systems.',
     path: '/work',
   },
   process: {
     title: 'Website Design Process | Peintner Family Sites',
     description:
-      'A clear website design and development process covering discovery, design, React development, launch support, mobile review, SEO structure, and performance checks.',
+      'A professional website and application development process covering strategy, design, React development, responsive review, SEO structure, launch support, and performance checks.',
     path: '/process',
   },
   contact: {
     title: 'Contact Peintner Family Sites | Start a Website Project',
     description:
-      'Contact Peintner Family Sites to discuss a website build, redesign, React experience, launch support, or local business web presence.',
+      'Contact Peintner Family Sites to discuss a premium website, redesign, landing page, React application, launch support, or stronger business web presence.',
     path: '/contact',
   },
   terms: {
@@ -92,9 +92,9 @@ export function buildOrganizationSchema() {
       },
     ],
     serviceType: [
-      'Website design',
+      'Premium website design',
       'Web development',
-      'React development',
+      'React application development',
       'Landing page design',
       'Technical SEO setup',
       'Website launch support',

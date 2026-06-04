@@ -64,7 +64,7 @@ export function ContactForm() {
       });
 
       setStatus('success');
-      setNotice('Thanks — your request was sent to Peintner Family Sites. I will follow up as soon as possible.');
+      setNotice('Thanks — your request was sent to Peintner Family Sites. I will review the details and follow up as soon as possible.');
       setForm(initialForm);
     } catch (error) {
       console.error('EmailJS send failed:', error);
@@ -78,9 +78,9 @@ export function ContactForm() {
       <div className="contact-form-card">
         <div className="contact-form-card__intro">
           <span>Project intake</span>
-          <h2 id="project-form-title">Tell Peintner Family Sites what you need built.</h2>
+          <h2 id="project-form-title">Tell Peintner Family Sites what you want to build.</h2>
           <p>
-            Share the basics below and PFS will use them to understand the project, goals, timeline, and best next step before reaching out.
+            Share the basics below so PFS can understand your goals, scope, timeline, and the best way to turn your idea into a professional website or application.
           </p>
           <div className="contact-form-card__meta">
             <a href="tel:+19034177043">Call (903) 417-7043</a>
@@ -111,9 +111,9 @@ export function ContactForm() {
               <select name="service" value={form.service} onChange={updateField}>
                 <option>New website build</option>
                 <option>Website redesign</option>
-                <option>React web app</option>
+                <option>Custom React application</option>
                 <option>Landing page</option>
-                <option>Website repair / polish</option>
+                <option>Website repair / professional polish</option>
               </select>
             </label>
             <label>
@@ -138,7 +138,7 @@ export function ContactForm() {
                 value={form.message}
                 onChange={updateField}
                 rows="6"
-                placeholder="Tell me about your business, what pages you need, what is broken, or what you want the site to accomplish."
+                placeholder="Tell me about your business, what you want built, what needs to improve, and what the finished website or application should accomplish."
                 required
               />
             </label>

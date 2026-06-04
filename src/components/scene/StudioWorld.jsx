@@ -380,27 +380,27 @@ function AnimatedRings({ ringScale = 1.94, sceneCenterY = 0 }) {
     const t = state.clock.elapsedTime;
 
     if (systemRef.current) {
-      systemRef.current.rotation.x = Math.sin(t * 0.12) * 0.036;
-      systemRef.current.rotation.y = Math.cos(t * 0.1) * 0.044;
-      systemRef.current.position.y = sceneCenterY + Math.sin(t * 0.24) * 0.018;
+      systemRef.current.rotation.x = Math.sin(t * 0.16) * 0.032;
+      systemRef.current.rotation.y = Math.cos(t * 0.13) * 0.038;
+      systemRef.current.position.y = sceneCenterY + Math.sin(t * 0.28) * 0.01;
     }
 
     if (mainRig.current) {
-      mainRig.current.rotation.x = Math.sin(t * 0.12) * 0.12;
-      mainRig.current.rotation.y = t * 0.105;
-      mainRig.current.rotation.z = Math.cos(t * 0.1) * 0.075;
+      mainRig.current.rotation.x = Math.sin(t * 0.16) * 0.115;
+      mainRig.current.rotation.y = t * 0.14;
+      mainRig.current.rotation.z = Math.cos(t * 0.13) * 0.07;
     }
 
     if (tiltedRig.current) {
-      tiltedRig.current.rotation.x = 1.18 + Math.sin(t * 0.09) * 0.14;
-      tiltedRig.current.rotation.y = -(t * 0.078);
-      tiltedRig.current.rotation.z = t * 0.046 + Math.sin(t * 0.08) * 0.045;
+      tiltedRig.current.rotation.x = 1.18 + Math.sin(t * 0.12) * 0.13;
+      tiltedRig.current.rotation.y = -(t * 0.105);
+      tiltedRig.current.rotation.z = t * 0.062 + Math.sin(t * 0.11) * 0.038;
     }
 
     if (outerRig.current) {
-      outerRig.current.rotation.x = 0.78 + Math.cos(t * 0.08) * 0.1;
-      outerRig.current.rotation.y = t * 0.052;
-      outerRig.current.rotation.z = -(t * 0.058);
+      outerRig.current.rotation.x = 0.78 + Math.cos(t * 0.105) * 0.092;
+      outerRig.current.rotation.y = t * 0.07;
+      outerRig.current.rotation.z = -(t * 0.078);
     }
   });
 

@@ -11,8 +11,8 @@ export function WorkPage() {
       <Seo seo={pageSeo.work} />
       <PageHeader
         eyebrow="Work"
-        title="Portfolio direction for sites that look custom, memorable, and business-ready."
-        text="This page is ready for real case studies, screenshots, before-and-after rebuilds, metrics, and client stories as PFS grows."
+        title="Web design and application work built for real businesses, real users, and real growth."
+        text="Project cards will be updated with live screenshots, case studies, and client results as new work is completed and published."
       />
       <FeaturedWork />
       <TechStack />

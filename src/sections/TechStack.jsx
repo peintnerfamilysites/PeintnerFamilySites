@@ -5,9 +5,9 @@ export function TechStack() {
   return (
     <section className="section shell stack-section" aria-labelledby="stack-title">
       <SectionIntro
-        eyebrow="Built like a real product"
-        title="Modern frontend foundations with room to scale."
-        text="The project is split into focused folders so new pages, services, projects, and assets can be added without turning App.jsx into a mess."
+        eyebrow="Modern development stack"
+        title="Modern frontend foundations built for performance, polish, and flexibility."
+        text="Peintner Family Sites uses modern tools and clean component systems so websites and applications can stay fast, organized, and easier to improve over time."
       />
       <div className="stack-marquee" id="stack-title">
         {[...stackItems, ...stackItems].map((item, index) => (

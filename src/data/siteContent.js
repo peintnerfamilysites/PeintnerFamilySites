@@ -7,10 +7,10 @@ export const navLinks = [
 ];
 
 export const stats = [
-  { value: '01', label: 'Strategy-first websites' },
-  { value: '100%', label: 'Responsive builds' },
-  { value: '<1s', label: 'First impression focus' },
-  { value: '24/7', label: 'Lead capture ready' },
+  { value: '01', label: 'Strategy-first builds' },
+  { value: '100%', label: 'Mobile-ready design' },
+  { value: '<1s', label: 'Fast first impressions' },
+  { value: '24/7', label: 'Lead capture focus' },
 ];
 
 export const services = [
@@ -18,45 +18,45 @@ export const services = [
     number: '01',
     title: 'Premium Business Websites',
     summary:
-      'Polished sites for local businesses, contractors, creators, and service brands that need instant trust and clear calls to action.',
-    points: ['Conversion-focused sections', 'Mobile-first layouts', 'Technical SEO structure'],
+      'Custom websites for businesses that need to look established, trustworthy, and ready to win customers from the first visit.',
+    points: ['Conversion-focused page structure', 'Responsive desktop, tablet, and mobile layouts', 'SEO-ready technical foundation'],
   },
   {
     number: '02',
-    title: 'Custom React Experiences',
+    title: 'Custom Web Applications',
     summary:
-      'Interactive landing pages, dashboards, portals, quote flows, and visual systems built around how the business actually operates.',
-    points: ['Reusable components', 'Fast Vite builds', 'Clean content architecture'],
+      'React-powered interfaces, portals, dashboards, quote flows, and interactive tools built around the way your business actually works.',
+    points: ['Reusable component systems', 'Clean app architecture', 'Fast, scalable frontend builds'],
   },
   {
     number: '03',
-    title: 'Brand Systems + Launch Support',
+    title: 'Brand Polish + Launch Systems',
     summary:
-      'Design direction, asset integration, hosting guidance, analytics, and post-launch improvements so the site keeps getting stronger.',
-    points: ['Design systems', 'Launch checklist', 'Growth-ready foundations'],
+      'Visual direction, asset preparation, launch support, analytics setup, and post-launch improvements that help your site feel complete.',
+    points: ['Professional brand presentation', 'Launch-ready checklist', 'Growth-focused improvements'],
   },
 ];
 
 export const featuredProjects = [
   {
-    title: 'Local Contractor Growth Site',
+    title: 'Local Business Growth Website',
     category: 'Website / Local SEO',
     description:
-      'A trust-heavy contractor layout with service pages, project galleries, quote calls-to-action, and review-platform linking.',
-    metrics: ['Quote funnel', 'Gallery-ready', 'Local intent'],
+      'A high-trust business website direction built for clear services, strong calls to action, project proof, reviews, and local search visibility.',
+    metrics: ['Lead-focused', 'Service pages', 'Local intent'],
   },
   {
-    title: 'PFS Studio Portfolio',
+    title: 'Premium Studio Portfolio',
     category: '3D Brand Experience',
     description:
-      'A cinematic developer portfolio direction with custom navigation artwork, motion, layered depth, and premium presentation.',
+      'A cinematic portfolio experience with custom visuals, responsive navigation, motion, 3D depth, and a memorable first impression.',
     metrics: ['React', 'Three.js', 'Motion'],
   },
   {
-    title: 'Client Operations Portal',
-    category: 'Web App Concept',
+    title: 'Operations Dashboard System',
+    category: 'Web App / Portal',
     description:
-      'A clean dashboard concept for managing customer jobs, messages, documents, invoices, and project status in one place.',
+      'A polished web app direction for organizing customers, projects, messages, documents, invoices, and workflow status in one place.',
     metrics: ['Dashboard', 'Workflow', 'Portal'],
   },
 ];
@@ -65,22 +65,22 @@ export const processSteps = [
   {
     title: 'Discover',
     detail:
-      'Define the offer, audience, goals, pages, assets, and the exact actions visitors should take.',
+      'We clarify the business, audience, offer, competitors, required pages, must-have features, and the action each visitor should take.',
   },
   {
     title: 'Design',
     detail:
-      'Build a strong visual direction with hierarchy, spacing, reusable patterns, and branded interactions.',
+      'We shape a premium visual direction with strong hierarchy, clean spacing, modern interactions, and brand details that feel intentional.',
   },
   {
     title: 'Develop',
     detail:
-      'Create the React component system, responsive layout, animations, and performance-minded structure.',
+      'We build the site or application with reusable React components, responsive CSS, optimized assets, smooth motion, and clean structure.',
   },
   {
     title: 'Launch',
     detail:
-      'Connect links, optimize metadata, review mobile behavior, test builds, and prepare the site for real users.',
+      'We test the experience, review mobile behavior, prepare SEO basics, connect the final details, and get the project ready for real users.',
   },
 ];
 

@@ -9750,3 +9750,23 @@ button {
   }
 }
 
+
+/* Desktop-only planet/ring scale guard.
+   Some wide desktop/browser setups can make the centered scene feel oversized because the layer uses viewport-based sizing.
+   Mobile and tablet rules remain untouched. */
+@media (min-width: 981px) {
+  .hero__panel-stage > .studio-world canvas,
+  .hero__panel-stage > .studio-world .studio-world__css-rings {
+    width: min(1120px, 112vw) !important;
+    height: min(1120px, 112vw) !important;
+  }
+}
+
+@media (min-width: 1400px) {
+  .hero__panel-stage > .studio-world canvas,
+  .hero__panel-stage > .studio-world .studio-world__css-rings {
+    width: 1120px !important;
+    height: 1120px !important;
+  }
+}
+

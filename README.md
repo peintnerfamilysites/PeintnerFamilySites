@@ -1,8 +1,8 @@
 # Peintner Family Sites
 
-A polished React/Vite website for **Peintner Family Sites**, built with a modern high-tech visual style, responsive navigation, animated page transitions, a Three.js homepage scene, and reusable content-driven sections.
+A polished React/Vite website for **Peintner Family Sites**, built with a high-tech visual style, responsive navigation, animated page transitions, optimized brand imagery, a centered Three.js planet/ring homepage scene, SEO metadata, and reusable content-driven sections.
 
-This README is meant to be a practical reference for understanding how the project works, where important files live, and how to safely make changes later.
+This README is a practical reference for understanding how the project works, where important files live, and how to safely make changes later.
 
 ---
 
@@ -18,32 +18,36 @@ This README is meant to be a practical reference for understanding how the proje
 8. [Layout Sections](#layout-sections)
 9. [Reusable Components](#reusable-components)
 10. [Navigation System](#navigation-system)
-11. [Homepage 3D Background](#homepage-3d-background)
+11. [Homepage Hero and 3D Scene](#homepage-hero-and-3d-scene)
 12. [Styling System](#styling-system)
 13. [Responsive Design Notes](#responsive-design-notes)
 14. [Assets](#assets)
-15. [Contact Form / EmailJS](#contact-form--emailjs)
-16. [Deployment Notes](#deployment-notes)
-17. [Common Edits](#common-edits)
-18. [Maintenance Checklist](#maintenance-checklist)
+15. [SEO and Production Visibility](#seo-and-production-visibility)
+16. [Contact Form / EmailJS](#contact-form--emailjs)
+17. [Deployment Notes](#deployment-notes)
+18. [Common Edits](#common-edits)
+19. [Maintenance Checklist](#maintenance-checklist)
+20. [Current Status](#current-status)
 
 ---
 
 ## Project Overview
 
-This project is a single-page React application with multiple routed pages. It is designed as a premium portfolio/business website for a web development company.
+This project is a routed React application designed as a premium portfolio/business website for a web development company.
 
-The site includes:
+The current site includes:
 
-- Desktop and mobile/tablet navigation.
-- Animated mobile menu.
-- Homepage hero with a Three.js planet/ring background.
+- Desktop navigation with a main logo, PFS brand mark, page links, call CTA, and project CTA.
+- Mobile/tablet full-screen animated menu.
+- Homepage hero card with a centered Three.js planet/ring animation behind it.
+- Three optimized brand visual cards below the homepage hero.
 - Services, work, process, tech stack, contact, terms, and error pages.
-- Reusable content cards and reveal animations.
+- Terms of Use page with a fixed no-wrap contact CTA.
+- SEO metadata, sitemap, robots file, web manifest, and social preview image.
 - Responsive styling from small phones through tablets and desktop.
-- Optimized assets and project structure.
+- Optimized assets and reduced source weight.
 
-The app is powered by Vite, React, React Router, Framer Motion, Tailwind CSS tooling, React Three Fiber, and Three.js.
+The app is powered by Vite, React, React Router, Framer Motion, Tailwind CSS tooling, React Three Fiber, Three.js, and EmailJS.
 
 ---
 
@@ -54,10 +58,10 @@ The app is powered by Vite, React, React Router, Framer Motion, Tailwind CSS too
 - **React**: UI framework.
 - **Vite**: Development server and production build tool.
 - **React Router DOM**: Client-side routing.
-- **Framer Motion**: Page, section, and menu animations.
+- **Framer Motion**: Page, section, navbar, and mobile menu animations.
 - **Three.js**: 3D rendering engine.
 - **@react-three/fiber**: React renderer for Three.js.
-- **Tailwind CSS / Tailwind Vite Plugin**: Styling utility support and CSS pipeline.
+- **Tailwind CSS / Tailwind Vite Plugin**: CSS pipeline and utility support.
 - **EmailJS**: Contact form email sending.
 
 ### Fonts
@@ -68,7 +72,7 @@ The site uses a high-tech font combination loaded in `index.html`:
 - Oxanium
 - Rajdhani
 
-These are assigned through CSS variables in `src/index.css`.
+These are applied through the font stack and CSS variables in `src/index.css`.
 
 ---
 
@@ -127,6 +131,12 @@ These scripts are defined in `package.json`.
 ├── package.json
 ├── vite.config.js
 ├── eslint.config.js
+├── public
+│   ├── 404.html
+│   ├── og-image.webp
+│   ├── robots.txt
+│   ├── site.webmanifest
+│   └── sitemap.xml
 ├── src
 │   ├── main.jsx
 │   ├── App.jsx
@@ -136,6 +146,7 @@ These scripts are defined in `package.json`.
 │   │   ├── navigation
 │   │   ├── routing
 │   │   ├── scene
+│   │   ├── seo
 │   │   └── ui
 │   ├── data
 │   ├── hooks
@@ -172,114 +183,88 @@ src/pages/NotFoundPage.jsx
 
 | Route | Page component | Purpose |
 | --- | --- | --- |
-| `/` | `HomePage` | Main landing page. |
-| `/services` | `ServicesPage` | Services overview. |
-| `/work` | `WorkPage` | Featured projects / examples. |
-| `/process` | `ProcessPage` | How the build process works. |
-| `/contact` | `ContactPage` | Contact information and contact form. |
-| `/terms` | `TermsOfUsePage` | Terms of use content. |
-| `*` | `NotFoundPage` | 404 fallback page. |
+| `/` | `HomePage` | Main landing page and hero experience. |
+| `/services` | `ServicesPage` | Services and offer details. |
+| `/work` | `WorkPage` | Portfolio/project direction. |
+| `/process` | `ProcessPage` | Build process and stack. |
+| `/contact` | `ContactPage` | Contact form and CTA details. |
+| `/terms` | `TermsOfUsePage` | Customer-facing Terms of Use. |
+| `*` | `NotFoundPage` | Custom 404 page. |
 
 ---
 
 ## Main Data Files
 
-Most page content is stored separately from the component layout. This makes the site easier to update.
+Most content lists are stored in:
 
-### `src/data/siteContent.js`
+```text
+src/data/siteContent.js
+```
 
-This file controls most repeated site content, including:
+This file controls:
 
-- Navigation links.
-- Homepage stats.
-- Services.
-- Featured projects.
-- Process steps.
-- Tech stack items.
+- `navLinks`
+- `stats`
+- `services`
+- `featuredProjects`
+- `processSteps`
+- `stackItems`
 
-When changing text on cards or updating service/project content, start here.
+Contact-related values are stored in:
 
-### `src/data/contactInfo.js`
+```text
+src/data/contactInfo.js
+```
 
-This file stores contact information used across the site, including the phone number.
+SEO data and schema helpers are stored in:
 
-The `CallButton` and footer phone link pull from this file.
+```text
+src/data/seo.js
+```
 
 ---
 
 ## Layout Sections
 
-Sections are larger page blocks used inside pages.
+Main page sections live in:
 
 ```text
-src/sections/Hero.jsx
-src/sections/Services.jsx
-src/sections/FeaturedWork.jsx
-src/sections/Process.jsx
-src/sections/TechStack.jsx
-src/sections/Contact.jsx
-src/sections/Footer.jsx
+src/sections
 ```
 
-### Section responsibilities
+Important sections include:
 
 | File | Purpose |
 | --- | --- |
-| `Hero.jsx` | Homepage hero, main call-to-action, stats, logo row, and 3D scene loading. |
-| `Services.jsx` | Service cards pulled from `siteContent.js`. |
-| `FeaturedWork.jsx` | Project/work cards pulled from `siteContent.js`. |
-| `Process.jsx` | Step-by-step build process. |
-| `TechStack.jsx` | Tools and technologies used. |
-| `Contact.jsx` | Contact call-to-action section. |
-| `Footer.jsx` | Footer brand, footer links, copyright text, and phone link. |
+| `Hero.jsx` | Homepage hero card, planet/ring scene wrapper, hero CTAs, and brand visual cards. |
+| `Services.jsx` | Service cards. |
+| `FeaturedWork.jsx` | Portfolio/project cards. |
+| `Process.jsx` | Process steps and workflow. |
+| `TechStack.jsx` | Technology stack display. |
+| `ContactCTA.jsx` | Contact call-to-action section. |
+| `Footer.jsx` | Footer brand, links, and phone CTA. |
 
 ---
 
 ## Reusable Components
 
-Reusable components live inside:
+Reusable components live in:
 
 ```text
 src/components
 ```
 
-### UI components
+Important components include:
 
-```text
-src/components/ui/PageHeader.jsx
-src/components/ui/CallButton.jsx
-src/components/ui/Reveal.jsx
-src/components/ui/ContactForm.jsx
-src/components/ui/SectionIntro.jsx
-```
-
-| Component | Purpose |
+| File | Purpose |
 | --- | --- |
-| `PageHeader` | Shared header for internal pages. |
-| `CallButton` | Reusable phone/call-to-action button. |
-| `Reveal` | Scroll/entrance animation wrapper using Framer Motion. |
-| `ContactForm` | EmailJS contact form. |
-| `SectionIntro` | Reusable section label/title/description block. |
-
-### Routing components
-
-```text
-src/components/routing/AppErrorBoundary.jsx
-src/components/routing/ScrollToTop.jsx
-```
-
-| Component | Purpose |
-| --- | --- |
-| `AppErrorBoundary` | Prevents the full app from crashing if a render error occurs. |
-| `ScrollToTop` | Automatically scrolls to the top when navigating to a new route. |
-
-### Custom hooks
-
-```text
-src/hooks/useScrollLock.js
-```
-
-`useScrollLock` locks background scrolling when the mobile menu is open.
+| `components/navigation/NavBar.jsx` | Desktop navbar and mobile/tablet menu. |
+| `components/scene/StudioWorld.jsx` | Three.js planet/ring scene and CSS fallback. |
+| `components/seo/Seo.jsx` | Per-page metadata and structured data. |
+| `components/ui/CallButton.jsx` | Reusable phone CTA button. |
+| `components/ui/ContactForm.jsx` | Contact form powered by EmailJS. |
+| `components/routing/ScrollToTop.jsx` | Scroll reset on route changes. |
+| `components/routing/AppErrorBoundary.jsx` | Error boundary wrapper. |
 
 ---
 
@@ -295,15 +280,16 @@ The navbar has two main experiences:
 
 1. **Desktop navbar**
    - Large horizontal navbar.
-   - Left logo/wordmark area.
-   - Center page buttons.
+   - Left main logo and PFS wordmark stack.
+   - Center page links.
    - Right call/start buttons.
+   - The PFS brand stack has a small desktop-only vertical alignment adjustment in `src/index.css`.
 
 2. **Mobile/tablet menu**
-   - Uses the mobile nav artwork.
-   - Opens as a full-screen overlay.
-   - Uses Framer Motion for entrance and exit animations.
+   - Uses `mobile-nav.webp` as the full-screen artwork.
+   - Opens as a Framer Motion overlay.
    - Includes logo, wordmark, page links, call button, and project CTA.
+   - Tablet-specific rules keep the overlay centered and prevent overflow.
 
 The navigation links come from:
 
@@ -313,13 +299,15 @@ src/data/siteContent.js
 
 Look for the `navLinks` array.
 
-### Tablet nav behavior
-
-Tablet-specific responsive rules are in `src/index.css`. The mobile menu has extra rules for the `761px` to `980px` range so it fits tablet screens without overflowing.
-
 ---
 
-## Homepage 3D Background
+## Homepage Hero and 3D Scene
+
+The homepage hero lives in:
+
+```text
+src/sections/Hero.jsx
+```
 
 The Three.js scene lives in:
 
@@ -327,17 +315,26 @@ The Three.js scene lives in:
 src/components/scene/StudioWorld.jsx
 ```
 
-This component handles the animated planet/ring background on the homepage.
+### Current hero structure
 
-### Important parts
+The homepage hero uses:
+
+- A main glass-style hero card.
+- A dedicated `hero__panel-stage` wrapper.
+- The `StudioWorld` scene placed behind the card inside that stage.
+- Three optimized brand visual cards below the hero card.
+
+The `hero__panel-stage` structure is important because it keeps the planet/rings visually centered behind the main card across desktop, tablet, and mobile.
+
+### Important scene parts
 
 - `canUseWebGL()`
-  - Checks if the browser supports WebGL.
-  - Falls back to CSS-only visuals if WebGL is unavailable.
+  - Checks browser WebGL support.
+  - Falls back to CSS visuals if WebGL is unavailable.
 
 - `createEarthTexture()`
-  - Generates the planet texture using a canvas.
-  - Avoids needing a large external texture file.
+  - Generates the planet texture using canvas.
+  - Uses reduced canvas dimensions for better runtime performance.
 
 - `createCloudTexture()`
   - Generates a procedural cloud texture.
@@ -347,17 +344,20 @@ This component handles the animated planet/ring background on the homepage.
 
 - `AnimatedRings()`
   - Renders the animated rings around the planet.
+  - Uses continuous elapsed-time animation for smoother rotation.
 
 - `BackgroundEffects()`
   - Provides CSS fallback elements.
 
 - `StudioWorld()`
   - Main exported scene wrapper.
-  - Handles WebGL and reduced-motion fallbacks.
+  - Handles WebGL and fallback rendering.
 
 ### Performance notes
 
-The scene is lazy-loaded from `Hero.jsx` using React `lazy()` and `Suspense`. This helps the main page load faster before the 3D background is fully ready.
+The scene is lazy-loaded from `Hero.jsx` using React `lazy()` and `Suspense`. This helps the main page render before the 3D background is fully ready.
+
+The latest animation pass made the rings smoother by using continuous elapsed-time rotation instead of frame-to-frame easing for the main ring rigs. The CSS fallback ring animation was also changed to a smoother linear motion.
 
 ---
 
@@ -376,8 +376,11 @@ The CSS file includes:
 - Typography.
 - Navbar styling.
 - Hero styling.
+- Planet/ring positioning rules.
+- Brand visual card styling.
 - Cards and sections.
 - Mobile menu styling.
+- Terms page styling.
 - Footer styling.
 - Responsive breakpoints.
 - Performance and rendering optimizations.
@@ -393,30 +396,25 @@ At the top and throughout `index.css`, the site uses variables like:
 --ink
 --muted
 --cyan
---purple
+--violet
 --ease
 --shadow-panel
 ```
 
-Later in the file, the high-tech fonts are assigned through:
-
-```css
---font-tech-display
---font-tech-body
---font-tech-condensed
-```
-
 ### Styling approach
 
-The site uses a handcrafted CSS system. Instead of relying only on Tailwind utility classes, most visual design is controlled by semantic class names such as:
+The site uses a handcrafted CSS system. Most visual design is controlled by semantic class names such as:
 
 ```css
 .hero__panel
+.hero__panel-stage
+.hero__mark-visual
 .desktop-art-nav
 .mobile-menu__content
 .service-card
 .work-card
 .process-step
+.terms-note
 .footer
 ```
 
@@ -448,21 +446,20 @@ Important breakpoint ranges include:
 | `981px+` | Desktop navbar and desktop layout. |
 | `981px - 1180px` | Smaller desktop navbar protection. |
 
-### Important tablet menu rules
+### Important responsive areas
 
-The tablet mobile menu rules are near the end of `src/index.css`. These rules keep the menu centered while preventing content from overflowing off the screen.
-
-Look for comments like:
+Look in `src/index.css` for:
 
 ```css
-/* Tablet mobile-menu overflow fix */
+.hero__panel-stage
+.studio-world
+.hero__mark-visual
+.desktop-art-nav
+.mobile-menu
+.terms-note
 ```
 
-and
-
-```css
-/* Tablet mobile-menu centering fix */
-```
+The homepage planet/ring layer has desktop, tablet, and mobile rules that keep the animation centered behind the hero card. The Terms page also has a no-wrap button fix so the long contact CTA stays inside the sidebar button without wrapping.
 
 ---
 
@@ -477,14 +474,12 @@ src/assets
 Current asset files include:
 
 ```text
+brand-slot-architecture.webp
+brand-slot-growth.webp
+brand-slot-interface.webp
 main-logo.webp
 mobile-nav.webp
-p-logo.webp
-f-logo.webp
-s-logo.webp
-p-logo-cropped.webp
-f-logo-cropped.webp
-s-logo-cropped.webp
+nav-pfs-logo.webp
 ```
 
 ### Asset usage
@@ -492,11 +487,58 @@ s-logo-cropped.webp
 | Asset | Used for |
 | --- | --- |
 | `main-logo.webp` | Main logo in navbar, hero, footer, and mobile menu. |
-| `mobile-nav.webp` | Mobile menu background art. |
-| `p-logo.webp`, `f-logo.webp`, `s-logo.webp` | Hero PFS logo row. |
-| `p-logo-cropped.webp`, `f-logo-cropped.webp`, `s-logo-cropped.webp` | Desktop navbar letter logo row. |
+| `nav-pfs-logo.webp` | Desktop navbar PFS brand mark. |
+| `mobile-nav.webp` | Mobile/tablet menu background art. |
+| `brand-slot-interface.webp` | First homepage brand visual card under the hero. |
+| `brand-slot-architecture.webp` | Second homepage brand visual card under the hero. |
+| `brand-slot-growth.webp` | Third homepage brand visual card under the hero. |
 
-Unused PNG files were removed during optimization to keep the project smaller.
+The old standalone `p-logo`, `f-logo`, and `s-logo` source assets were removed after the homepage slots were changed to brand-style visuals.
+
+### Public assets
+
+Public/static assets live in:
+
+```text
+public
+```
+
+Current public files include:
+
+```text
+404.html
+og-image.webp
+robots.txt
+site.webmanifest
+sitemap.xml
+```
+
+`public/og-image.webp` is the high-tech social preview image used for Open Graph/Twitter cards.
+
+---
+
+## SEO and Production Visibility
+
+This project includes a production SEO foundation for the GitHub Pages URL:
+
+- Static homepage metadata in `index.html`.
+- Per-page React metadata through `src/components/seo/Seo.jsx`.
+- Canonical URLs for the main pages.
+- Open Graph and Twitter preview tags.
+- JSON-LD structured data for the business, website, and current page.
+- `public/robots.txt`.
+- `public/sitemap.xml`.
+- `public/site.webmanifest`.
+- `public/og-image.webp`.
+- GitHub Pages SPA route fallback through `public/404.html`.
+
+After deployment, submit the sitemap in Google Search Console:
+
+```text
+https://peintnerfamilysites.github.io/PeintnerFamilySites/sitemap.xml
+```
+
+For stronger long-term search visibility, connect a real custom domain when ready, submit the sitemap in Google Search Console, and add real portfolio/project proof as the business grows.
 
 ---
 
@@ -610,6 +652,28 @@ Edit:
 src/sections/Hero.jsx
 ```
 
+### Change homepage brand visual cards
+
+Edit imports and the `hero__mark-row` data in:
+
+```text
+src/sections/Hero.jsx
+```
+
+Replace the matching WebP files in:
+
+```text
+src/assets
+```
+
+Current brand visual files:
+
+```text
+brand-slot-interface.webp
+brand-slot-architecture.webp
+brand-slot-growth.webp
+```
+
 ### Change service cards
 
 Edit:
@@ -658,7 +722,7 @@ Edit:
 src/sections/Footer.jsx
 ```
 
-### Change desktop navbar sizing
+### Change desktop navbar sizing/alignment
 
 Edit:
 
@@ -670,6 +734,7 @@ Search for:
 
 ```css
 .desktop-art-nav
+.desktop-art-nav__wordmark
 ```
 
 ### Change mobile/tablet menu layout
@@ -703,6 +768,26 @@ createEarthTexture
 createCloudTexture
 ```
 
+### Change Terms page text or sidebar CTA
+
+Edit the Terms page content in:
+
+```text
+src/pages/TermsOfUsePage.jsx
+```
+
+Edit the Terms page sidebar/button styling in:
+
+```text
+src/index.css
+```
+
+Search for:
+
+```css
+.terms-note
+```
+
 ---
 
 ## Maintenance Checklist
@@ -730,19 +815,22 @@ Check the site at these screen sizes:
 
 Also test:
 
-- Desktop navbar.
+- Desktop navbar alignment.
 - Mobile/tablet menu open and close.
+- Homepage planet/ring positioning behind the hero card.
+- Homepage brand visual cards.
 - Contact form.
+- Terms page sidebar buttons.
 - Route navigation.
 - Footer layout.
-- Homepage 3D scene.
 - Reduced-motion settings if possible.
+- Production build on the GitHub Pages base path.
 
 ---
 
 ## Notes for Future Development
 
-This project has a polished visual system, but the CSS file has grown through multiple design passes. Future improvements could include splitting `src/index.css` into smaller files such as:
+This project has a polished visual system, but `src/index.css` has grown through multiple design passes. Future improvements could include splitting it into smaller files such as:
 
 ```text
 styles/base.css
@@ -763,38 +851,15 @@ For now, keeping everything in `src/index.css` is simple and works correctly.
 
 The current version includes:
 
-- Optimized assets.
-- Removed unused dependencies.
+- Optimized WebP assets.
+- Removed unused old P/F/S source assets.
 - High-tech font system.
-- Responsive navbar and mobile/tablet menu fixes.
-- Footer rectangle fix.
-- Homepage 3D planet/ring animation.
+- Responsive desktop navbar and mobile/tablet menu.
+- Desktop navbar brand stack alignment polish.
+- Homepage hero card with centered planet/ring animation behind it.
+- Smoother Three.js and CSS fallback ring animation.
+- Homepage brand visual cards replacing the old P/F/S logo slots.
+- Terms of Use page with no-wrap contact button overflow fix.
+- SEO files and metadata for production visibility.
+- GitHub Pages base path set to `/PeintnerFamilySites/`.
 - Successful lint and production build.
-
-## SEO & Production Visibility
-
-This project includes a production SEO foundation for the GitHub Pages URL:
-
-- Static homepage metadata in `index.html`
-- Per-page React metadata through `src/components/seo/Seo.jsx`
-- Canonical URLs for the main pages
-- Open Graph and Twitter preview tags
-- JSON-LD structured data for the business, website, and current page
-- `public/robots.txt`
-- `public/sitemap.xml`
-- `public/site.webmanifest`
-- `public/og-image.webp`
-- GitHub Pages SPA route fallback through `public/404.html`
-
-After deployment, submit the sitemap in Google Search Console:
-
-```text
-https://peintnerfamilysites.github.io/PeintnerFamilySites/sitemap.xml
-```
-
-For stronger long-term search visibility, connect a real custom domain when ready, submit the sitemap in Google Search Console, and add real portfolio/project proof as the business grows.
-
-
-### Social Preview Image
-
-`public/og-image.webp` uses the generated high-tech PFS social preview artwork. The regular site logo remains `src/assets/main-logo.webp`.
