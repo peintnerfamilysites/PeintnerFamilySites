@@ -6835,3 +6835,143 @@ button {
   }
 }
 
+
+/* Responsive planet/ring background scaling: keeps the 3D scene proportional on tablets and phones */
+.studio-world {
+  --studio-scene-css-scale: 1;
+}
+
+.studio-world canvas,
+.studio-world__css-rings {
+  transform: scale(var(--studio-scene-css-scale));
+  transform-origin: center center;
+}
+
+@media (min-width: 761px) and (max-width: 980px) {
+  .studio-world {
+    --studio-scene-css-scale: 0.88;
+    inset: -8%;
+    opacity: 0.82;
+  }
+
+  .studio-world__planet-glow {
+    width: min(18vw, 190px);
+  }
+
+  .studio-world__planet-core {
+    width: min(12vw, 128px);
+  }
+
+  .studio-world__ring--one {
+    width: min(56vw, 430px);
+  }
+
+  .studio-world__ring--two {
+    width: min(70vw, 540px);
+  }
+
+  .studio-world__ring--three {
+    width: min(84vw, 650px);
+  }
+
+  .studio-world__ring--four {
+    width: min(64vw, 500px);
+  }
+
+  .studio-world__ring--five {
+    width: min(96vw, 740px);
+  }
+
+  .studio-world__ring--six {
+    width: min(112vw, 860px);
+  }
+}
+
+@media (max-width: 760px) {
+  .studio-world {
+    --studio-scene-css-scale: 0.72;
+    inset: -6%;
+    opacity: 0.62;
+  }
+
+  .studio-world__planet-glow {
+    width: min(34vw, 150px);
+  }
+
+  .studio-world__planet-core {
+    width: min(23vw, 104px);
+  }
+
+  .studio-world__ring--one {
+    width: min(74vw, 320px);
+  }
+
+  .studio-world__ring--two {
+    width: min(92vw, 400px);
+  }
+
+  .studio-world__ring--three {
+    width: min(108vw, 480px);
+  }
+
+  .studio-world__ring--four {
+    width: min(82vw, 360px);
+  }
+
+  .studio-world__ring--five {
+    width: min(124vw, 540px);
+  }
+
+  .studio-world__ring--six {
+    width: min(138vw, 620px);
+  }
+}
+
+@media (max-width: 420px) {
+  .studio-world {
+    --studio-scene-css-scale: 0.62;
+    inset: -4%;
+    opacity: 0.54;
+  }
+
+  .studio-world__planet-glow {
+    width: min(38vw, 128px);
+  }
+
+  .studio-world__planet-core {
+    width: min(26vw, 88px);
+  }
+
+  .studio-world__ring--one {
+    width: min(68vw, 260px);
+  }
+
+  .studio-world__ring--two {
+    width: min(84vw, 320px);
+  }
+
+  .studio-world__ring--three {
+    width: min(100vw, 380px);
+  }
+
+  .studio-world__ring--four {
+    width: min(76vw, 300px);
+  }
+
+  .studio-world__ring--five {
+    width: min(112vw, 430px);
+  }
+
+  .studio-world__ring--six {
+    width: min(126vw, 500px);
+  }
+}
+
+@media (max-width: 980px) and (orientation: landscape) {
+  .studio-world {
+    --studio-scene-css-scale: 0.68;
+    inset: -8% -2%;
+    opacity: 0.56;
+  }
+}
+

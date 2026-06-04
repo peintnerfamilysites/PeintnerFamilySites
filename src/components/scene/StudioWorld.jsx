@@ -1,4 +1,4 @@
-import { Suspense, memo, useMemo, useRef, useState } from 'react';
+import { Suspense, memo, useEffect, useMemo, useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
@@ -193,6 +193,80 @@ function createCloudTexture() {
   return texture;
 }
 
+
+function getResponsiveSceneConfig() {
+  if (typeof window === 'undefined') {
+    return {
+      cameraZ: 4.55,
+      ringScale: 1.94,
+      dpr: [1, 1.15],
+    };
+  }
+
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  const shortestSide = Math.min(width, height);
+
+  if (width <= 420) {
+    return {
+      cameraZ: 5.45,
+      ringScale: shortestSide < 380 ? 0.78 : 0.86,
+      dpr: [1, 1],
+    };
+  }
+
+  if (width <= 760) {
+    return {
+      cameraZ: 5.25,
+      ringScale: 1.02,
+      dpr: [1, 1],
+    };
+  }
+
+  if (width <= 980) {
+    return {
+      cameraZ: 5.05,
+      ringScale: height < 760 ? 1.16 : 1.28,
+      dpr: [1, 1.05],
+    };
+  }
+
+  return {
+    cameraZ: 4.55,
+    ringScale: 1.94,
+    dpr: [1, 1.15],
+  };
+}
+
+function useResponsiveSceneConfig() {
+  const [config, setConfig] = useState(() => getResponsiveSceneConfig());
+
+  useEffect(() => {
+    let frame = 0;
+
+    const updateConfig = () => {
+      if (frame) return;
+
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        setConfig(getResponsiveSceneConfig());
+      });
+    };
+
+    updateConfig();
+    window.addEventListener('resize', updateConfig, { passive: true });
+    window.addEventListener('orientationchange', updateConfig, { passive: true });
+
+    return () => {
+      window.removeEventListener('resize', updateConfig);
+      window.removeEventListener('orientationchange', updateConfig);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  return config;
+}
+
 function EarthPlanet() {
   const tiltRef = useRef(null);
   const earthRef = useRef(null);
@@ -291,7 +365,7 @@ function EarthPlanet() {
   );
 }
 
-function AnimatedRings() {
+function AnimatedRings({ ringScale = 1.94 }) {
   const systemRef = useRef(null);
   const mainRig = useRef(null);
   const tiltedRig = useRef(null);
@@ -338,7 +412,7 @@ function AnimatedRings() {
   );
 
   return (
-    <group ref={systemRef} position={[0, 0.06, -1.1]} scale={[1.94, 1.94, 1.94]}>
+    <group ref={systemRef} position={[0, 0.06, -1.1]} scale={[ringScale, ringScale, ringScale]}>
       <EarthPlanet />
 
       <group ref={mainRig} renderOrder={2}>
@@ -401,14 +475,14 @@ function AnimatedRings() {
   );
 }
 
-function SceneContent() {
+function SceneContent({ ringScale }) {
   return (
     <>
       <ambientLight intensity={0.72} />
       <hemisphereLight skyColor="#dff6ff" groundColor="#020617" intensity={0.8} />
       <directionalLight position={[3.2, 2.4, 5]} intensity={1.9} color="#ffffff" />
       <directionalLight position={[-4, -1, -3]} intensity={0.58} color="#60a5fa" />
-      <AnimatedRings />
+      <AnimatedRings ringScale={ringScale} />
     </>
   );
 }
@@ -433,6 +507,7 @@ function BackgroundEffects() {
 const StudioWorld = memo(function StudioWorld() {
   const [webglReady] = useState(() => canUseWebGL());
   const [webglFailed, setWebglFailed] = useState(false);
+  const sceneConfig = useResponsiveSceneConfig();
 
   if (!webglReady || webglFailed) {
     return (
@@ -447,8 +522,8 @@ const StudioWorld = memo(function StudioWorld() {
       <BackgroundEffects />
 
       <Canvas
-        camera={{ position: [0, 0, 4.55], fov: 46 }}
-        dpr={[1, 1.15]}
+        camera={{ position: [0, 0, sceneConfig.cameraZ], fov: 46 }}
+        dpr={sceneConfig.dpr}
         performance={{ min: 0.6 }}
         onCreated={({ gl }) => {
           gl.setClearAlpha(0);
@@ -472,7 +547,7 @@ const StudioWorld = memo(function StudioWorld() {
         }}
       >
         <Suspense fallback={null}>
-          <SceneContent />
+          <SceneContent ringScale={sceneConfig.ringScale} />
         </Suspense>
       </Canvas>
     </div>
