@@ -1,5 +1,5 @@
 import { Link, NavLink } from 'react-router-dom';
-import mainLogo from '../assets/main-logo.webp';
+import mainLogo from '../assets/navbar-pfs-ring-logo.webp';
 import { pfsPhone } from '../data/contactInfo';
 
 export function Footer() {
