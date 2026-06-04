@@ -7516,3 +7516,226 @@ button {
   }
 }
 
+
+/* True short/wide phone-landscape menu: slim panel that fits rotated phones */
+@media (max-width: 980px) and (orientation: landscape) and (max-height: 560px) {
+  .mobile-menu {
+    position: fixed !important;
+    inset: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .mobile-menu__art {
+    width: 100vw !important;
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+    max-height: 100dvh !important;
+    display: grid !important;
+    place-items: center !important;
+    padding:
+      max(7px, env(safe-area-inset-top))
+      max(52px, calc(env(safe-area-inset-right) + 52px))
+      max(7px, env(safe-area-inset-bottom))
+      max(10px, env(safe-area-inset-left)) !important;
+    overflow: hidden !important;
+  }
+
+  .mobile-menu__content {
+    width: min(100%, 780px) !important;
+    max-width: calc(100vw - 72px) !important;
+    height: auto !important;
+    max-height: calc(100dvh - 14px) !important;
+    min-height: 0 !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto !important;
+    grid-template-areas:
+      "links"
+      "actions" !important;
+    align-items: center !important;
+    align-content: center !important;
+    justify-content: center !important;
+    gap: clamp(6px, 2dvh, 9px) !important;
+    padding: clamp(8px, 2dvh, 12px) clamp(9px, 2vw, 14px) !important;
+    border-radius: clamp(16px, 4dvh, 22px) !important;
+    overflow: hidden !important;
+  }
+
+  .mobile-menu__brand,
+  .mobile-menu__logo-wrap,
+  .mobile-menu__logo,
+  .mobile-menu__wordmark {
+    display: none !important;
+  }
+
+  .mobile-menu__close {
+    position: fixed !important;
+    top: max(8px, env(safe-area-inset-top)) !important;
+    right: max(9px, env(safe-area-inset-right)) !important;
+    left: auto !important;
+    bottom: auto !important;
+    translate: 0 0 !important;
+    transform: none !important;
+    width: clamp(34px, 10dvh, 40px) !important;
+    height: clamp(34px, 10dvh, 40px) !important;
+    min-width: clamp(34px, 10dvh, 40px) !important;
+    min-height: clamp(34px, 10dvh, 40px) !important;
+    margin: 0 !important;
+    z-index: 9999 !important;
+    font-size: clamp(1.35rem, 5dvh, 1.65rem) !important;
+    line-height: 1 !important;
+  }
+
+  .mobile-menu__links {
+    grid-area: links !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    display: grid !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    gap: clamp(4px, 1vw, 7px) !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .mobile-menu__links div {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .mobile-menu__links a {
+    width: 100% !important;
+    min-width: 0 !important;
+    height: clamp(28px, 8.8dvh, 34px) !important;
+    min-height: clamp(28px, 8.8dvh, 34px) !important;
+    max-height: 34px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 clamp(2px, 0.8vw, 6px) !important;
+    border-radius: 999px !important;
+    font-size: clamp(0.43rem, 1.28vw, 0.66rem) !important;
+    line-height: 1 !important;
+    letter-spacing: 0 !important;
+    text-align: center !important;
+    text-transform: uppercase !important;
+    white-space: nowrap !important;
+    word-break: keep-all !important;
+    overflow-wrap: normal !important;
+    overflow: hidden !important;
+    text-overflow: clip !important;
+  }
+
+  .mobile-menu__links a::after {
+    inset: auto 30% 4px !important;
+  }
+
+  .mobile-menu__actions {
+    grid-area: actions !important;
+    width: min(100%, 520px) !important;
+    min-width: 0 !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr) !important;
+    gap: clamp(5px, 1.2vw, 8px) !important;
+    align-self: center !important;
+    justify-self: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .mobile-menu__call,
+  .mobile-menu__cta {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: clamp(29px, 9dvh, 35px) !important;
+    min-height: clamp(29px, 9dvh, 35px) !important;
+    max-height: 35px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 clamp(5px, 1.2vw, 10px) !important;
+    border-radius: 999px !important;
+    font-size: clamp(0.5rem, 1.35vw, 0.68rem) !important;
+    line-height: 1 !important;
+    letter-spacing: 0.02em !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    word-break: keep-all !important;
+    overflow-wrap: normal !important;
+    overflow: hidden !important;
+    text-overflow: clip !important;
+  }
+
+  .mobile-menu__call small {
+    display: none !important;
+  }
+
+  .mobile-menu__call strong {
+    display: inline !important;
+    font-size: inherit !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+  }
+
+  .mobile-menu__cta {
+    background-size: 100% 100% !important;
+    background-position: center !important;
+  }
+}
+
+@media (max-width: 700px) and (orientation: landscape) and (max-height: 500px) {
+  .mobile-menu__art {
+    padding-right: max(46px, calc(env(safe-area-inset-right) + 46px)) !important;
+  }
+
+  .mobile-menu__content {
+    max-width: calc(100vw - 60px) !important;
+    gap: 5px !important;
+    padding: 7px 8px !important;
+  }
+
+  .mobile-menu__links {
+    gap: 3px !important;
+  }
+
+  .mobile-menu__links a {
+    height: 26px !important;
+    min-height: 26px !important;
+    font-size: clamp(0.38rem, 1.18vw, 0.54rem) !important;
+    padding-inline: 2px !important;
+  }
+
+  .mobile-menu__actions {
+    width: min(100%, 430px) !important;
+    gap: 5px !important;
+  }
+
+  .mobile-menu__call,
+  .mobile-menu__cta {
+    height: 28px !important;
+    min-height: 28px !important;
+    font-size: clamp(0.45rem, 1.25vw, 0.58rem) !important;
+    padding-inline: 5px !important;
+  }
+}
+
+@media (max-width: 600px) and (orientation: landscape) and (max-height: 430px) {
+  .mobile-menu__content {
+    max-width: calc(100vw - 54px) !important;
+  }
+
+  .mobile-menu__links a {
+    font-size: 0.38rem !important;
+  }
+
+  .mobile-menu__actions {
+    width: 100% !important;
+  }
+
+  .mobile-menu__call,
+  .mobile-menu__cta {
+    font-size: 0.44rem !important;
+  }
+}
+
