@@ -3,24 +3,10 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
 function canUseWebGL() {
-  if (typeof window === 'undefined') return false;
-
-  try {
-    const canvas = document.createElement('canvas');
-    const options = {
-      alpha: true,
-      antialias: false,
-      depth: true,
-      stencil: false,
-      failIfMajorPerformanceCaveat: false,
-      powerPreference: 'default',
-    };
-
-    const gl = canvas.getContext('webgl2', options) || canvas.getContext('webgl', options) || canvas.getContext('experimental-webgl', options);
-    return Boolean(gl);
-  } catch {
-    return false;
-  }
+  // Use only the CSS/background planet and ring animation.
+  // The WebGL canvas version is intentionally disabled because it can appear as a second
+  // animation inside the hero card on some Windows desktop browser/GPU combinations.
+  return false;
 }
 
 function createSeededRandom(seed = 1) {
@@ -544,6 +530,8 @@ const StudioWorld = memo(function StudioWorld() {
 
   return (
     <div className="studio-world studio-world--webgl" aria-hidden="true">
+      <BackgroundEffects />
+
       <Canvas
         camera={{ position: [0, 0, sceneConfig.cameraZ], fov: 46 }}
         dpr={sceneConfig.dpr}
