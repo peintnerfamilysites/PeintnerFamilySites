@@ -543,9 +543,7 @@ const StudioWorld = memo(function StudioWorld() {
   }
 
   return (
-    <div className="studio-world" aria-hidden="true">
-      <BackgroundEffects />
-
+    <div className="studio-world studio-world--webgl" aria-hidden="true">
       <Canvas
         camera={{ position: [0, 0, sceneConfig.cameraZ], fov: 46 }}
         dpr={sceneConfig.dpr}
