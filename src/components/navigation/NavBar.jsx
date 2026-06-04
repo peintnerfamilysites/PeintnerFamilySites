@@ -4,7 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { navLinks } from '../../data/siteContent';
 import { useScrollLock } from '../../hooks/useScrollLock';
 import mobileNav from '../../assets/mobile-nav.webp';
-import mainLogo from '../../assets/main-logo.webp';
+import mainLogo from '../../assets/navbar-pfs-ring-logo.webp';
 import navPfsLogo from '../../assets/nav-pfs-logo.webp';
 import { CallButton } from '../ui/CallButton';
 
