@@ -3,7 +3,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Link, NavLink } from 'react-router-dom';
 import { navLinks } from '../../data/siteContent';
 import { useScrollLock } from '../../hooks/useScrollLock';
-import desktopNav from '../../assets/desktop-nav-current.webp';
 import mobileNav from '../../assets/mobile-nav.webp';
 import mainLogo from '../../assets/main-logo.webp';
 import pLogo from '../../assets/p-logo-cropped.webp';
@@ -68,12 +67,25 @@ export function NavBar() {
   useScrollLock(open);
 
   useEffect(() => {
-    const updateScrolled = () => setScrolled(window.scrollY > 24);
+    let frame = 0;
+
+    const updateScrolled = () => {
+      if (frame) return;
+
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        const nextScrolled = window.scrollY > 24;
+        setScrolled((current) => (current === nextScrolled ? current : nextScrolled));
+      });
+    };
 
     updateScrolled();
     window.addEventListener('scroll', updateScrolled, { passive: true });
 
-    return () => window.removeEventListener('scroll', updateScrolled);
+    return () => {
+      window.removeEventListener('scroll', updateScrolled);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, []);
 
   const close = () => setOpen(false);
@@ -87,12 +99,7 @@ export function NavBar() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="desktop-art-nav" style={{ backgroundImage: `url(${desktopNav})` }}>
-          <div className="desktop-art-nav__storm" aria-hidden="true">
-            <span className="desktop-art-nav__bolt desktop-art-nav__bolt--left" />
-            <span className="desktop-art-nav__bolt desktop-art-nav__bolt--center" />
-            <span className="desktop-art-nav__bolt desktop-art-nav__bolt--right" />
-          </div>
+        <div className="desktop-art-nav">
           <Link className="desktop-art-nav__brand" to="/" aria-label="Peintner Family Sites home">
             <img className="desktop-art-nav__main-logo" src={mainLogo} alt="" decoding="async" />
             <span className="desktop-art-nav__wordmark">
@@ -168,13 +175,6 @@ export function NavBar() {
               style={{ backgroundImage: `url(${mobileNav})` }}
               variants={mobilePanelVariants}
             >
-              <div className="mobile-menu__storm" aria-hidden="true">
-                <span className="mobile-menu__bolt mobile-menu__bolt--top" />
-                <span className="mobile-menu__bolt mobile-menu__bolt--top-extra" />
-                <span className="mobile-menu__bolt mobile-menu__bolt--mid" />
-                <span className="mobile-menu__bolt mobile-menu__bolt--low" />
-                <span className="mobile-menu__bolt mobile-menu__bolt--bottom-extra" />
-              </div>
               <div className="mobile-menu__scrim" />
               <div className="mobile-menu__content" onClick={(event) => event.stopPropagation()}>
                 <motion.button

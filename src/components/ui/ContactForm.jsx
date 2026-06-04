@@ -51,7 +51,7 @@ export function ContactForm() {
     if (!emailJsConfig.serviceId || !emailJsConfig.templateId || !emailJsConfig.publicKey) {
       window.location.href = buildMailto(form);
       setStatus('setup');
-      setNotice('EmailJS environment keys are not connected yet, so this opened your email app with the project details filled in.');
+      setNotice('Your email app opened with the project details filled in. Send that message to contact Peintner Family Sites directly.');
       return;
     }
 
@@ -80,8 +80,7 @@ export function ContactForm() {
           <span>Project intake</span>
           <h2 id="project-form-title">Tell Peintner Family Sites what you need built.</h2>
           <p>
-            Share the basics below and the request can be routed through EmailJS when your service, template,
-            and public key are added to the environment file.
+            Share the basics below and PFS will use them to understand the project, goals, timeline, and best next step before reaching out.
           </p>
           <div className="contact-form-card__meta">
             <a href="tel:+19034177043">Call (903) 417-7043</a>
