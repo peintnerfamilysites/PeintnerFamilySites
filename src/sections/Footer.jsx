@@ -7,7 +7,7 @@ export function Footer() {
     <footer className="footer shell">
       <Link className="footer__brand" to="/" aria-label="PFS home">
         <span className="footer__logo-shell">
-          <img decoding="async" src={mainLogo} alt="" />
+          <img decoding="async" src={mainLogo} alt="" width="512" height="512" />
         </span>
         <span className="footer__wordmark">
           <small>Studio</small>

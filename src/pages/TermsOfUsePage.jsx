@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { pfsPhone } from '../data/contactInfo';
 
+import { Seo } from '../components/seo/Seo';
+import { pageSeo } from '../data/seo';
 const termsSections = [
   {
     title: '1. Agreement to these Terms',
@@ -136,7 +138,9 @@ const termsSections = [
 
 export function TermsOfUsePage() {
   return (
-    <section className="terms-page shell" aria-labelledby="terms-title">
+    <>
+      <Seo seo={pageSeo.terms} />
+      <section className="terms-page shell" aria-labelledby="terms-title">
       <div className="terms-hero">
         <span className="terms-hero__eyebrow">Terms of Use</span>
         <h1 id="terms-title">Terms written from Peintner Family Sites to our customers.</h1>
@@ -180,6 +184,7 @@ export function TermsOfUsePage() {
           ))}
         </div>
       </div>
-    </section>
+      </section>
+    </>
   );
 }

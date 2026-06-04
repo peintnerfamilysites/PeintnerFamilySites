@@ -10,7 +10,6 @@ import { ContactPage } from "./pages/ContactPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { TermsOfUsePage } from "./pages/TermsOfUsePage";
 import { Footer } from "./sections/Footer";
-//hi
 export default function App() {
   return (
     <div className="app">

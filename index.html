@@ -2,19 +2,95 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <base href="/PeintnerFamilySites/" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Peintner Family Sites | Premium Web Design & React Development</title>
+    <meta name="description" content="Peintner Family Sites builds sharp, fast, mobile-ready websites and custom React experiences for small businesses that need trust, speed, and clear customer action." />
+    <meta name="robots" content="index,follow" />
+    <meta name="author" content="Peintner Family Sites" />
+    <meta name="theme-color" content="#020914" />
+    <meta name="color-scheme" content="dark light" />
+
+    <link rel="canonical" href="https://peintnerfamilysites.github.io/PeintnerFamilySites/" />
+    <link rel="icon" type="image/webp" href="/PeintnerFamilySites/og-image.webp" />
+    <link rel="apple-touch-icon" href="/PeintnerFamilySites/og-image.webp" />
+    <link rel="manifest" href="%BASE_URL%site.webmanifest" />
+
+    <meta property="og:title" content="Peintner Family Sites | Premium Web Design & React Development" />
+    <meta property="og:description" content="Sharp, mobile-ready websites and custom React experiences for small businesses that need trust, speed, and clear customer action." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://peintnerfamilysites.github.io/PeintnerFamilySites/" />
+    <meta property="og:image" content="https://peintnerfamilysites.github.io/PeintnerFamilySites/og-image.webp" />
+    <meta property="og:site_name" content="Peintner Family Sites" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Peintner Family Sites | Premium Web Design & React Development" />
+    <meta name="twitter:description" content="Sharp, mobile-ready websites and custom React experiences for small businesses that need trust, speed, and clear customer action." />
+    <meta name="twitter:image" content="https://peintnerfamilysites.github.io/PeintnerFamilySites/og-image.webp" />
+
+    <script type="application/ld+json" id="pfs-static-schema">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "ProfessionalService",
+            "name": "Peintner Family Sites",
+            "alternateName": "PFS",
+            "url": "https://peintnerfamilysites.github.io/PeintnerFamilySites/",
+            "email": "peintnerfamilysites@gmail.com",
+            "telephone": "+19034177043",
+            "serviceType": [
+              "Website design",
+              "Web development",
+              "React development",
+              "Landing page design",
+              "Technical SEO setup",
+              "Website launch support"
+            ],
+            "areaServed": [
+              {
+                "@type": "City",
+                "name": "Springfield",
+                "addressRegion": "MO",
+                "addressCountry": "US"
+              },
+              {
+                "@type": "AdministrativeArea",
+                "name": "Missouri",
+                "addressCountry": "US"
+              }
+            ],
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Springfield",
+              "addressRegion": "MO",
+              "addressCountry": "US"
+            }
+          },
+          {
+            "@type": "WebSite",
+            "name": "Peintner Family Sites",
+            "alternateName": "PFS",
+            "url": "https://peintnerfamilysites.github.io/PeintnerFamilySites/"
+          }
+        ]
+      }
+    </script>
+
+    <script>
+      const redirectPath = new URLSearchParams(window.location.search).get('redirect');
+      if (redirectPath) {
+        window.history.replaceState(null, '', `/PeintnerFamilySites/${redirectPath}`);
+      }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Oxanium:wght@400;500;600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet" />
-    <title>Peintner Family Sites | Premium Web Design & React Development</title>
-    <meta name="description" content="Peintner Family Sites builds sharp, mobile-ready websites and custom React experiences for small businesses that need trust, speed, and clear customer action." />
-    <meta name="theme-color" content="#020914" />
-    <meta property="og:title" content="Peintner Family Sites" />
-    <meta property="og:description" content="Premium web design, React builds, and launch-ready customer experiences." />
-    <meta property="og:type" content="website" />
   </head>
   <body>
+    <noscript>Peintner Family Sites builds premium websites and React experiences for small businesses. Please enable JavaScript to view the full site.</noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

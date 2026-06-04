@@ -5,9 +5,7 @@ import { navLinks } from '../../data/siteContent';
 import { useScrollLock } from '../../hooks/useScrollLock';
 import mobileNav from '../../assets/mobile-nav.webp';
 import mainLogo from '../../assets/main-logo.webp';
-import pLogo from '../../assets/p-logo-cropped.webp';
-import fLogo from '../../assets/f-logo-cropped.webp';
-import sLogo from '../../assets/s-logo-cropped.webp';
+import navPfsLogo from '../../assets/nav-pfs-logo.webp';
 import { CallButton } from '../ui/CallButton';
 
 const overlayVariants = {
@@ -101,12 +99,10 @@ export function NavBar() {
       >
         <div className="desktop-art-nav">
           <Link className="desktop-art-nav__brand" to="/" aria-label="Peintner Family Sites home">
-            <img className="desktop-art-nav__main-logo" src={mainLogo} alt="" decoding="async" />
+            <img className="desktop-art-nav__main-logo" src={mainLogo} alt="" width="512" height="512" decoding="async" />
             <span className="desktop-art-nav__wordmark">
-              <span className="desktop-art-nav__letters" aria-label="PFS">
-                <img src={pLogo} alt="" decoding="async" />
-                <img src={fLogo} alt="" decoding="async" />
-                <img src={sLogo} alt="" decoding="async" />
+              <span className="desktop-art-nav__signature" aria-label="PFS">
+                <img src={navPfsLogo} alt="" width="560" height="283" decoding="async" />
               </span>
               <small>Peintner Family Sites</small>
             </span>
@@ -138,7 +134,7 @@ export function NavBar() {
           to="/"
           aria-label="Peintner Family Sites home"
         >
-          <img src={mainLogo} alt="" decoding="async" />
+          <img src={mainLogo} alt="" width="512" height="512" decoding="async" />
           <span>
             <strong>PFS</strong>
             <small>Peintner Family Sites</small>
@@ -189,7 +185,7 @@ export function NavBar() {
 
                 <motion.div className="mobile-menu__brand" variants={mobileItemVariants}>
                   <Link className="mobile-menu__logo-wrap" to="/" onClick={close} aria-label="PFS home">
-                    <img className="mobile-menu__logo" src={mainLogo} alt="Peintner Family Sites" decoding="async" />
+                    <img className="mobile-menu__logo" src={mainLogo} alt="Peintner Family Sites" width="512" height="512" decoding="async" />
                   </Link>
                   <div className="mobile-menu__wordmark" aria-label="Peintner Family Sites">
                     <strong>PFS</strong>

@@ -36,8 +36,8 @@ function createSeededRandom(seed = 1) {
 
 function createEarthTexture() {
   const canvas = document.createElement('canvas');
-  canvas.width = 2048;
-  canvas.height = 1024;
+  canvas.width = 1024;
+  canvas.height = 512;
   const ctx = canvas.getContext('2d');
 
   if (!ctx) return null;
@@ -152,8 +152,8 @@ function createEarthTexture() {
 
 function createCloudTexture() {
   const canvas = document.createElement('canvas');
-  canvas.width = 2048;
-  canvas.height = 1024;
+  canvas.width = 1024;
+  canvas.height = 512;
   const ctx = canvas.getContext('2d');
 
   if (!ctx) return null;
@@ -199,7 +199,7 @@ function getResponsiveSceneConfig() {
     return {
       cameraZ: 4.55,
       ringScale: 1.94,
-      sceneCenterY: -0.18,
+      sceneCenterY: 0,
       dpr: [1, 1.15],
     };
   }
@@ -212,7 +212,7 @@ function getResponsiveSceneConfig() {
     return {
       cameraZ: 5.45,
       ringScale: shortestSide < 380 ? 0.78 : 0.86,
-      sceneCenterY: -0.24,
+      sceneCenterY: 0,
       dpr: [1, 1],
     };
   }
@@ -221,7 +221,7 @@ function getResponsiveSceneConfig() {
     return {
       cameraZ: 5.25,
       ringScale: 1.02,
-      sceneCenterY: -0.22,
+      sceneCenterY: 0,
       dpr: [1, 1],
     };
   }
@@ -230,7 +230,7 @@ function getResponsiveSceneConfig() {
     return {
       cameraZ: 5.05,
       ringScale: height < 760 ? 1.16 : 1.28,
-      sceneCenterY: height < 760 ? -0.18 : -0.2,
+      sceneCenterY: 0,
       dpr: [1, 1.05],
     };
   }
@@ -238,7 +238,7 @@ function getResponsiveSceneConfig() {
   return {
     cameraZ: 4.55,
     ringScale: 1.94,
-    sceneCenterY: -0.18,
+    sceneCenterY: 0,
     dpr: [1, 1.15],
   };
 }
@@ -314,13 +314,13 @@ function EarthPlanet() {
       <pointLight position={[-2.2, -0.35, -1.4]} intensity={5.5} distance={10} decay={2} color="#3b82f6" />
 
       <mesh position={[0, 0, -0.18]} renderOrder={0}>
-        <sphereGeometry args={[1.12, 32, 32]} />
+        <sphereGeometry args={[1.12, 28, 28]} />
         <meshBasicMaterial color="#020817" transparent opacity={0.28} />
       </mesh>
 
       <group ref={tiltRef}>
         <mesh ref={glowRef} renderOrder={0}>
-          <sphereGeometry args={[1.03, 32, 32]} />
+          <sphereGeometry args={[1.03, 28, 28]} />
           <meshBasicMaterial
             color="#4cc9f0"
             transparent
@@ -332,7 +332,7 @@ function EarthPlanet() {
         </mesh>
 
         <mesh ref={earthRef} castShadow receiveShadow renderOrder={1}>
-          <sphereGeometry args={[0.94, 64, 64]} />
+          <sphereGeometry args={[0.94, 48, 48]} />
           <meshStandardMaterial
             map={earthTexture}
             roughness={0.9}
@@ -343,7 +343,7 @@ function EarthPlanet() {
         </mesh>
 
         <mesh ref={cloudRef} renderOrder={2}>
-          <sphereGeometry args={[0.958, 48, 48]} />
+          <sphereGeometry args={[0.958, 40, 40]} />
           <meshStandardMaterial
             map={cloudTexture}
             transparent
@@ -355,7 +355,7 @@ function EarthPlanet() {
         </mesh>
 
         <mesh ref={atmosphereRef} renderOrder={0}>
-          <sphereGeometry args={[1.01, 40, 40]} />
+          <sphereGeometry args={[1.01, 32, 32]} />
           <meshBasicMaterial
             color="#93c5fd"
             transparent
@@ -370,38 +370,37 @@ function EarthPlanet() {
   );
 }
 
-function AnimatedRings({ ringScale = 1.94, sceneCenterY = -0.1 }) {
+function AnimatedRings({ ringScale = 1.94, sceneCenterY = 0 }) {
   const systemRef = useRef(null);
   const mainRig = useRef(null);
   const tiltedRig = useRef(null);
   const outerRig = useRef(null);
 
-  useFrame((state, delta) => {
+  useFrame((state) => {
     const t = state.clock.elapsedTime;
-    const smoothing = 1 - Math.exp(-delta * 4.5);
 
     if (systemRef.current) {
-      systemRef.current.rotation.x = THREE.MathUtils.lerp(systemRef.current.rotation.x, Math.sin(t * 0.16) * 0.05, smoothing * 0.7);
-      systemRef.current.rotation.y = THREE.MathUtils.lerp(systemRef.current.rotation.y, Math.cos(t * 0.12) * 0.06, smoothing * 0.7);
-      systemRef.current.position.y = THREE.MathUtils.lerp(systemRef.current.position.y, sceneCenterY + Math.sin(t * 0.42) * 0.035, smoothing);
+      systemRef.current.rotation.x = Math.sin(t * 0.12) * 0.036;
+      systemRef.current.rotation.y = Math.cos(t * 0.1) * 0.044;
+      systemRef.current.position.y = sceneCenterY + Math.sin(t * 0.24) * 0.018;
     }
 
     if (mainRig.current) {
-      mainRig.current.rotation.x = THREE.MathUtils.lerp(mainRig.current.rotation.x, Math.sin(t * 0.18) * 0.17, smoothing);
-      mainRig.current.rotation.y += delta * (0.12 + Math.sin(t * 0.09) * 0.02);
-      mainRig.current.rotation.z = THREE.MathUtils.lerp(mainRig.current.rotation.z, Math.cos(t * 0.14) * 0.11, smoothing);
+      mainRig.current.rotation.x = Math.sin(t * 0.12) * 0.12;
+      mainRig.current.rotation.y = t * 0.105;
+      mainRig.current.rotation.z = Math.cos(t * 0.1) * 0.075;
     }
 
     if (tiltedRig.current) {
-      tiltedRig.current.rotation.x = THREE.MathUtils.lerp(tiltedRig.current.rotation.x, 1.18 + Math.sin(t * 0.13) * 0.2, smoothing);
-      tiltedRig.current.rotation.y -= delta * (0.09 + Math.cos(t * 0.08) * 0.016);
-      tiltedRig.current.rotation.z += delta * (0.055 + Math.sin(t * 0.11) * 0.013);
+      tiltedRig.current.rotation.x = 1.18 + Math.sin(t * 0.09) * 0.14;
+      tiltedRig.current.rotation.y = -(t * 0.078);
+      tiltedRig.current.rotation.z = t * 0.046 + Math.sin(t * 0.08) * 0.045;
     }
 
     if (outerRig.current) {
-      outerRig.current.rotation.x = THREE.MathUtils.lerp(outerRig.current.rotation.x, 0.78 + Math.cos(t * 0.11) * 0.14, smoothing);
-      outerRig.current.rotation.y += delta * (0.06 + Math.sin(t * 0.07) * 0.013);
-      outerRig.current.rotation.z -= delta * (0.07 + Math.cos(t * 0.1) * 0.011);
+      outerRig.current.rotation.x = 0.78 + Math.cos(t * 0.08) * 0.1;
+      outerRig.current.rotation.y = t * 0.052;
+      outerRig.current.rotation.z = -(t * 0.058);
     }
   });
 

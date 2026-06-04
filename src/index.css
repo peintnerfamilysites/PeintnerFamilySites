@@ -8719,3 +8719,1034 @@ button {
   }
 }
 
+
+/* Final navbar viewport stabilization pass: preserve style while preventing overflow/clipped cards */
+.nav-shell,
+.desktop-art-nav,
+.mobile-brand,
+.mobile-trigger,
+.mobile-menu,
+.mobile-menu__art,
+.mobile-menu__content,
+.mobile-menu__brand,
+.mobile-menu__links,
+.mobile-menu__actions,
+.mobile-menu__links a,
+.mobile-menu__call,
+.mobile-menu__cta {
+  box-sizing: border-box;
+}
+
+.desktop-art-nav__links a,
+.desktop-art-nav__cta,
+.nav-call,
+.mobile-brand,
+.mobile-menu__links a,
+.mobile-menu__call,
+.mobile-menu__cta {
+  white-space: nowrap;
+}
+
+.mobile-menu__content {
+  min-width: 0;
+  height: auto;
+  max-height: calc(100dvh - max(20px, env(safe-area-inset-top)) - max(20px, env(safe-area-inset-bottom)));
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+}
+
+.mobile-menu__links,
+.mobile-menu__actions {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.mobile-menu__links a,
+.mobile-menu__call,
+.mobile-menu__cta {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Desktop/tablet navbar width guards */
+@media (min-width: 981px) {
+  .desktop-art-nav {
+    width: min(1380px, calc(100vw - 32px));
+    max-width: calc(100vw - 32px);
+  }
+
+  .desktop-art-nav__brand,
+  .desktop-art-nav__actions {
+    min-width: 0;
+  }
+
+  .desktop-art-nav__links {
+    min-width: 0;
+  }
+
+  .desktop-art-nav__links a {
+    min-width: 0;
+    padding-inline: clamp(10px, 1.05vw, 18px);
+  }
+
+  .desktop-art-nav__wordmark,
+  .desktop-art-nav__actions {
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1180px) {
+  .desktop-art-nav {
+    grid-template-columns: minmax(206px, 0.62fr) minmax(390px, 1fr) minmax(218px, 0.58fr);
+    gap: 10px;
+  }
+
+  .desktop-art-nav__main-logo {
+    width: clamp(58px, 5.6vw, 78px);
+  }
+
+  .desktop-art-nav__links a {
+    min-height: 48px;
+    font-size: clamp(0.66rem, 0.78vw, 0.78rem);
+    letter-spacing: 0.045em;
+  }
+
+  .desktop-art-nav__cta,
+  .nav-call {
+    min-height: 46px;
+    font-size: clamp(0.64rem, 0.74vw, 0.76rem);
+  }
+}
+
+/* Portrait phones: let the card grow with the nav/action buttons instead of clipping them */
+@media (max-width: 760px) and (orientation: portrait) {
+  .mobile-menu,
+  .mobile-menu__art {
+    min-height: 100dvh;
+    height: 100dvh;
+    max-height: 100dvh;
+    overflow: hidden;
+  }
+
+  .mobile-menu__art {
+    align-items: center;
+    justify-items: center;
+    padding:
+      max(16px, env(safe-area-inset-top))
+      max(14px, env(safe-area-inset-right))
+      max(16px, env(safe-area-inset-bottom))
+      max(14px, env(safe-area-inset-left));
+  }
+
+  .mobile-menu__content {
+    width: min(100%, 430px);
+    max-width: calc(100vw - 28px);
+    min-height: auto;
+    height: auto;
+    max-height: calc(100dvh - 32px);
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "brand"
+      "links"
+      "actions";
+    align-content: center;
+    justify-items: center;
+    gap: clamp(12px, 2.4dvh, 20px);
+    padding: clamp(18px, 3.2dvh, 28px) clamp(16px, 4.2vw, 24px);
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .mobile-menu__brand,
+  .mobile-menu__links,
+  .mobile-menu__actions {
+    width: 100%;
+  }
+
+  .mobile-menu__links {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(8px, 1.55dvh, 12px);
+  }
+
+  .mobile-menu__links a {
+    width: 100%;
+    min-height: clamp(44px, 6.2dvh, 56px);
+    padding-inline: 14px;
+    font-size: clamp(0.95rem, 4.2vw, 1.25rem);
+    line-height: 1;
+  }
+
+  .mobile-menu__actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(9px, 1.7dvh, 13px);
+    padding-bottom: 0;
+  }
+
+  .mobile-menu__call,
+  .mobile-menu__cta {
+    width: 100%;
+    min-height: clamp(44px, 6.2dvh, 56px);
+    padding-inline: 14px;
+  }
+}
+
+/* Short portrait phones: keep style but compact the card enough to fit all buttons */
+@media (max-width: 430px) and (orientation: portrait) and (max-height: 760px) {
+  .mobile-menu__content {
+    align-content: start;
+    gap: 10px;
+    padding: 15px;
+  }
+
+  .mobile-menu__logo-wrap {
+    width: clamp(86px, 25vw, 118px);
+  }
+
+  .mobile-menu__logo {
+    width: clamp(76px, 22vw, 104px);
+  }
+
+  .mobile-menu__wordmark {
+    padding: 7px 13px 8px;
+  }
+
+  .mobile-menu__wordmark strong {
+    font-size: clamp(1rem, 5vw, 1.28rem);
+  }
+
+  .mobile-menu__wordmark span {
+    font-size: 0.52rem;
+  }
+
+  .mobile-menu__links {
+    gap: 7px;
+  }
+
+  .mobile-menu__links a {
+    min-height: 40px;
+    font-size: clamp(0.85rem, 3.9vw, 1.05rem);
+  }
+
+  .mobile-menu__call,
+  .mobile-menu__cta {
+    min-height: 40px;
+    font-size: 0.72rem;
+  }
+}
+
+/* Tablet/mobile shared range: ensure action row never escapes card width */
+@media (max-width: 980px) {
+  .mobile-menu__content {
+    isolation: isolate;
+    overscroll-behavior: contain;
+  }
+
+  .mobile-menu__actions {
+    contain: layout;
+  }
+
+  .mobile-menu__call,
+  .mobile-menu__cta {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+/* Phone landscape: card uses available short-wide space and may scroll if needed */
+@media (max-width: 980px) and (orientation: landscape) and (max-height: 560px) {
+  .mobile-menu,
+  .mobile-menu__art {
+    height: 100dvh;
+    max-height: 100dvh;
+  }
+
+  .mobile-menu__art {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .mobile-menu__content {
+    width: min(96vw, 900px);
+    max-width: calc(100vw - 20px);
+    min-height: auto;
+    height: auto;
+    max-height: calc(100dvh - 16px);
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .mobile-menu__close {
+    z-index: 30;
+  }
+
+  .mobile-menu__links,
+  .mobile-menu__actions {
+    max-width: 100%;
+  }
+}
+
+/* Very narrow devices: prefer vertical scrolling over broken wrapping */
+@media (max-width: 360px) {
+  .mobile-menu__content {
+    max-width: calc(100vw - 18px);
+    padding-inline: 12px;
+  }
+
+  .mobile-menu__links a,
+  .mobile-menu__call,
+  .mobile-menu__cta {
+    letter-spacing: 0.02em;
+  }
+}
+
+
+/* Single-image chrome PFS signature in desktop navbar */
+.desktop-art-nav__signature {
+  display: inline-flex;
+  align-items: center;
+  height: clamp(30px, 2.75vw, 42px);
+  width: auto;
+  max-width: min(100%, 200px);
+}
+
+.desktop-art-nav__signature img {
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  filter:
+    drop-shadow(0 0 10px rgba(70, 160, 235, 0.5))
+    drop-shadow(0 5px 11px rgba(0, 0, 0, 0.45));
+}
+
+@media (min-width: 981px) and (max-width: 1280px) {
+  .desktop-art-nav__signature {
+    height: 32px;
+    max-width: 164px;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1080px) {
+  .desktop-art-nav__signature {
+    height: 28px;
+    max-width: 144px;
+  }
+}
+
+
+/* Final desktop navbar PFS signature placement: tight crop, smaller, above the words */
+.desktop-art-nav__wordmark {
+  display: grid !important;
+  justify-items: start !important;
+  align-content: center !important;
+  gap: 3px !important;
+  min-width: 0 !important;
+}
+
+.desktop-art-nav__signature {
+  display: inline-grid !important;
+  place-items: center !important;
+  width: clamp(86px, 7.6vw, 132px) !important;
+  max-width: 132px !important;
+  height: clamp(24px, 2.2vw, 34px) !important;
+  margin: 0 0 1px !important;
+  overflow: visible !important;
+}
+
+.desktop-art-nav__signature img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  filter:
+    drop-shadow(0 0 8px rgba(70, 160, 235, 0.48))
+    drop-shadow(0 5px 10px rgba(0, 0, 0, 0.44)) !important;
+}
+
+.desktop-art-nav__wordmark small {
+  justify-self: start !important;
+  margin-top: 0 !important;
+}
+
+@media (min-width: 981px) and (max-width: 1280px) {
+  .desktop-art-nav__signature {
+    width: clamp(78px, 7vw, 112px) !important;
+    height: 28px !important;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1080px) {
+  .desktop-art-nav__signature {
+    width: 92px !important;
+    height: 23px !important;
+  }
+}
+
+
+/* Final desktop navbar PFS signature overlap fix: smaller with clear vertical separation */
+@media (min-width: 981px) {
+  .desktop-art-nav__wordmark {
+    display: grid !important;
+    grid-template-rows: auto auto !important;
+    align-items: center !important;
+    align-content: center !important;
+    justify-items: start !important;
+    gap: 7px !important;
+    min-height: 54px !important;
+    overflow: visible !important;
+  }
+
+  .desktop-art-nav__signature {
+    width: clamp(62px, 5.2vw, 88px) !important;
+    max-width: 88px !important;
+    height: clamp(16px, 1.45vw, 22px) !important;
+    max-height: 22px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    align-self: end !important;
+  }
+
+  .desktop-art-nav__signature img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    display: block !important;
+  }
+
+  .desktop-art-nav__wordmark small {
+    display: block !important;
+    position: static !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.05 !important;
+    align-self: start !important;
+    max-width: 230px !important;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1280px) {
+  .desktop-art-nav__signature {
+    width: clamp(58px, 4.8vw, 78px) !important;
+    max-width: 78px !important;
+    height: 18px !important;
+  }
+
+  .desktop-art-nav__wordmark {
+    gap: 6px !important;
+    min-height: 48px !important;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1080px) {
+  .desktop-art-nav__signature {
+    width: 64px !important;
+    max-width: 64px !important;
+    height: 15px !important;
+  }
+
+  .desktop-art-nav__wordmark {
+    gap: 5px !important;
+    min-height: 42px !important;
+  }
+}
+
+
+/* Final desktop navbar PFS signature alignment: keep size, move up/left, prevent word overlap */
+@media (min-width: 981px) {
+  .desktop-art-nav__wordmark {
+    display: grid !important;
+    grid-template-rows: auto auto !important;
+    justify-items: start !important;
+    align-items: start !important;
+    align-content: center !important;
+    gap: 11px !important;
+    min-height: 62px !important;
+    overflow: visible !important;
+  }
+
+  .desktop-art-nav__signature {
+    width: clamp(62px, 5.2vw, 88px) !important;
+    max-width: 88px !important;
+    height: clamp(16px, 1.45vw, 22px) !important;
+    max-height: 22px !important;
+    justify-self: start !important;
+    align-self: start !important;
+    margin: -5px 0 0 -3px !important;
+    padding: 0 !important;
+    translate: 0 0 !important;
+    transform: none !important;
+    overflow: visible !important;
+  }
+
+  .desktop-art-nav__signature img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: left center !important;
+    display: block !important;
+    margin: 0 !important;
+    translate: 0 0 !important;
+    transform: none !important;
+  }
+
+  .desktop-art-nav__wordmark small {
+    justify-self: start !important;
+    align-self: start !important;
+    display: block !important;
+    position: static !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.05 !important;
+    clear: both !important;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1280px) {
+  .desktop-art-nav__wordmark {
+    gap: 10px !important;
+    min-height: 56px !important;
+  }
+
+  .desktop-art-nav__signature {
+    width: clamp(58px, 4.8vw, 78px) !important;
+    max-width: 78px !important;
+    height: 18px !important;
+    margin: -4px 0 0 -3px !important;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1080px) {
+  .desktop-art-nav__wordmark {
+    gap: 9px !important;
+    min-height: 50px !important;
+  }
+
+  .desktop-art-nav__signature {
+    width: 64px !important;
+    max-width: 64px !important;
+    height: 15px !important;
+    margin: -3px 0 0 -2px !important;
+  }
+}
+
+
+/* Micro-adjust visible PFS alignment: compensate for transparent left space in the image */
+@media (min-width: 981px) {
+  .desktop-art-nav__signature {
+    margin: -8px 0 0 -11px !important;
+  }
+
+  .desktop-art-nav__signature img {
+    transform: translateX(-5px) translateY(-2px) !important;
+    transform-origin: left center !important;
+  }
+
+  .desktop-art-nav__wordmark {
+    gap: 12px !important;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1280px) {
+  .desktop-art-nav__signature {
+    margin: -7px 0 0 -10px !important;
+  }
+
+  .desktop-art-nav__signature img {
+    transform: translateX(-4px) translateY(-2px) !important;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1080px) {
+  .desktop-art-nav__signature {
+    margin: -5px 0 0 -8px !important;
+  }
+
+  .desktop-art-nav__signature img {
+    transform: translateX(-3px) translateY(-1px) !important;
+  }
+}
+
+
+/* Micro fix: move navbar PFS higher so it no longer clips/overlaps the word text */
+@media (min-width: 981px) {
+  .desktop-art-nav__wordmark {
+    gap: 18px !important;
+    min-height: 72px !important;
+    align-content: center !important;
+    overflow: visible !important;
+  }
+
+  .desktop-art-nav__signature {
+    margin: -18px 0 0 -11px !important;
+  }
+
+  .desktop-art-nav__signature img {
+    transform: translateX(-5px) translateY(-8px) !important;
+    transform-origin: left center !important;
+  }
+
+  .desktop-art-nav__wordmark small {
+    position: relative !important;
+    z-index: 2 !important;
+    margin-top: 0 !important;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1280px) {
+  .desktop-art-nav__wordmark {
+    gap: 16px !important;
+    min-height: 64px !important;
+  }
+
+  .desktop-art-nav__signature {
+    margin: -15px 0 0 -10px !important;
+  }
+
+  .desktop-art-nav__signature img {
+    transform: translateX(-4px) translateY(-7px) !important;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1080px) {
+  .desktop-art-nav__wordmark {
+    gap: 14px !important;
+    min-height: 56px !important;
+  }
+
+  .desktop-art-nav__signature {
+    margin: -12px 0 0 -8px !important;
+  }
+
+  .desktop-art-nav__signature img {
+    transform: translateX(-3px) translateY(-6px) !important;
+  }
+}
+
+
+/* Balance desktop navbar signature with the main logo image */
+@media (min-width: 981px) {
+  .desktop-art-nav__brand {
+    align-items: center !important;
+  }
+
+  .desktop-art-nav__wordmark {
+    display: grid !important;
+    grid-template-rows: auto auto !important;
+    justify-items: start !important;
+    align-items: start !important;
+    align-content: center !important;
+    gap: 14px !important;
+    min-height: clamp(54px, 4.2vw, 72px) !important;
+    overflow: visible !important;
+  }
+
+  .desktop-art-nav__signature {
+    width: clamp(62px, 5.2vw, 88px) !important;
+    max-width: 88px !important;
+    height: clamp(16px, 1.45vw, 22px) !important;
+    max-height: 22px !important;
+    justify-self: start !important;
+    align-self: start !important;
+    margin: -12px 0 0 -11px !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  .desktop-art-nav__signature img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: left center !important;
+    display: block !important;
+    transform: translateX(-5px) translateY(-5px) !important;
+    transform-origin: left center !important;
+  }
+
+  .desktop-art-nav__wordmark small {
+    display: block !important;
+    position: static !important;
+    justify-self: start !important;
+    align-self: start !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.05 !important;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1280px) {
+  .desktop-art-nav__wordmark {
+    gap: 13px !important;
+    min-height: 58px !important;
+  }
+
+  .desktop-art-nav__signature {
+    width: clamp(58px, 4.8vw, 78px) !important;
+    max-width: 78px !important;
+    height: 18px !important;
+    margin: -10px 0 0 -10px !important;
+  }
+
+  .desktop-art-nav__signature img {
+    transform: translateX(-4px) translateY(-4px) !important;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1080px) {
+  .desktop-art-nav__wordmark {
+    gap: 11px !important;
+    min-height: 50px !important;
+  }
+
+  .desktop-art-nav__signature {
+    width: 64px !important;
+    max-width: 64px !important;
+    height: 15px !important;
+    margin: -8px 0 0 -8px !important;
+  }
+
+  .desktop-art-nav__signature img {
+    transform: translateX(-3px) translateY(-3px) !important;
+  }
+}
+
+
+/* Color-only animation for the desktop Peintner Family Sites wordmark.
+   Keeps the original single-line layout intact. */
+@media (min-width: 981px) {
+  .desktop-art-nav__wordmark small {
+    display: block !important;
+    width: max-content !important;
+    max-width: 230px !important;
+    white-space: nowrap !important;
+    color: rgba(225, 247, 255, 0.78);
+    background: linear-gradient(
+      90deg,
+      rgba(225, 247, 255, 0.78) 0%,
+      #35d5ff 28%,
+      #ffffff 42%,
+      #8b5cf6 58%,
+      rgba(225, 247, 255, 0.78) 76%
+    );
+    background-size: 240% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: nav-wordmark-call-color-sweep 3.2s ease-in-out infinite;
+    text-shadow:
+      0 0 10px rgba(53, 213, 255, 0.28),
+      0 0 20px rgba(139, 92, 246, 0.12);
+  }
+
+  .desktop-art-nav__brand:hover .desktop-art-nav__wordmark small,
+  .desktop-art-nav__brand:focus-visible .desktop-art-nav__wordmark small {
+    animation-duration: 1.45s;
+    text-shadow:
+      0 0 12px rgba(53, 213, 255, 0.52),
+      0 0 26px rgba(139, 92, 246, 0.24);
+  }
+}
+
+@keyframes nav-wordmark-call-color-sweep {
+  0%,
+  100% {
+    background-position: 120% 50%;
+    color: rgba(225, 247, 255, 0.78);
+    -webkit-text-fill-color: rgba(225, 247, 255, 0.78);
+  }
+
+  45% {
+    background-position: 0% 50%;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  70% {
+    background-position: -80% 50%;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .desktop-art-nav__wordmark small {
+    animation: none !important;
+    color: rgba(225, 247, 255, 0.78) !important;
+    -webkit-text-fill-color: currentColor !important;
+  }
+}
+
+
+/* Final polish: nudge PFS mark slightly right and slow the wordmark color sweep */
+@media (min-width: 981px) {
+  .desktop-art-nav__signature {
+    margin-left: -7px !important;
+  }
+
+  .desktop-art-nav__signature img {
+    transform: translateX(-1px) translateY(-5px) !important;
+  }
+
+  .desktop-art-nav__wordmark small {
+    animation-duration: 6.4s !important;
+  }
+
+  .desktop-art-nav__brand:hover .desktop-art-nav__wordmark small,
+  .desktop-art-nav__brand:focus-visible .desktop-art-nav__wordmark small {
+    animation-duration: 3.2s !important;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1280px) {
+  .desktop-art-nav__signature {
+    margin-left: -6px !important;
+  }
+
+  .desktop-art-nav__signature img {
+    transform: translateX(-1px) translateY(-4px) !important;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1080px) {
+  .desktop-art-nav__signature {
+    margin-left: -5px !important;
+  }
+
+  .desktop-art-nav__signature img {
+    transform: translateX(0) translateY(-3px) !important;
+  }
+}
+
+
+/* Final micro-position: halfway between previous and current PFS logo alignment */
+@media (min-width: 981px) {
+  .desktop-art-nav__signature {
+    margin-left: -9px !important;
+  }
+
+  .desktop-art-nav__signature img {
+    transform: translateX(-3px) translateY(-5px) !important;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1280px) {
+  .desktop-art-nav__signature {
+    margin-left: -8px !important;
+  }
+
+  .desktop-art-nav__signature img {
+    transform: translateX(-2.5px) translateY(-4px) !important;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1080px) {
+  .desktop-art-nav__signature {
+    margin-left: -6.5px !important;
+  }
+
+  .desktop-art-nav__signature img {
+    transform: translateX(-1.5px) translateY(-3px) !important;
+  }
+}
+
+
+/* Stable hero-card planet/rings centering.
+   The outer scene stays pinned to the card stage to avoid top-left jumps.
+   The canvas/ring layer is oversized from the center so the animation sits behind the card on all screens. */
+.hero__panel-stage {
+  position: relative;
+  width: min(1010px, 100%);
+  justify-self: center;
+  isolation: isolate;
+  overflow: visible;
+}
+
+.hero__panel-stage > .studio-world {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 0 !important;
+  opacity: 1 !important;
+  pointer-events: none !important;
+  overflow: visible !important;
+  transform: none !important;
+  contain: layout style;
+}
+
+.hero__panel-stage > .studio-world canvas,
+.hero__panel-stage > .studio-world .studio-world__css-rings {
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  width: min(1320px, 132vw) !important;
+  height: min(1320px, 132vw) !important;
+  transform: translate(-50%, -50%) !important;
+  transform-origin: center center !important;
+}
+
+.hero__panel-stage > .studio-world .studio-world__css-rings {
+  display: grid !important;
+  place-items: center !important;
+}
+
+.hero__panel-stage > .hero__panel {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+@media (max-width: 980px) {
+  .hero__panel-stage > .studio-world canvas,
+  .hero__panel-stage > .studio-world .studio-world__css-rings {
+    width: min(1040px, 150vw) !important;
+    height: min(1040px, 150vw) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .hero__panel-stage > .studio-world canvas,
+  .hero__panel-stage > .studio-world .studio-world__css-rings {
+    width: min(920px, 168vw) !important;
+    height: min(920px, 168vw) !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .hero__panel-stage > .studio-world canvas,
+  .hero__panel-stage > .studio-world .studio-world__css-rings {
+    width: min(820px, 180vw) !important;
+    height: min(820px, 180vw) !important;
+  }
+}
+
+
+/* Keep desktop untouched; nudge the card-centered planet/rings upward on tablet and mobile */
+@media (max-width: 980px) {
+  .hero__panel-stage > .studio-world canvas,
+  .hero__panel-stage > .studio-world .studio-world__css-rings {
+    transform: translate(-50%, calc(-50% - 54px)) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .hero__panel-stage > .studio-world canvas,
+  .hero__panel-stage > .studio-world .studio-world__css-rings {
+    transform: translate(-50%, calc(-50% - 46px)) !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .hero__panel-stage > .studio-world canvas,
+  .hero__panel-stage > .studio-world .studio-world__css-rings {
+    transform: translate(-50%, calc(-50% - 38px)) !important;
+  }
+}
+
+
+/* Desktop navbar polish: lower the PFS mark + wordmark stack to align with the main logo */
+@media (min-width: 981px) {
+  .desktop-art-nav__wordmark {
+    transform: translateY(4px) !important;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1280px) {
+  .desktop-art-nav__wordmark {
+    transform: translateY(3px) !important;
+  }
+}
+
+
+/* Terms page CTA fix: keep long contact button on one line without overflowing */
+.terms-note .button {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  padding-inline: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.terms-note .button--ghost {
+  font-size: clamp(0.72rem, 0.78vw, 0.84rem);
+  letter-spacing: 0;
+}
+
+@media (min-width: 761px) {
+  .terms-layout {
+    grid-template-columns: minmax(290px, 0.38fr) 1fr;
+  }
+
+  .terms-note {
+    padding-inline: 20px;
+  }
+}
+
+@media (max-width: 760px) {
+  .terms-note .button {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .terms-note .button--ghost {
+    font-size: clamp(0.78rem, 3vw, 0.9rem);
+  }
+}
+
+
+/* Smoother fallback ring animation */
+.studio-world__ring {
+  animation-timing-function: linear !important;
+  will-change: transform;
+}
+
+@keyframes studio-css-ring-drift-one {
+  0% {
+    transform: rotateX(62deg) rotateY(-8deg) rotateZ(14deg);
+  }
+
+  50% {
+    transform: rotateX(64deg) rotateY(2deg) rotateZ(194deg);
+  }
+
+  100% {
+    transform: rotateX(62deg) rotateY(-8deg) rotateZ(374deg);
+  }
+}
+
+@keyframes studio-css-ring-drift-two {
+  0% {
+    transform: rotateX(72deg) rotateY(20deg) rotateZ(-28deg);
+  }
+
+  50% {
+    transform: rotateX(70deg) rotateY(28deg) rotateZ(-208deg);
+  }
+
+  100% {
+    transform: rotateX(72deg) rotateY(20deg) rotateZ(-388deg);
+  }
+}
+
+@keyframes studio-css-ring-drift-three {
+  0% {
+    transform: rotateX(52deg) rotateY(-28deg) rotateZ(42deg);
+  }
+
+  50% {
+    transform: rotateX(55deg) rotateY(-18deg) rotateZ(222deg);
+  }
+
+  100% {
+    transform: rotateX(52deg) rotateY(-28deg) rotateZ(402deg);
+  }
+}
+

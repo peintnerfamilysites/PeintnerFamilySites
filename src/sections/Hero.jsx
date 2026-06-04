@@ -2,9 +2,9 @@ import { lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 const StudioWorld = lazy(() => import('../components/scene/StudioWorld'));
 import mainLogo from '../assets/main-logo.webp';
-import pLogo from '../assets/p-logo.webp';
-import fLogo from '../assets/f-logo.webp';
-import sLogo from '../assets/s-logo.webp';
+import brandSlotInterface from '../assets/brand-slot-interface.webp';
+import brandSlotArchitecture from '../assets/brand-slot-architecture.webp';
+import brandSlotGrowth from '../assets/brand-slot-growth.webp';
 import { Link } from 'react-router-dom';
 import { stats } from '../data/siteContent';
 import { CallButton } from '../components/ui/CallButton';
@@ -13,19 +13,20 @@ export function Hero() {
   return (
     <section className="hero">
       <div className="hero__ambient" />
-      <Suspense fallback={<div className="studio-world studio-world--fallback" aria-hidden="true" />}>
-        <StudioWorld />
-      </Suspense>
-
       <div className="hero__content shell">
-        <motion.div
-          className="hero__panel"
-          initial={{ opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.75, ease: 'easeOut' }}
-        >
+        <div className="hero__panel-stage">
+          <Suspense fallback={<div className="studio-world studio-world--fallback" aria-hidden="true" />}>
+            <StudioWorld />
+          </Suspense>
+
+          <motion.div
+            className="hero__panel"
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.75, ease: 'easeOut' }}
+          >
           <div className="eyebrow-pill">Premium web design studio</div>
-          <img className="hero__logo" src={mainLogo} alt="Peintner Family Sites" />
+          <img className="hero__logo" src={mainLogo} alt="Peintner Family Sites" width="512" height="512" decoding="async" fetchPriority="high" />
           <h1>Websites that make small brands feel elite.</h1>
           <p>
             Peintner Family Sites builds sharp, fast, mobile-ready websites and custom React experiences with the kind of polish that makes visitors trust you before they ever call.
@@ -35,17 +36,31 @@ export function Hero() {
             <CallButton />
             <Link className="button button--ghost" to="/work">View the vision</Link>
           </div>
-        </motion.div>
+          </motion.div>
+        </div>
 
         <motion.div
           className="hero__mark-row"
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.7 }}
-          aria-label="PFS initials"
+          aria-label="Brand visuals"
         >
-          {[pLogo, fLogo, sLogo].map((logo, index) => (
-            <img key={index} src={logo} alt="" />
+          {[
+            { src: brandSlotInterface, alt: 'Futuristic interface design concept' },
+            { src: brandSlotArchitecture, alt: 'Holographic system and development concept' },
+            { src: brandSlotGrowth, alt: 'Launch and growth dashboard concept' },
+          ].map((item, index) => (
+            <img
+              key={index}
+              className="hero__mark-visual"
+              src={item.src}
+              alt={item.alt}
+              width="768"
+              height="768"
+              loading="lazy"
+              decoding="async"
+            />
           ))}
         </motion.div>
 

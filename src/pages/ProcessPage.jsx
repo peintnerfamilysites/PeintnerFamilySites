@@ -3,9 +3,12 @@ import { Process } from '../sections/Process';
 import { TechStack } from '../sections/TechStack';
 import { Contact } from '../sections/Contact';
 
+import { Seo } from '../components/seo/Seo';
+import { pageSeo } from '../data/seo';
 export function ProcessPage() {
   return (
     <>
+      <Seo seo={pageSeo.process} />
       <PageHeader
         eyebrow="Process"
         title="A senior-dev workflow that keeps the site clean, scalable, and launch-ready."

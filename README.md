@@ -770,3 +770,31 @@ The current version includes:
 - Footer rectangle fix.
 - Homepage 3D planet/ring animation.
 - Successful lint and production build.
+
+## SEO & Production Visibility
+
+This project includes a production SEO foundation for the GitHub Pages URL:
+
+- Static homepage metadata in `index.html`
+- Per-page React metadata through `src/components/seo/Seo.jsx`
+- Canonical URLs for the main pages
+- Open Graph and Twitter preview tags
+- JSON-LD structured data for the business, website, and current page
+- `public/robots.txt`
+- `public/sitemap.xml`
+- `public/site.webmanifest`
+- `public/og-image.webp`
+- GitHub Pages SPA route fallback through `public/404.html`
+
+After deployment, submit the sitemap in Google Search Console:
+
+```text
+https://peintnerfamilysites.github.io/PeintnerFamilySites/sitemap.xml
+```
+
+For stronger long-term search visibility, connect a real custom domain when ready, submit the sitemap in Google Search Console, and add real portfolio/project proof as the business grows.
+
+
+### Social Preview Image
+
+`public/og-image.webp` uses the generated high-tech PFS social preview artwork. The regular site logo remains `src/assets/main-logo.webp`.
