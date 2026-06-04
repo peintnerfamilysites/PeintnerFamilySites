@@ -236,8 +236,8 @@ function getResponsiveSceneConfig() {
   }
 
   return {
-    cameraZ: 4.55,
-    ringScale: 1.94,
+    cameraZ: 5.15,
+    ringScale: 1.58,
     sceneCenterY: 0,
     dpr: [1, 1.15],
   };
@@ -375,9 +375,30 @@ function AnimatedRings({ ringScale = 1.94, sceneCenterY = 0 }) {
   const mainRig = useRef(null);
   const tiltedRig = useRef(null);
   const outerRig = useRef(null);
+  const timerRef = useRef(null);
 
-  useFrame((state) => {
-    const t = state.clock.elapsedTime;
+  useEffect(() => {
+    const timer = new THREE.Timer();
+
+    if (typeof document !== 'undefined') {
+      timer.connect(document);
+    }
+
+    timerRef.current = timer;
+
+    return () => {
+      timer.disconnect();
+      timer.dispose();
+      timerRef.current = null;
+    };
+  }, []);
+
+  useFrame(() => {
+    const timer = timerRef.current;
+    if (!timer) return;
+
+    timer.update();
+    const t = timer.getElapsed();
 
     if (systemRef.current) {
       systemRef.current.rotation.x = Math.sin(t * 0.16) * 0.032;
