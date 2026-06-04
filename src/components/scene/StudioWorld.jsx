@@ -199,6 +199,7 @@ function getResponsiveSceneConfig() {
     return {
       cameraZ: 4.55,
       ringScale: 1.94,
+      sceneCenterY: -0.18,
       dpr: [1, 1.15],
     };
   }
@@ -211,6 +212,7 @@ function getResponsiveSceneConfig() {
     return {
       cameraZ: 5.45,
       ringScale: shortestSide < 380 ? 0.78 : 0.86,
+      sceneCenterY: -0.24,
       dpr: [1, 1],
     };
   }
@@ -219,6 +221,7 @@ function getResponsiveSceneConfig() {
     return {
       cameraZ: 5.25,
       ringScale: 1.02,
+      sceneCenterY: -0.22,
       dpr: [1, 1],
     };
   }
@@ -227,6 +230,7 @@ function getResponsiveSceneConfig() {
     return {
       cameraZ: 5.05,
       ringScale: height < 760 ? 1.16 : 1.28,
+      sceneCenterY: height < 760 ? -0.18 : -0.2,
       dpr: [1, 1.05],
     };
   }
@@ -234,6 +238,7 @@ function getResponsiveSceneConfig() {
   return {
     cameraZ: 4.55,
     ringScale: 1.94,
+    sceneCenterY: -0.18,
     dpr: [1, 1.15],
   };
 }
@@ -365,7 +370,7 @@ function EarthPlanet() {
   );
 }
 
-function AnimatedRings({ ringScale = 1.94 }) {
+function AnimatedRings({ ringScale = 1.94, sceneCenterY = -0.1 }) {
   const systemRef = useRef(null);
   const mainRig = useRef(null);
   const tiltedRig = useRef(null);
@@ -378,7 +383,7 @@ function AnimatedRings({ ringScale = 1.94 }) {
     if (systemRef.current) {
       systemRef.current.rotation.x = THREE.MathUtils.lerp(systemRef.current.rotation.x, Math.sin(t * 0.16) * 0.05, smoothing * 0.7);
       systemRef.current.rotation.y = THREE.MathUtils.lerp(systemRef.current.rotation.y, Math.cos(t * 0.12) * 0.06, smoothing * 0.7);
-      systemRef.current.position.y = THREE.MathUtils.lerp(systemRef.current.position.y, 0.06 + Math.sin(t * 0.42) * 0.035, smoothing);
+      systemRef.current.position.y = THREE.MathUtils.lerp(systemRef.current.position.y, sceneCenterY + Math.sin(t * 0.42) * 0.035, smoothing);
     }
 
     if (mainRig.current) {
@@ -412,7 +417,7 @@ function AnimatedRings({ ringScale = 1.94 }) {
   );
 
   return (
-    <group ref={systemRef} position={[0, 0.06, -1.1]} scale={[ringScale, ringScale, ringScale]}>
+    <group ref={systemRef} position={[0, sceneCenterY, -1.1]} scale={[ringScale, ringScale, ringScale]}>
       <EarthPlanet />
 
       <group ref={mainRig} renderOrder={2}>
@@ -475,14 +480,14 @@ function AnimatedRings({ ringScale = 1.94 }) {
   );
 }
 
-function SceneContent({ ringScale }) {
+function SceneContent({ ringScale, sceneCenterY }) {
   return (
     <>
       <ambientLight intensity={0.72} />
       <hemisphereLight skyColor="#dff6ff" groundColor="#020617" intensity={0.8} />
       <directionalLight position={[3.2, 2.4, 5]} intensity={1.9} color="#ffffff" />
       <directionalLight position={[-4, -1, -3]} intensity={0.58} color="#60a5fa" />
-      <AnimatedRings ringScale={ringScale} />
+      <AnimatedRings ringScale={ringScale} sceneCenterY={sceneCenterY} />
     </>
   );
 }
@@ -547,7 +552,7 @@ const StudioWorld = memo(function StudioWorld() {
         }}
       >
         <Suspense fallback={null}>
-          <SceneContent ringScale={sceneConfig.ringScale} />
+          <SceneContent ringScale={sceneConfig.ringScale} sceneCenterY={sceneConfig.sceneCenterY} />
         </Suspense>
       </Canvas>
     </div>
