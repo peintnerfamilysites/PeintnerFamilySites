@@ -680,7 +680,7 @@ main {
     0 0 86px rgba(192, 132, 252, 0.22),
     inset 0 0 34px rgba(34, 211, 238, 0.22);
   transform-style: preserve-3d;
-  animation: studio-css-ring-drift-one 34s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  animation: studio-css-ring-drift-one 17s cubic-bezier(0.45, 0, 0.55, 1) infinite;
 }
 
 .studio-world__ring--one {
@@ -697,7 +697,7 @@ main {
     0 0 96px rgba(34, 211, 238, 0.18),
     inset 0 0 32px rgba(240, 171, 252, 0.16);
   animation-name: studio-css-ring-drift-two;
-  animation-duration: 42s;
+  animation-duration: 21s;
   animation-direction: reverse;
 }
 
@@ -710,7 +710,7 @@ main {
     0 0 104px rgba(192, 132, 252, 0.16),
     inset 0 0 22px rgba(45, 212, 191, 0.12);
   animation-name: studio-css-ring-drift-three;
-  animation-duration: 54s;
+  animation-duration: 27s;
 }
 
 
@@ -722,7 +722,8 @@ main {
     0 0 24px rgba(103, 232, 249, 0.24),
     inset 0 0 20px rgba(103, 232, 249, 0.12);
   animation-name: studio-css-ring-drift-two;
-  animation-duration: 30s;
+  animation-duration: 15s;
+  animation-direction: reverse;
 }
 
 .studio-world__ring--five {
@@ -733,8 +734,7 @@ main {
     0 0 24px rgba(192, 132, 252, 0.22),
     inset 0 0 20px rgba(192, 132, 252, 0.1);
   animation-name: studio-css-ring-drift-one;
-  animation-duration: 47s;
-  animation-direction: reverse;
+  animation-duration: 23.5s;
 }
 
 .studio-world__ring--six {
@@ -745,7 +745,7 @@ main {
     0 0 22px rgba(224, 242, 254, 0.18),
     inset 0 0 18px rgba(224, 242, 254, 0.08);
   animation-name: studio-css-ring-drift-three;
-  animation-duration: 62s;
+  animation-duration: 31s;
   animation-direction: reverse;
 }
 
@@ -9770,3 +9770,205 @@ button {
   }
 }
 
+
+/* Polished orbital ring system
+   Each ring keeps a stable 3D tilt and rotates only around its own Z axis.
+   This produces smoother cross-browser motion while preserving the centered planet layout. */
+.studio-world__ring {
+  --ring-x: 68deg;
+  --ring-y: 12deg;
+  --ring-start: 0deg;
+  --ring-depth: 1;
+  animation-name: studio-ring-orbit-forward !important;
+  animation-timing-function: linear !important;
+  animation-iteration-count: infinite !important;
+  transform-origin: center center;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+.studio-world__ring--one {
+  --ring-x: 68deg;
+  --ring-y: 12deg;
+  --ring-start: 4deg;
+  --ring-depth: 1;
+  animation-name: studio-ring-orbit-forward !important;
+  animation-duration: 13s !important;
+  opacity: 0.94;
+}
+
+.studio-world__ring--two {
+  --ring-x: 74deg;
+  --ring-y: -22deg;
+  --ring-start: -28deg;
+  --ring-depth: 0.98;
+  animation-name: studio-ring-orbit-reverse !important;
+  animation-duration: 17s !important;
+  opacity: 0.82;
+}
+
+.studio-world__ring--three {
+  --ring-x: 62deg;
+  --ring-y: 34deg;
+  --ring-start: 38deg;
+  --ring-depth: 0.96;
+  animation-name: studio-ring-orbit-forward !important;
+  animation-duration: 21s !important;
+  opacity: 0.7;
+}
+
+.studio-world__ring--four {
+  --ring-x: 79deg;
+  --ring-y: 8deg;
+  --ring-start: 71deg;
+  --ring-depth: 0.99;
+  animation-name: studio-ring-orbit-reverse !important;
+  animation-duration: 12s !important;
+  opacity: 0.66;
+}
+
+.studio-world__ring--five {
+  --ring-x: 56deg;
+  --ring-y: -36deg;
+  --ring-start: -56deg;
+  --ring-depth: 0.94;
+  animation-name: studio-ring-orbit-forward !important;
+  animation-duration: 19s !important;
+  opacity: 0.58;
+}
+
+.studio-world__ring--six {
+  --ring-x: 72deg;
+  --ring-y: 42deg;
+  --ring-start: 112deg;
+  --ring-depth: 0.92;
+  animation-name: studio-ring-orbit-reverse !important;
+  animation-duration: 25s !important;
+  opacity: 0.42;
+}
+
+@keyframes studio-ring-orbit-forward {
+  from {
+    transform: rotateX(var(--ring-x)) rotateY(var(--ring-y)) rotateZ(var(--ring-start)) scale(var(--ring-depth));
+  }
+
+  to {
+    transform: rotateX(var(--ring-x)) rotateY(var(--ring-y)) rotateZ(calc(var(--ring-start) + 360deg)) scale(var(--ring-depth));
+  }
+}
+
+@keyframes studio-ring-orbit-reverse {
+  from {
+    transform: rotateX(var(--ring-x)) rotateY(var(--ring-y)) rotateZ(var(--ring-start)) scale(var(--ring-depth));
+  }
+
+  to {
+    transform: rotateX(var(--ring-x)) rotateY(var(--ring-y)) rotateZ(calc(var(--ring-start) - 360deg)) scale(var(--ring-depth));
+  }
+}
+
+/* Visible orbital motion polish
+   The previous perfect-circle rings rotated correctly, but a perfectly uniform circle looks unchanged when it spins.
+   These highlights add moving arcs and small glow nodes so the orbit direction is visible while still animating only transforms. */
+.studio-world__ring {
+  --ring-band: 7px;
+  --ring-highlight: rgba(186, 230, 253, 0.92);
+  --ring-highlight-soft: rgba(34, 211, 238, 0.34);
+  --ring-sway-x: 3deg;
+  --ring-sway-y: -4deg;
+  overflow: visible;
+}
+
+.studio-world__ring::before,
+.studio-world__ring::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  transform: translateZ(1px);
+}
+
+.studio-world__ring::before {
+  inset: -4px;
+  border-radius: inherit;
+  background:
+    conic-gradient(
+      from 0deg,
+      transparent 0deg 15deg,
+      var(--ring-highlight) 18deg 30deg,
+      var(--ring-highlight-soft) 36deg 52deg,
+      transparent 58deg 148deg,
+      rgba(240, 171, 252, 0.44) 154deg 168deg,
+      transparent 174deg 252deg,
+      rgba(45, 212, 191, 0.38) 258deg 270deg,
+      transparent 276deg 360deg
+    );
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - var(--ring-band)), #000 calc(100% - var(--ring-band) + 1px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - var(--ring-band)), #000 calc(100% - var(--ring-band) + 1px));
+  opacity: 0.88;
+}
+
+.studio-world__ring::after {
+  top: -6px;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.96), var(--ring-highlight) 38%, transparent 72%);
+  box-shadow:
+    0 0 18px var(--ring-highlight),
+    0 0 36px var(--ring-highlight-soft);
+  opacity: 0.78;
+  transform: translate3d(-50%, 0, 2px);
+}
+
+.studio-world__ring--one {
+  --ring-band: 8px;
+  --ring-highlight: rgba(224, 242, 254, 0.96);
+  --ring-highlight-soft: rgba(34, 211, 238, 0.44);
+  --ring-sway-x: 4deg;
+  --ring-sway-y: -5deg;
+}
+
+.studio-world__ring--two {
+  --ring-band: 7px;
+  --ring-highlight: rgba(240, 171, 252, 0.88);
+  --ring-highlight-soft: rgba(240, 171, 252, 0.34);
+  --ring-sway-x: -3deg;
+  --ring-sway-y: 5deg;
+}
+
+.studio-world__ring--three,
+.studio-world__ring--four,
+.studio-world__ring--five,
+.studio-world__ring--six {
+  --ring-band: 5px;
+}
+
+@keyframes studio-ring-orbit-forward {
+  0% {
+    transform: rotateX(var(--ring-x)) rotateY(var(--ring-y)) rotateZ(var(--ring-start)) scale(var(--ring-depth));
+  }
+
+  50% {
+    transform: rotateX(calc(var(--ring-x) + var(--ring-sway-x))) rotateY(calc(var(--ring-y) + var(--ring-sway-y))) rotateZ(calc(var(--ring-start) + 180deg)) scale(var(--ring-depth));
+  }
+
+  100% {
+    transform: rotateX(var(--ring-x)) rotateY(var(--ring-y)) rotateZ(calc(var(--ring-start) + 360deg)) scale(var(--ring-depth));
+  }
+}
+
+@keyframes studio-ring-orbit-reverse {
+  0% {
+    transform: rotateX(var(--ring-x)) rotateY(var(--ring-y)) rotateZ(var(--ring-start)) scale(var(--ring-depth));
+  }
+
+  50% {
+    transform: rotateX(calc(var(--ring-x) + var(--ring-sway-x))) rotateY(calc(var(--ring-y) + var(--ring-sway-y))) rotateZ(calc(var(--ring-start) - 180deg)) scale(var(--ring-depth));
+  }
+
+  100% {
+    transform: rotateX(var(--ring-x)) rotateY(var(--ring-y)) rotateZ(calc(var(--ring-start) - 360deg)) scale(var(--ring-depth));
+  }
+}

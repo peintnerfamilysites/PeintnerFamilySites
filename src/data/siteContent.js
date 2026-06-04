@@ -47,10 +47,10 @@ export const featuredProjects = [
   },
   {
     title: 'Premium Studio Portfolio',
-    category: '3D Brand Experience',
+    category: 'Motion Brand Experience',
     description:
       'A cinematic portfolio experience with custom visuals, responsive navigation, motion, 3D depth, and a memorable first impression.',
-    metrics: ['React', 'Three.js', 'Motion'],
+    metrics: ['React', 'CSS Motion', 'UI Polish'],
   },
   {
     title: 'Operations Dashboard System',
@@ -88,7 +88,6 @@ export const stackItems = [
   'React',
   'Vite',
   'React Router',
-  'Three.js',
   'Framer Motion',
   'Responsive CSS',
   'SEO Structure',

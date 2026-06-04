@@ -1,8 +1,30 @@
 # Peintner Family Sites
 
-A polished React/Vite website for **Peintner Family Sites**, built with a high-tech visual style, responsive navigation, animated page transitions, optimized brand imagery, a centered Three.js planet/ring homepage scene, SEO metadata, and reusable content-driven sections.
+A polished React/Vite website for **Peintner Family Sites**, built with a high-tech visual style, responsive navigation, animated page transitions, optimized brand imagery, a CSS-based planet/ring homepage scene, SEO metadata, and reusable content-driven sections.
 
 This README is a practical reference for understanding how the project works, where important files live, and how to safely make changes later.
+
+---
+
+## Production Checklist to Complete Before Final Launch
+
+These items are intentionally kept near the top so they are not missed before the public production launch. The codebase has been optimized, linted, and rebuilt, but these business/account items still require owner confirmation:
+
+- [ ] Copy `.env.example` to `.env.local` and connect real EmailJS values in production: `VITE_EMAILJS_SERVICE_ID`, `VITE_EMAILJS_TEMPLATE_ID`, and `VITE_EMAILJS_PUBLIC_KEY`. Until then, the contact form falls back to opening the visitor's email app.
+- [ ] Confirm the public phone number, email address, service area, and business details in `src/data/contactInfo.js`, `src/data/seo.js`, `public/sitemap.xml`, and `public/site.webmanifest`.
+- [ ] Replace placeholder portfolio/project copy with real approved work, screenshots, testimonials, and links when available.
+- [ ] Add analytics/search tools if desired, such as Google Search Console, Google Analytics, or privacy-friendly analytics.
+- [ ] Run a final Lighthouse/PageSpeed check after deployment on the live GitHub Pages URL.
+- [ ] Review the Terms of Use with a qualified professional before relying on it for legal protection.
+- [ ] Confirm the GitHub Pages repository name and `VITE_BASE_PATH` match the final deployment URL.
+
+Completed in this production pass:
+
+- Removed the disabled Three.js/WebGL implementation so the site no longer ships the large Three.js vendor bundle.
+- Kept the planet/ring background as a CSS animation to avoid the Windows duplicate-canvas issue and reduce JavaScript weight.
+- Removed duplicate packaged project files and unused source PNG assets from the deliverable.
+- Updated the deployment workflow to use `npm ci`, lint before build, and cache npm dependencies.
+- Confirmed `npm run lint` and `npm run build` pass successfully.
 
 ---
 
@@ -18,7 +40,7 @@ This README is a practical reference for understanding how the project works, wh
 8. [Layout Sections](#layout-sections)
 9. [Reusable Components](#reusable-components)
 10. [Navigation System](#navigation-system)
-11. [Homepage Hero and 3D Scene](#homepage-hero-and-3d-scene)
+11. [Homepage Hero and Animated Scene](#homepage-hero-and-animated-scene)
 12. [Styling System](#styling-system)
 13. [Responsive Design Notes](#responsive-design-notes)
 14. [Assets](#assets)
@@ -26,8 +48,9 @@ This README is a practical reference for understanding how the project works, wh
 16. [Contact Form / EmailJS](#contact-form--emailjs)
 17. [Deployment Notes](#deployment-notes)
 18. [Common Edits](#common-edits)
-19. [Maintenance Checklist](#maintenance-checklist)
-20. [Current Status](#current-status)
+19. [Production Checklist](#production-checklist-to-complete-before-final-launch)
+20. [Maintenance Checklist](#maintenance-checklist)
+21. [Current Status](#current-status)
 
 ---
 
@@ -39,7 +62,7 @@ The current site includes:
 
 - Desktop navigation with a main logo, PFS brand mark, page links, call CTA, and project CTA.
 - Mobile/tablet full-screen animated menu.
-- Homepage hero card with a centered Three.js planet/ring animation behind it.
+- Homepage hero card with a centered CSS planet/ring animation behind it.
 - Three optimized brand visual cards below the homepage hero.
 - Services, work, process, tech stack, contact, terms, and error pages.
 - Terms of Use page with a fixed no-wrap contact CTA.
@@ -47,7 +70,7 @@ The current site includes:
 - Responsive styling from small phones through tablets and desktop.
 - Optimized assets and reduced source weight.
 
-The app is powered by Vite, React, React Router, Framer Motion, Tailwind CSS tooling, React Three Fiber, Three.js, and EmailJS.
+The app is powered by Vite, React, React Router, Framer Motion, Tailwind CSS tooling, and EmailJS.
 
 ---
 
@@ -59,8 +82,6 @@ The app is powered by Vite, React, React Router, Framer Motion, Tailwind CSS too
 - **Vite**: Development server and production build tool.
 - **React Router DOM**: Client-side routing.
 - **Framer Motion**: Page, section, navbar, and mobile menu animations.
-- **Three.js**: 3D rendering engine.
-- **@react-three/fiber**: React renderer for Three.js.
 - **Tailwind CSS / Tailwind Vite Plugin**: CSS pipeline and utility support.
 - **EmailJS**: Contact form email sending.
 
@@ -259,7 +280,7 @@ Important components include:
 | File | Purpose |
 | --- | --- |
 | `components/navigation/NavBar.jsx` | Desktop navbar and mobile/tablet menu. |
-| `components/scene/StudioWorld.jsx` | Three.js planet/ring scene and CSS fallback. |
+| `components/scene/StudioWorld.jsx` | Lightweight CSS planet/ring scene. |
 | `components/seo/Seo.jsx` | Per-page metadata and structured data. |
 | `components/ui/CallButton.jsx` | Reusable phone CTA button. |
 | `components/ui/ContactForm.jsx` | Contact form powered by EmailJS. |
@@ -301,7 +322,7 @@ Look for the `navLinks` array.
 
 ---
 
-## Homepage Hero and 3D Scene
+## Homepage Hero and Animated Scene
 
 The homepage hero lives in:
 
@@ -309,7 +330,7 @@ The homepage hero lives in:
 src/sections/Hero.jsx
 ```
 
-The Three.js scene lives in:
+The lightweight animated scene lives in:
 
 ```text
 src/components/scene/StudioWorld.jsx
@@ -328,36 +349,10 @@ The `hero__panel-stage` structure is important because it keeps the planet/rings
 
 ### Important scene parts
 
-- `canUseWebGL()`
-  - Checks browser WebGL support.
-  - Falls back to CSS visuals if WebGL is unavailable.
-
-- `createEarthTexture()`
-  - Generates the planet texture using canvas.
-  - Uses reduced canvas dimensions for better runtime performance.
-
-- `createCloudTexture()`
-  - Generates a procedural cloud texture.
-
-- `EarthPlanet()`
-  - Renders the planet, atmosphere, glow, and cloud layer.
-
-- `AnimatedRings()`
-  - Renders the animated rings around the planet.
-  - Uses continuous elapsed-time animation for smoother rotation.
-
-- `BackgroundEffects()`
-  - Provides CSS fallback elements.
-
-- `StudioWorld()`
-  - Main exported scene wrapper.
-  - Handles WebGL and fallback rendering.
-
-### Performance notes
-
-The scene is lazy-loaded from `Hero.jsx` using React `lazy()` and `Suspense`. This helps the main page render before the 3D background is fully ready.
-
-The latest animation pass made the rings smoother by using continuous elapsed-time rotation instead of frame-to-frame easing for the main ring rigs. The CSS fallback ring animation was also changed to a smoother linear motion.
+- `StudioWorld()` renders lightweight markup for the CSS planet/ring animation.
+- `BackgroundEffects()` maps the ring elements from a small array instead of repeating markup by hand.
+- The scene is intentionally CSS-based so the site avoids the previous duplicate WebGL/canvas issue and does not ship a large 3D vendor bundle.
+- Motion-sensitive users are covered by the reduced-motion rules in `src/index.css`.
 
 ---
 
@@ -857,7 +852,7 @@ The current version includes:
 - Responsive desktop navbar and mobile/tablet menu.
 - Desktop navbar brand stack alignment polish.
 - Homepage hero card with centered planet/ring animation behind it.
-- Smoother Three.js and CSS fallback ring animation.
+- Lightweight CSS planet/ring animation with reduced JavaScript weight.
 - Homepage brand visual cards replacing the old P/F/S logo slots.
 - Terms of Use page with no-wrap contact button overflow fix.
 - SEO files and metadata for production visibility.

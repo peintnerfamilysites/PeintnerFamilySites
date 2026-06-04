@@ -16,7 +16,7 @@ export function Footer() {
       </Link>
 
       <div className="footer__meta">
-        <p>© 2026 PFS. Built with React, Three.js, and Tailwind.</p>
+        <p>© 2026 PFS. Built with React, Framer Motion, and Tailwind tooling.</p>
         <nav className="footer__links" aria-label="Footer navigation">
           <NavLink
             to="/services"
