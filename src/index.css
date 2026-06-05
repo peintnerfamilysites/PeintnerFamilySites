@@ -577,7 +577,7 @@ main {
   min-height: 100svh;
   display: grid;
   align-items: center;
-  overflow: hidden;
+  overflow: visible;
   padding: 154px 0 74px;
 }
 
@@ -592,13 +592,13 @@ main {
 
 .studio-world {
   position: absolute;
-  inset: -10%;
+  inset: -24% -32%;
   z-index: 0;
   opacity: 1;
   pointer-events: none;
-  contain: layout paint style;
+  overflow: visible;
+  contain: layout style;
   transform: translateZ(0);
-  will-change: transform;
 }
 
 .studio-world canvas {
@@ -613,8 +613,8 @@ main {
   display: grid;
   place-items: center;
   pointer-events: none;
+  overflow: visible;
   opacity: 0.9;
-  filter: drop-shadow(0 0 22px rgba(53, 213, 255, 0.42));
 }
 
 .studio-world__planet-glow,
@@ -673,14 +673,16 @@ main {
   position: absolute;
   width: min(112vw, 1320px);
   aspect-ratio: 1;
-  border: 2px solid rgba(34, 211, 238, 0.86);
+  border: 3px solid rgba(34, 211, 238, 0.88);
   border-radius: 50%;
-  box-shadow:
-    0 0 32px rgba(34, 211, 238, 0.48),
-    0 0 86px rgba(192, 132, 252, 0.22),
-    inset 0 0 34px rgba(34, 211, 238, 0.22);
-  transform-style: preserve-3d;
-  animation: studio-css-ring-drift-one 17s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  background: transparent;
+  box-shadow: none;
+  filter: none;
+  outline: none;
+  transform-style: flat;
+  backface-visibility: visible;
+  animation: studio-css-ring-drift-one 11s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  will-change: transform;
 }
 
 .studio-world__ring--one {
@@ -692,10 +694,6 @@ main {
 .studio-world__ring--two {
   width: min(108vw, 1260px);
   border-color: rgba(240, 171, 252, 0.68);
-  box-shadow:
-    0 0 34px rgba(240, 171, 252, 0.36),
-    0 0 96px rgba(34, 211, 238, 0.18),
-    inset 0 0 32px rgba(240, 171, 252, 0.16);
   animation-name: studio-css-ring-drift-two;
   animation-duration: 21s;
   animation-direction: reverse;
@@ -703,12 +701,8 @@ main {
 
 .studio-world__ring--three {
   width: min(136vw, 1580px);
-  border-width: 1px;
+  border-width: 2px;
   border-color: rgba(45, 212, 191, 0.54);
-  box-shadow:
-    0 0 28px rgba(45, 212, 191, 0.28),
-    0 0 104px rgba(192, 132, 252, 0.16),
-    inset 0 0 22px rgba(45, 212, 191, 0.12);
   animation-name: studio-css-ring-drift-three;
   animation-duration: 27s;
 }
@@ -716,34 +710,41 @@ main {
 
 .studio-world__ring--four {
   width: min(94vw, 1080px);
-  border-width: 1px;
+  border-width: 2px;
   border-color: rgba(165, 243, 252, 0.52);
-  box-shadow:
-    0 0 24px rgba(103, 232, 249, 0.24),
-    inset 0 0 20px rgba(103, 232, 249, 0.12);
   animation-name: studio-css-ring-drift-two;
   animation-duration: 15s;
   animation-direction: reverse;
 }
 
+.studio-world__ring::before,
+.studio-world__ring::after {
+  content: none;
+  display: none;
+}
+
+.studio-world__ring,
+.studio-world__ring--one,
+.studio-world__ring--two,
+.studio-world__ring--three,
+.studio-world__ring--four {
+  box-shadow: none;
+  filter: none;
+  outline: none;
+}
+
 .studio-world__ring--five {
   width: min(160vw, 1880px);
-  border-width: 1px;
+  border-width: 2px;
   border-color: rgba(196, 181, 253, 0.46);
-  box-shadow:
-    0 0 24px rgba(192, 132, 252, 0.22),
-    inset 0 0 20px rgba(192, 132, 252, 0.1);
   animation-name: studio-css-ring-drift-one;
   animation-duration: 23.5s;
 }
 
 .studio-world__ring--six {
   width: min(186vw, 2200px);
-  border-width: 1px;
+  border-width: 2px;
   border-color: rgba(224, 242, 254, 0.3);
-  box-shadow:
-    0 0 22px rgba(224, 242, 254, 0.18),
-    inset 0 0 18px rgba(224, 242, 254, 0.08);
   animation-name: studio-css-ring-drift-three;
   animation-duration: 31s;
   animation-direction: reverse;
@@ -818,7 +819,7 @@ main {
 
 @media (min-width: 981px) {
   .studio-world {
-    inset: -18% -24%;
+    inset: -32% -42%;
   }
 
   .studio-world__css-rings {
@@ -1472,12 +1473,15 @@ main {
   }
 
   .studio-world {
-    inset: -22%;
+    inset: -34% -42%;
     opacity: 0.95;
   }
 
   .studio-world__ring {
-    width: min(132vw, 760px);
+    width: min(146vw, 860px);
+    box-shadow: none;
+    filter: none;
+    outline: none;
   }
 
   .hero__panel {
@@ -9828,6 +9832,21 @@ button {
   opacity: 0.66;
 }
 
+.studio-world__ring::before,
+.studio-world__ring::after {
+  content: none;
+  display: none;
+}
+
+.studio-world__ring,
+.studio-world__ring--one,
+.studio-world__ring--two,
+.studio-world__ring--three,
+.studio-world__ring--four {
+  box-shadow: none;
+  filter: none;
+}
+
 .studio-world__ring--five {
   --ring-x: 56deg;
   --ring-y: -36deg;
@@ -10027,6 +10046,21 @@ button {
   animation-duration: 16s !important;
 }
 
+.studio-world__ring::before,
+.studio-world__ring::after {
+  content: none;
+  display: none;
+}
+
+.studio-world__ring,
+.studio-world__ring--one,
+.studio-world__ring--two,
+.studio-world__ring--three,
+.studio-world__ring--four {
+  box-shadow: none;
+  filter: none;
+}
+
 .studio-world__ring--five {
   animation-duration: 24s !important;
 }
@@ -10065,4 +10099,1091 @@ button {
   .studio-world__ring--six::after {
     opacity: 0.35;
   }
+}
+
+/* Senior performance stabilization pass.
+   Keeps the same planet/ring layout while removing the heaviest continuous paint costs. */
+.studio-world,
+.studio-world__css-rings {
+  contain: layout paint style;
+}
+
+.studio-world__css-rings {
+  filter: none !important;
+}
+
+.studio-world__planet-glow {
+  filter: blur(4px) !important;
+  opacity: 0.72;
+  animation-duration: 7.5s !important;
+}
+
+.studio-world__planet-core {
+  box-shadow:
+    0 0 24px rgba(59, 130, 246, 0.22),
+    0 0 44px rgba(34, 211, 238, 0.12) !important;
+}
+
+.studio-world__planet-core::before,
+.studio-world__planet-core::after {
+  filter: none !important;
+}
+
+.studio-world__ring {
+  box-shadow:
+    0 0 10px rgba(34, 211, 238, 0.24),
+    0 0 22px rgba(192, 132, 252, 0.1),
+    inset 0 0 10px rgba(34, 211, 238, 0.1) !important;
+  contain: paint;
+  will-change: transform;
+}
+
+.studio-world__ring::before {
+  opacity: 0.52 !important;
+  box-shadow: none !important;
+}
+
+.studio-world__ring::after {
+  width: 6px !important;
+  height: 6px !important;
+  box-shadow: 0 0 8px var(--ring-highlight-soft) !important;
+  opacity: 0.58 !important;
+}
+
+.studio-world__ring--five,
+.studio-world__ring--six {
+  animation-duration: 40s !important;
+  box-shadow: 0 0 8px rgba(34, 211, 238, 0.12) !important;
+}
+
+.studio-world__ring--five::before,
+.studio-world__ring--six::before,
+.studio-world__ring--five::after,
+.studio-world__ring--six::after {
+  display: none !important;
+}
+
+.studio-world--paused .studio-world__planet-glow,
+.studio-world--paused .studio-world__ring,
+.studio-world--paused .desktop-art-nav__wordmark small {
+  animation-play-state: paused !important;
+}
+
+@media (max-width: 980px) {
+  .studio-world__ring--five,
+  .studio-world__ring--six {
+    display: none !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .studio-world__planet-glow {
+    filter: blur(3px) !important;
+  }
+
+  .studio-world__ring {
+    box-shadow: 0 0 8px rgba(34, 211, 238, 0.16) !important;
+  }
+
+  .studio-world__ring::before,
+  .studio-world__ring::after {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .studio-world__planet-glow,
+  .studio-world__ring,
+  .marquee-track,
+  .desktop-art-nav__wordmark small {
+    animation: none !important;
+  }
+}
+
+/* Clipping fix for optimized orbital scene.
+   Paint containment was the reason the large outer rings looked sliced after the performance pass.
+   Keep layout/style containment for safety, but allow the oversized rings and glow arcs to render outside
+   the centered scene box without reintroducing the expensive filters/blur stack. */
+.hero,
+.hero__content,
+.hero__panel-stage,
+.hero__panel-stage > .studio-world,
+.hero__panel-stage > .studio-world .studio-world__css-rings,
+.studio-world,
+.studio-world__css-rings,
+.studio-world__ring {
+  overflow: visible !important;
+}
+
+.studio-world,
+.studio-world__css-rings,
+.studio-world__ring {
+  contain: layout style !important;
+}
+
+.hero__panel-stage > .studio-world .studio-world__css-rings {
+  width: min(1320px, 152vw) !important;
+  height: min(1320px, 152vw) !important;
+}
+
+@media (min-width: 981px) {
+  .hero__panel-stage > .studio-world canvas,
+  .hero__panel-stage > .studio-world .studio-world__css-rings {
+    width: min(1320px, 132vw) !important;
+    height: min(1320px, 132vw) !important;
+  }
+}
+
+@media (min-width: 1400px) {
+  .hero__panel-stage > .studio-world canvas,
+  .hero__panel-stage > .studio-world .studio-world__css-rings {
+    width: 1320px !important;
+    height: 1320px !important;
+  }
+}
+
+/* V3 nested gyroscope ring motion.
+   The rings now change their 3D tilt as they rotate so they feel like they are orbiting
+   through each other around the planet instead of spinning on one flat axis. */
+.studio-world__css-rings {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.studio-world__planet-glow {
+  z-index: 0;
+}
+
+.studio-world__ring {
+  z-index: 1;
+  animation-name: studio-ring-gyroscope-a !important;
+  animation-timing-function: linear !important;
+  transform-origin: 50% 50%;
+  transform-style: preserve-3d;
+}
+
+.studio-world__planet-core {
+  z-index: 2;
+}
+
+.studio-world__planet-atmosphere {
+  z-index: 3;
+}
+
+.studio-world__ring::before,
+.studio-world__ring::after {
+  z-index: 4;
+}
+
+.studio-world__ring--one {
+  --ring-x: 66deg;
+  --ring-y: 14deg;
+  --ring-z: 0deg;
+  --ring-depth: 1;
+  animation-name: studio-ring-gyroscope-a !important;
+  animation-duration: 15s !important;
+  opacity: 0.95;
+}
+
+.studio-world__ring--two {
+  --ring-x: 28deg;
+  --ring-y: 72deg;
+  --ring-z: -34deg;
+  --ring-depth: 0.98;
+  animation-name: studio-ring-gyroscope-b !important;
+  animation-duration: 19s !important;
+  opacity: 0.84;
+}
+
+.studio-world__ring--three {
+  --ring-x: 78deg;
+  --ring-y: -30deg;
+  --ring-z: 46deg;
+  --ring-depth: 0.96;
+  animation-name: studio-ring-gyroscope-c !important;
+  animation-duration: 23s !important;
+  opacity: 0.72;
+}
+
+.studio-world__ring--four {
+  --ring-x: 42deg;
+  --ring-y: -68deg;
+  --ring-z: 90deg;
+  --ring-depth: 0.99;
+  animation-name: studio-ring-gyroscope-b !important;
+  animation-duration: 17s !important;
+  animation-direction: reverse !important;
+  opacity: 0.68;
+}
+
+.studio-world__ring::before,
+.studio-world__ring::after {
+  content: none;
+  display: none;
+}
+
+.studio-world__ring,
+.studio-world__ring--one,
+.studio-world__ring--two,
+.studio-world__ring--three,
+.studio-world__ring--four {
+  box-shadow: none;
+  filter: none;
+}
+
+.studio-world__ring--five {
+  --ring-x: 86deg;
+  --ring-y: 36deg;
+  --ring-z: -74deg;
+  --ring-depth: 0.94;
+  animation-name: studio-ring-gyroscope-c !important;
+  animation-duration: 30s !important;
+  opacity: 0.5;
+}
+
+.studio-world__ring--six {
+  --ring-x: 18deg;
+  --ring-y: 82deg;
+  --ring-z: 132deg;
+  --ring-depth: 0.92;
+  animation-name: studio-ring-gyroscope-a !important;
+  animation-duration: 36s !important;
+  animation-direction: reverse !important;
+  opacity: 0.38;
+}
+
+@keyframes studio-ring-gyroscope-a {
+  0% {
+    transform: translate3d(0, 0, 0) rotateZ(var(--ring-z)) rotateX(var(--ring-x)) rotateY(var(--ring-y)) rotateZ(0deg) scale(var(--ring-depth));
+  }
+
+  25% {
+    transform: translate3d(0, 0, 0) rotateZ(calc(var(--ring-z) + 70deg)) rotateX(calc(var(--ring-x) - 30deg)) rotateY(calc(var(--ring-y) + 44deg)) rotateZ(108deg) scale(var(--ring-depth));
+  }
+
+  50% {
+    transform: translate3d(0, 0, 0) rotateZ(calc(var(--ring-z) + 155deg)) rotateX(calc(var(--ring-x) + 18deg)) rotateY(calc(var(--ring-y) - 52deg)) rotateZ(212deg) scale(var(--ring-depth));
+  }
+
+  75% {
+    transform: translate3d(0, 0, 0) rotateZ(calc(var(--ring-z) + 250deg)) rotateX(calc(var(--ring-x) - 44deg)) rotateY(calc(var(--ring-y) + 20deg)) rotateZ(304deg) scale(var(--ring-depth));
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) rotateZ(calc(var(--ring-z) + 360deg)) rotateX(var(--ring-x)) rotateY(var(--ring-y)) rotateZ(360deg) scale(var(--ring-depth));
+  }
+}
+
+@keyframes studio-ring-gyroscope-b {
+  0% {
+    transform: translate3d(0, 0, 0) rotateY(var(--ring-y)) rotateZ(var(--ring-z)) rotateX(var(--ring-x)) rotateZ(0deg) scale(var(--ring-depth));
+  }
+
+  25% {
+    transform: translate3d(0, 0, 0) rotateY(calc(var(--ring-y) - 42deg)) rotateZ(calc(var(--ring-z) + 96deg)) rotateX(calc(var(--ring-x) + 38deg)) rotateZ(122deg) scale(var(--ring-depth));
+  }
+
+  50% {
+    transform: translate3d(0, 0, 0) rotateY(calc(var(--ring-y) + 58deg)) rotateZ(calc(var(--ring-z) + 184deg)) rotateX(calc(var(--ring-x) - 22deg)) rotateZ(228deg) scale(var(--ring-depth));
+  }
+
+  75% {
+    transform: translate3d(0, 0, 0) rotateY(calc(var(--ring-y) - 20deg)) rotateZ(calc(var(--ring-z) + 282deg)) rotateX(calc(var(--ring-x) + 52deg)) rotateZ(318deg) scale(var(--ring-depth));
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) rotateY(var(--ring-y)) rotateZ(calc(var(--ring-z) + 360deg)) rotateX(var(--ring-x)) rotateZ(360deg) scale(var(--ring-depth));
+  }
+}
+
+@keyframes studio-ring-gyroscope-c {
+  0% {
+    transform: translate3d(0, 0, 0) rotateX(var(--ring-x)) rotateZ(var(--ring-z)) rotateY(var(--ring-y)) rotateZ(0deg) scale(var(--ring-depth));
+  }
+
+  25% {
+    transform: translate3d(0, 0, 0) rotateX(calc(var(--ring-x) + 34deg)) rotateZ(calc(var(--ring-z) - 82deg)) rotateY(calc(var(--ring-y) - 46deg)) rotateZ(96deg) scale(var(--ring-depth));
+  }
+
+  50% {
+    transform: translate3d(0, 0, 0) rotateX(calc(var(--ring-x) - 50deg)) rotateZ(calc(var(--ring-z) - 170deg)) rotateY(calc(var(--ring-y) + 30deg)) rotateZ(204deg) scale(var(--ring-depth));
+  }
+
+  75% {
+    transform: translate3d(0, 0, 0) rotateX(calc(var(--ring-x) + 16deg)) rotateZ(calc(var(--ring-z) - 278deg)) rotateY(calc(var(--ring-y) + 60deg)) rotateZ(300deg) scale(var(--ring-depth));
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) rotateX(var(--ring-x)) rotateZ(calc(var(--ring-z) - 360deg)) rotateY(var(--ring-y)) rotateZ(360deg) scale(var(--ring-depth));
+  }
+}
+
+@media (max-width: 760px) {
+  .studio-world__css-rings {
+    perspective: 900px;
+  }
+
+  .studio-world__ring--one,
+  .studio-world__ring--two,
+  .studio-world__ring--three,
+  .studio-world__ring--four {
+    animation-duration: 22s !important;
+  }
+}
+
+/* V4 stable nested orbit fix.
+   The V3 gyroscope motion could briefly turn a ring almost edge-on, which made thin rings look like
+   they disappeared before coming back. Keep the nested inside-each-other motion, but clamp the 3D tilt
+   range and force both sides of each ring to remain paintable. */
+.studio-world__ring {
+  backface-visibility: visible !important;
+  -webkit-backface-visibility: visible !important;
+  transform-style: preserve-3d !important;
+  animation-timing-function: linear !important;
+}
+
+.studio-world__ring--one {
+  --ring-x: 62deg;
+  --ring-y: 14deg;
+  --ring-z: 0deg;
+  --ring-z-depth: 8px;
+  --ring-swing-x: 10deg;
+  --ring-swing-y: -12deg;
+  animation-name: studio-ring-nested-visible-a !important;
+  animation-duration: 15s !important;
+}
+
+.studio-world__ring--two {
+  --ring-x: 44deg;
+  --ring-y: 54deg;
+  --ring-z: -36deg;
+  --ring-z-depth: -4px;
+  --ring-swing-x: -12deg;
+  --ring-swing-y: 10deg;
+  animation-name: studio-ring-nested-visible-b !important;
+  animation-duration: 19s !important;
+}
+
+.studio-world__ring--three {
+  --ring-x: 70deg;
+  --ring-y: -24deg;
+  --ring-z: 46deg;
+  --ring-z-depth: 4px;
+  --ring-swing-x: -10deg;
+  --ring-swing-y: 14deg;
+  animation-name: studio-ring-nested-visible-c !important;
+  animation-duration: 23s !important;
+}
+
+.studio-world__ring--four {
+  --ring-x: 50deg;
+  --ring-y: -52deg;
+  --ring-z: 92deg;
+  --ring-z-depth: -8px;
+  --ring-swing-x: 12deg;
+  --ring-swing-y: -10deg;
+  animation-name: studio-ring-nested-visible-b !important;
+  animation-duration: 17s !important;
+  animation-direction: reverse !important;
+}
+
+.studio-world__ring::before,
+.studio-world__ring::after {
+  content: none;
+  display: none;
+}
+
+.studio-world__ring,
+.studio-world__ring--one,
+.studio-world__ring--two,
+.studio-world__ring--three,
+.studio-world__ring--four {
+  box-shadow: none;
+  filter: none;
+}
+
+.studio-world__ring--five {
+  --ring-x: 74deg;
+  --ring-y: 30deg;
+  --ring-z: -76deg;
+  --ring-z-depth: 2px;
+  --ring-swing-x: -8deg;
+  --ring-swing-y: -12deg;
+  animation-name: studio-ring-nested-visible-c !important;
+  animation-duration: 30s !important;
+}
+
+.studio-world__ring--six {
+  --ring-x: 38deg;
+  --ring-y: 62deg;
+  --ring-z: 132deg;
+  --ring-z-depth: -12px;
+  --ring-swing-x: 10deg;
+  --ring-swing-y: -8deg;
+  animation-name: studio-ring-nested-visible-a !important;
+  animation-duration: 36s !important;
+  animation-direction: reverse !important;
+}
+
+@keyframes studio-ring-nested-visible-a {
+  0% {
+    transform: translate3d(0, 0, var(--ring-z-depth)) rotateZ(var(--ring-z)) rotateX(var(--ring-x)) rotateY(var(--ring-y)) rotateZ(0deg) scale(var(--ring-depth));
+  }
+
+  33% {
+    transform: translate3d(0, 0, var(--ring-z-depth)) rotateZ(calc(var(--ring-z) + 108deg)) rotateX(calc(var(--ring-x) + var(--ring-swing-x))) rotateY(calc(var(--ring-y) + var(--ring-swing-y))) rotateZ(126deg) scale(var(--ring-depth));
+  }
+
+  66% {
+    transform: translate3d(0, 0, var(--ring-z-depth)) rotateZ(calc(var(--ring-z) + 236deg)) rotateX(calc(var(--ring-x) - var(--ring-swing-x))) rotateY(calc(var(--ring-y) - var(--ring-swing-y))) rotateZ(248deg) scale(var(--ring-depth));
+  }
+
+  100% {
+    transform: translate3d(0, 0, var(--ring-z-depth)) rotateZ(calc(var(--ring-z) + 360deg)) rotateX(var(--ring-x)) rotateY(var(--ring-y)) rotateZ(360deg) scale(var(--ring-depth));
+  }
+}
+
+@keyframes studio-ring-nested-visible-b {
+  0% {
+    transform: translate3d(0, 0, var(--ring-z-depth)) rotateY(var(--ring-y)) rotateZ(var(--ring-z)) rotateX(var(--ring-x)) rotateZ(0deg) scale(var(--ring-depth));
+  }
+
+  33% {
+    transform: translate3d(0, 0, var(--ring-z-depth)) rotateY(calc(var(--ring-y) + var(--ring-swing-y))) rotateZ(calc(var(--ring-z) + 116deg)) rotateX(calc(var(--ring-x) + var(--ring-swing-x))) rotateZ(118deg) scale(var(--ring-depth));
+  }
+
+  66% {
+    transform: translate3d(0, 0, var(--ring-z-depth)) rotateY(calc(var(--ring-y) - var(--ring-swing-y))) rotateZ(calc(var(--ring-z) + 242deg)) rotateX(calc(var(--ring-x) - var(--ring-swing-x))) rotateZ(246deg) scale(var(--ring-depth));
+  }
+
+  100% {
+    transform: translate3d(0, 0, var(--ring-z-depth)) rotateY(var(--ring-y)) rotateZ(calc(var(--ring-z) + 360deg)) rotateX(var(--ring-x)) rotateZ(360deg) scale(var(--ring-depth));
+  }
+}
+
+@keyframes studio-ring-nested-visible-c {
+  0% {
+    transform: translate3d(0, 0, var(--ring-z-depth)) rotateX(var(--ring-x)) rotateZ(var(--ring-z)) rotateY(var(--ring-y)) rotateZ(0deg) scale(var(--ring-depth));
+  }
+
+  33% {
+    transform: translate3d(0, 0, var(--ring-z-depth)) rotateX(calc(var(--ring-x) + var(--ring-swing-x))) rotateZ(calc(var(--ring-z) - 104deg)) rotateY(calc(var(--ring-y) + var(--ring-swing-y))) rotateZ(112deg) scale(var(--ring-depth));
+  }
+
+  66% {
+    transform: translate3d(0, 0, var(--ring-z-depth)) rotateX(calc(var(--ring-x) - var(--ring-swing-x))) rotateZ(calc(var(--ring-z) - 232deg)) rotateY(calc(var(--ring-y) - var(--ring-swing-y))) rotateZ(238deg) scale(var(--ring-depth));
+  }
+
+  100% {
+    transform: translate3d(0, 0, var(--ring-z-depth)) rotateX(var(--ring-x)) rotateZ(calc(var(--ring-z) - 360deg)) rotateY(var(--ring-y)) rotateZ(360deg) scale(var(--ring-depth));
+  }
+}
+
+
+/* V5 four-ring test pass.
+   Render only four rings from StudioWorld.jsx and keep the stable nested rotation balanced around the planet. */
+.studio-world__ring--one {
+  --ring-depth: 1;
+  --ring-x: 62deg;
+  --ring-y: 14deg;
+  --ring-z: 0deg;
+  --ring-z-depth: 8px;
+  --ring-swing-x: 10deg;
+  --ring-swing-y: -12deg;
+  animation-name: studio-ring-nested-visible-a !important;
+  animation-duration: 15s !important;
+  opacity: 0.95 !important;
+}
+
+.studio-world__ring--two {
+  --ring-depth: 0.98;
+  --ring-x: 44deg;
+  --ring-y: 54deg;
+  --ring-z: -36deg;
+  --ring-z-depth: -4px;
+  --ring-swing-x: -12deg;
+  --ring-swing-y: 10deg;
+  animation-name: studio-ring-nested-visible-b !important;
+  animation-duration: 19s !important;
+  opacity: 0.84 !important;
+}
+
+.studio-world__ring--three {
+  --ring-depth: 0.96;
+  --ring-x: 70deg;
+  --ring-y: -24deg;
+  --ring-z: 46deg;
+  --ring-z-depth: 4px;
+  --ring-swing-x: -10deg;
+  --ring-swing-y: 14deg;
+  animation-name: studio-ring-nested-visible-c !important;
+  animation-duration: 23s !important;
+  opacity: 0.72 !important;
+}
+
+.studio-world__ring--four {
+  --ring-depth: 0.99;
+  --ring-x: 50deg;
+  --ring-y: -52deg;
+  --ring-z: 92deg;
+  --ring-z-depth: -8px;
+  --ring-swing-x: 12deg;
+  --ring-swing-y: -10deg;
+  animation-name: studio-ring-nested-visible-b !important;
+  animation-duration: 17s !important;
+  animation-direction: reverse !important;
+  opacity: 0.68 !important;
+}
+
+/* V6: wider continuous rings.
+   Keeps the 4-ring nested orbit, but removes the segmented conic/mask layer that made
+   parts of the ring appear to disappear while rotating. */
+.studio-world__ring {
+  background: transparent !important;
+  border-style: solid !important;
+  border-width: 4px !important;
+  overflow: visible !important;
+  transform-style: preserve-3d !important;
+  backface-visibility: visible !important;
+  animation-timing-function: linear !important;
+  animation-iteration-count: infinite !important;
+  will-change: transform;
+}
+
+.studio-world__ring::before {
+  inset: -5px !important;
+  border: 2px solid rgba(224, 242, 254, 0.34) !important;
+  border-radius: inherit !important;
+  background: transparent !important;
+  -webkit-mask: none !important;
+  mask: none !important;
+  box-shadow:
+    0 0 14px rgba(34, 211, 238, 0.28),
+    inset 0 0 12px rgba(224, 242, 254, 0.18) !important;
+  opacity: 0.78 !important;
+}
+
+.studio-world__ring::after {
+  opacity: 0.72 !important;
+}
+
+.studio-world__ring--one {
+  width: min(94vw, 1040px) !important;
+  --ring-x: 58deg;
+  --ring-y: 14deg;
+  --ring-start: 8deg;
+  --ring-depth: 1;
+  --ring-sway-x: 2deg;
+  --ring-sway-y: -2deg;
+  border-color: rgba(125, 211, 252, 0.94) !important;
+  box-shadow:
+    0 0 22px rgba(34, 211, 238, 0.42),
+    0 0 58px rgba(34, 211, 238, 0.18),
+    inset 0 0 18px rgba(224, 242, 254, 0.18) !important;
+  animation-name: studio-ring-continuous-forward !important;
+  animation-duration: 14s !important;
+  opacity: 0.96 !important;
+}
+
+.studio-world__ring--two {
+  width: min(116vw, 1280px) !important;
+  --ring-x: 64deg;
+  --ring-y: -20deg;
+  --ring-start: -32deg;
+  --ring-depth: 0.99;
+  --ring-sway-x: -2deg;
+  --ring-sway-y: 2deg;
+  border-color: rgba(240, 171, 252, 0.76) !important;
+  box-shadow:
+    0 0 24px rgba(240, 171, 252, 0.34),
+    0 0 62px rgba(34, 211, 238, 0.16),
+    inset 0 0 18px rgba(240, 171, 252, 0.14) !important;
+  animation-name: studio-ring-continuous-reverse !important;
+  animation-duration: 18s !important;
+  opacity: 0.88 !important;
+}
+
+.studio-world__ring--three {
+  width: min(138vw, 1520px) !important;
+  --ring-x: 52deg;
+  --ring-y: 32deg;
+  --ring-start: 42deg;
+  --ring-depth: 0.98;
+  --ring-sway-x: 2deg;
+  --ring-sway-y: -3deg;
+  border-color: rgba(45, 212, 191, 0.68) !important;
+  box-shadow:
+    0 0 22px rgba(45, 212, 191, 0.28),
+    0 0 66px rgba(192, 132, 252, 0.14),
+    inset 0 0 16px rgba(45, 212, 191, 0.12) !important;
+  animation-name: studio-ring-continuous-forward !important;
+  animation-duration: 22s !important;
+  opacity: 0.78 !important;
+}
+
+.studio-world__ring--four {
+  width: min(106vw, 1160px) !important;
+  --ring-x: 69deg;
+  --ring-y: 6deg;
+  --ring-start: 74deg;
+  --ring-depth: 1;
+  --ring-sway-x: -2deg;
+  --ring-sway-y: 2deg;
+  border-color: rgba(165, 243, 252, 0.66) !important;
+  box-shadow:
+    0 0 20px rgba(103, 232, 249, 0.28),
+    0 0 56px rgba(103, 232, 249, 0.12),
+    inset 0 0 14px rgba(103, 232, 249, 0.12) !important;
+  animation-name: studio-ring-continuous-reverse !important;
+  animation-duration: 16s !important;
+  opacity: 0.78 !important;
+}
+
+@keyframes studio-ring-continuous-forward {
+  0% {
+    transform: rotateX(var(--ring-x)) rotateY(var(--ring-y)) rotateZ(var(--ring-start)) scale(var(--ring-depth));
+  }
+
+  50% {
+    transform: rotateX(calc(var(--ring-x) + var(--ring-sway-x))) rotateY(calc(var(--ring-y) + var(--ring-sway-y))) rotateZ(calc(var(--ring-start) + 180deg)) scale(var(--ring-depth));
+  }
+
+  100% {
+    transform: rotateX(var(--ring-x)) rotateY(var(--ring-y)) rotateZ(calc(var(--ring-start) + 360deg)) scale(var(--ring-depth));
+  }
+}
+
+@keyframes studio-ring-continuous-reverse {
+  0% {
+    transform: rotateX(var(--ring-x)) rotateY(var(--ring-y)) rotateZ(var(--ring-start)) scale(var(--ring-depth));
+  }
+
+  50% {
+    transform: rotateX(calc(var(--ring-x) + var(--ring-sway-x))) rotateY(calc(var(--ring-y) + var(--ring-sway-y))) rotateZ(calc(var(--ring-start) - 180deg)) scale(var(--ring-depth));
+  }
+
+  100% {
+    transform: rotateX(var(--ring-x)) rotateY(var(--ring-y)) rotateZ(calc(var(--ring-start) - 360deg)) scale(var(--ring-depth));
+  }
+}
+
+@media (max-width: 760px) {
+  .studio-world__ring {
+    border-width: 3px !important;
+  }
+
+  .studio-world__ring::before {
+    inset: -4px !important;
+    border-width: 1px !important;
+  }
+}
+
+/* V9 ring renderer fix: use SVG strokes instead of CSS border boxes.
+   This removes the visible rectangular compositing plane that showed up while rotating,
+   and keeps oversized rings from being clipped by paint containment. */
+.studio-world {
+  overflow: visible !important;
+  contain: layout style !important;
+}
+
+.studio-world canvas,
+.studio-world__css-rings {
+  overflow: visible !important;
+}
+
+.studio-world__css-rings {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.studio-world__ring {
+  position: absolute;
+  display: block;
+  aspect-ratio: 1;
+  overflow: visible !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  filter: none !important;
+  outline: 0 !important;
+  transform-box: fill-box;
+  transform-origin: center center;
+  transform-style: preserve-3d;
+  backface-visibility: visible;
+  will-change: transform;
+}
+
+.studio-world__ring::before,
+.studio-world__ring::after {
+  content: none !important;
+  display: none !important;
+}
+
+.studio-world__ring-glow,
+.studio-world__ring-line {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+  transform-origin: center;
+}
+
+.studio-world__ring-glow {
+  stroke: currentColor;
+  stroke-width: 6.4;
+  opacity: 0.18;
+}
+
+.studio-world__ring-line {
+  stroke: currentColor;
+  stroke-width: 3.2;
+  opacity: 0.92;
+}
+
+.studio-world__ring--one {
+  width: min(86vw, 960px) !important;
+  color: rgba(34, 211, 238, 0.96);
+  animation: studio-css-ring-drift-one 11s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+.studio-world__ring--two {
+  width: min(112vw, 1300px) !important;
+  color: rgba(240, 171, 252, 0.76);
+  animation: studio-css-ring-drift-two 13s cubic-bezier(0.45, 0, 0.55, 1) infinite reverse;
+}
+
+.studio-world__ring--three {
+  width: min(140vw, 1620px) !important;
+  color: rgba(45, 212, 191, 0.66);
+  animation: studio-css-ring-drift-three 16s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+.studio-world__ring--four {
+  width: min(98vw, 1120px) !important;
+  color: rgba(165, 243, 252, 0.66);
+  animation: studio-css-ring-drift-two 9s cubic-bezier(0.45, 0, 0.55, 1) infinite reverse;
+}
+
+@media (min-width: 761px) and (max-width: 980px) {
+  .studio-world {
+    inset: -24% -32% !important;
+  }
+
+  .studio-world__ring--one { width: min(74vw, 620px) !important; }
+  .studio-world__ring--two { width: min(94vw, 780px) !important; }
+  .studio-world__ring--three { width: min(116vw, 940px) !important; }
+  .studio-world__ring--four { width: min(84vw, 700px) !important; }
+}
+
+@media (max-width: 760px) {
+  .studio-world {
+    inset: -22% -28% !important;
+  }
+
+  .studio-world__ring--one { width: min(82vw, 430px) !important; }
+  .studio-world__ring--two { width: min(102vw, 540px) !important; }
+  .studio-world__ring--three { width: min(124vw, 660px) !important; }
+  .studio-world__ring--four { width: min(92vw, 490px) !important; }
+}
+
+@media (max-width: 420px) {
+  .studio-world {
+    inset: -20% -28% !important;
+  }
+
+  .studio-world__ring--one { width: min(78vw, 330px) !important; }
+  .studio-world__ring--two { width: min(98vw, 410px) !important; }
+  .studio-world__ring--three { width: min(118vw, 500px) !important; }
+  .studio-world__ring--four { width: min(88vw, 370px) !important; }
+}
+
+/* V11 realistic Earth upgrade: use user-provided day/night/cloud textures plus normal + specular maps.
+   The planet is rendered in a lightweight Three.js canvas, while the 4 SVG rings stay in CSS so the hero keeps the same layout. */
+.studio-world__css-rings {
+  overflow: visible !important;
+}
+
+.studio-world__planet-glow {
+  width: clamp(210px, 24vw, 330px);
+  aspect-ratio: 1;
+  z-index: 1;
+  opacity: 0.9;
+  background: radial-gradient(circle, rgba(96, 165, 250, 0.34) 0%, rgba(34, 211, 238, 0.18) 42%, rgba(34, 211, 238, 0.06) 58%, transparent 74%);
+  filter: blur(14px);
+}
+
+.studio-world__earth-shell {
+  position: absolute;
+  z-index: 2;
+  width: clamp(170px, 18vw, 250px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.studio-world__earth-canvas {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: visible;
+  filter: drop-shadow(0 0 20px rgba(88, 196, 255, 0.18)) drop-shadow(0 0 40px rgba(20, 77, 163, 0.14));
+}
+
+.studio-world__earth-canvas canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+.studio-world__ring {
+  z-index: 3;
+}
+
+.studio-world__ring-glow {
+  stroke-width: 7.2;
+  opacity: 0.12;
+}
+
+.studio-world__ring-line {
+  stroke-width: 3.8;
+  opacity: 0.96;
+}
+
+@media (max-width: 980px) {
+  .studio-world__earth-shell {
+    width: clamp(158px, 20vw, 220px);
+  }
+
+  .studio-world__planet-glow {
+    width: clamp(195px, 28vw, 290px);
+  }
+}
+
+@media (max-width: 760px) {
+  .studio-world__earth-shell {
+    width: clamp(144px, 34vw, 196px);
+  }
+
+  .studio-world__planet-glow {
+    width: clamp(176px, 42vw, 260px);
+    filter: blur(12px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .studio-world__ring,
+  .studio-world__planet-glow {
+    animation: none !important;
+  }
+}
+
+/* V13 Earth-only debug/stabilization pass.
+   Rings are removed from the DOM in StudioWorld.jsx; these overrides also disable any older ring CSS that remains lower in the cascade. */
+.hero__panel-stage > .studio-world .studio-world__earth-stage {
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  width: min(760px, 76vw) !important;
+  height: min(760px, 76vw) !important;
+  transform: translate(-50%, -50%) !important;
+  transform-origin: center center !important;
+  display: grid !important;
+  place-items: center !important;
+  overflow: visible !important;
+  pointer-events: none !important;
+}
+
+.studio-world__earth-stage {
+  perspective: none !important;
+  transform-style: flat !important;
+  overflow: visible !important;
+}
+
+.studio-world__ring,
+.studio-world__ring-glow,
+.studio-world__ring-line {
+  display: none !important;
+  animation: none !important;
+}
+
+.studio-world__earth-shell {
+  z-index: 4 !important;
+  width: clamp(230px, 25vw, 360px) !important;
+  aspect-ratio: 1 !important;
+  opacity: 1 !important;
+}
+
+.studio-world__planet-glow {
+  z-index: 3 !important;
+  width: clamp(280px, 31vw, 430px) !important;
+  opacity: 0.95 !important;
+  animation: studio-planet-pulse 5.6s ease-in-out infinite;
+}
+
+.studio-world--paused .studio-world__planet-glow {
+  animation-play-state: paused !important;
+}
+
+@media (max-width: 980px) {
+  .hero__panel-stage > .studio-world .studio-world__earth-stage {
+    width: min(620px, 92vw) !important;
+    height: min(620px, 92vw) !important;
+    transform: translate(-50%, calc(-50% - 32px)) !important;
+  }
+
+  .studio-world__earth-shell {
+    width: clamp(190px, 31vw, 280px) !important;
+  }
+
+  .studio-world__planet-glow {
+    width: clamp(240px, 42vw, 350px) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .hero__panel-stage > .studio-world .studio-world__earth-stage {
+    width: min(560px, 116vw) !important;
+    height: min(560px, 116vw) !important;
+    transform: translate(-50%, calc(-50% - 24px)) !important;
+  }
+
+  .studio-world__earth-shell {
+    width: clamp(160px, 46vw, 230px) !important;
+  }
+
+  .studio-world__planet-glow {
+    width: clamp(210px, 58vw, 300px) !important;
+  }
+}
+
+/* V14 visibility fix: the old hero scene selector targeted every canvas inside StudioWorld,
+   which accidentally pulled the Earth WebGL canvas out of its globe shell. Keep the Earth
+   canvas local to the globe, then place the globe as the visible layer behind the card. */
+.hero__panel-stage > .studio-world {
+  z-index: 1 !important;
+  opacity: 1 !important;
+  overflow: visible !important;
+}
+
+.hero__panel-stage > .hero__panel {
+  z-index: 2 !important;
+  background:
+    linear-gradient(180deg, rgba(3, 7, 18, 0.58), rgba(3, 7, 18, 0.78)),
+    radial-gradient(circle at 50% 0%, rgba(53, 213, 255, 0.12), transparent 22rem) !important;
+}
+
+.hero__panel-stage > .studio-world .studio-world__earth-stage {
+  position: absolute !important;
+  z-index: 1 !important;
+  left: 50% !important;
+  top: 50% !important;
+  width: min(880px, 86vw) !important;
+  height: min(880px, 86vw) !important;
+  transform: translate(-50%, -50%) !important;
+  display: grid !important;
+  place-items: center !important;
+  overflow: visible !important;
+  pointer-events: none !important;
+}
+
+.studio-world__earth-shell {
+  position: relative !important;
+  z-index: 4 !important;
+  width: clamp(300px, 31vw, 470px) !important;
+  aspect-ratio: 1 !important;
+  display: grid !important;
+  place-items: center !important;
+  overflow: visible !important;
+  opacity: 1 !important;
+}
+
+.studio-world__earth-canvas {
+  position: relative !important;
+  z-index: 2 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 50% !important;
+  overflow: visible !important;
+}
+
+.hero__panel-stage > .studio-world .studio-world__earth-canvas canvas,
+.studio-world__earth-canvas canvas {
+  position: static !important;
+  inset: auto !important;
+  left: auto !important;
+  top: auto !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  transform: none !important;
+  transform-origin: center center !important;
+  display: block !important;
+}
+
+.studio-world__earth-fallback {
+  position: absolute !important;
+  z-index: 1 !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  opacity: 0.28 !important;
+  filter: saturate(1.2) brightness(1.15) drop-shadow(0 0 34px rgba(88, 196, 255, 0.24));
+  pointer-events: none !important;
+}
+
+.studio-world__planet-glow {
+  z-index: 3 !important;
+  width: clamp(360px, 40vw, 600px) !important;
+  opacity: 1 !important;
+}
+
+@media (max-width: 980px) {
+  .hero__panel-stage > .studio-world .studio-world__earth-stage {
+    width: min(760px, 106vw) !important;
+    height: min(760px, 106vw) !important;
+    transform: translate(-50%, calc(-50% - 22px)) !important;
+  }
+
+  .studio-world__earth-shell {
+    width: clamp(240px, 42vw, 380px) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .hero__panel-stage > .studio-world .studio-world__earth-stage {
+    width: min(660px, 132vw) !important;
+    height: min(660px, 132vw) !important;
+    transform: translate(-50%, calc(-50% - 16px)) !important;
+  }
+
+  .studio-world__earth-shell {
+    width: clamp(200px, 58vw, 310px) !important;
+  }
+
+  .hero__panel-stage > .hero__panel {
+    background:
+      linear-gradient(180deg, rgba(3, 7, 18, 0.62), rgba(3, 7, 18, 0.82)),
+      radial-gradient(circle at 50% 0%, rgba(53, 213, 255, 0.12), transparent 22rem) !important;
+  }
+}
+
+/* V16 movement fix: remove the static fallback image from the visible layer and make the WebGL Earth the only visible planet. */
+.studio-world__earth-fallback {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+.studio-world__earth-canvas {
+  z-index: 5 !important;
+  opacity: 1 !important;
+  background: transparent !important;
+}
+
+.studio-world__earth-canvas canvas {
+  opacity: 1 !important;
+  visibility: visible !important;
 }

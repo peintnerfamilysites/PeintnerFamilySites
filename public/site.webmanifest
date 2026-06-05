@@ -9,25 +9,25 @@
   "theme_color": "#020914",
   "icons": [
     {
-      "src": "favicon.png",
+      "src": "/PeintnerFamilySites/favicon.png",
       "sizes": "32x32",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "favicon.webp",
+      "src": "/PeintnerFamilySites/favicon.webp",
       "sizes": "32x32",
       "type": "image/webp",
       "purpose": "any"
     },
     {
-      "src": "apple-touch-icon.png",
+      "src": "/PeintnerFamilySites/apple-touch-icon.png",
       "sizes": "180x180",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "og-image.webp",
+      "src": "/PeintnerFamilySites/og-image.webp",
       "sizes": "512x512",
       "type": "image/webp",
       "purpose": "any"

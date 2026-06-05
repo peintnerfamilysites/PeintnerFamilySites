@@ -33,14 +33,14 @@ const overlayVariants = {
 
 const mobilePanelVariants = {
   closed: {
-    scale: 1.04,
-    filter: 'blur(10px)',
-    transition: { duration: 0.36, ease: [0.7, 0, 0.84, 0] },
+    opacity: 0.98,
+    scale: 1.025,
+    transition: { duration: 0.28, ease: [0.7, 0, 0.84, 0] },
   },
   open: {
+    opacity: 1,
     scale: 1,
-    filter: 'blur(0px)',
-    transition: { duration: 0.56, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 0.38, ease: [0.16, 1, 0.3, 1] },
   },
 };
 
