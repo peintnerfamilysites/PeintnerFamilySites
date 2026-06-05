@@ -11077,8 +11077,8 @@ button {
   z-index: 1 !important;
   left: 50% !important;
   top: 50% !important;
-  width: min(880px, 86vw) !important;
-  height: min(880px, 86vw) !important;
+  width: min(1480px, 132vw) !important;
+  height: min(1480px, 132vw) !important;
   transform: translate(-50%, -50%) !important;
   display: grid !important;
   place-items: center !important;
@@ -11089,7 +11089,7 @@ button {
 .studio-world__earth-shell {
   position: relative !important;
   z-index: 4 !important;
-  width: clamp(300px, 31vw, 470px) !important;
+  width: clamp(620px, 68vw, 900px) !important;
   aspect-ratio: 1 !important;
   display: grid !important;
   place-items: center !important;
@@ -11136,31 +11136,31 @@ button {
 
 .studio-world__planet-glow {
   z-index: 3 !important;
-  width: clamp(360px, 40vw, 600px) !important;
+  width: clamp(700px, 76vw, 1020px) !important;
   opacity: 1 !important;
 }
 
 @media (max-width: 980px) {
   .hero__panel-stage > .studio-world .studio-world__earth-stage {
-    width: min(760px, 106vw) !important;
-    height: min(760px, 106vw) !important;
+    width: min(1260px, 148vw) !important;
+    height: min(1260px, 148vw) !important;
     transform: translate(-50%, calc(-50% - 22px)) !important;
   }
 
   .studio-world__earth-shell {
-    width: clamp(240px, 42vw, 380px) !important;
+    width: clamp(470px, 72vw, 670px) !important;
   }
 }
 
 @media (max-width: 760px) {
   .hero__panel-stage > .studio-world .studio-world__earth-stage {
-    width: min(660px, 132vw) !important;
-    height: min(660px, 132vw) !important;
+    width: min(980px, 176vw) !important;
+    height: min(980px, 176vw) !important;
     transform: translate(-50%, calc(-50% - 16px)) !important;
   }
 
   .studio-world__earth-shell {
-    width: clamp(200px, 58vw, 310px) !important;
+    width: clamp(360px, 82vw, 530px) !important;
   }
 
   .hero__panel-stage > .hero__panel {
@@ -11186,4 +11186,27 @@ button {
 .studio-world__earth-canvas canvas {
   opacity: 1 !important;
   visibility: visible !important;
+}
+
+
+/* V27 large earth + safe framing: keep the animation large without clipping. */
+.hero,
+.hero__content,
+.hero__panel-stage,
+.hero__panel-stage > .studio-world,
+.hero__panel-stage > .studio-world .studio-world__earth-stage,
+.studio-world,
+.studio-world__earth-stage,
+.studio-world__earth-shell,
+.studio-world__earth-canvas,
+.studio-world__earth-canvas canvas {
+  overflow: visible !important;
+}
+
+.hero__panel-stage > .studio-world,
+.studio-world,
+.studio-world__earth-stage,
+.studio-world__earth-shell,
+.studio-world__earth-canvas {
+  contain: layout style !important;
 }

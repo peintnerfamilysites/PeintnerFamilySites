@@ -68,7 +68,7 @@ const StudioWorld = memo(function StudioWorld() {
     let camera;
     let earthGroup;
     let earth;
-    let nightLights;
+    let ringGroups = [];
     let clouds;
     let atmosphere;
     let frameStarted = false;
@@ -127,8 +127,8 @@ const StudioWorld = memo(function StudioWorld() {
       });
 
       scene = new THREE.Scene();
-      camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
-      camera.position.set(0, 0, 4.1);
+      camera = new THREE.PerspectiveCamera(46, 1, 0.1, 100);
+      camera.position.set(0, 0, 9.6);
       scene.add(camera);
 
       const rootGroup = new THREE.Group();
@@ -150,7 +150,7 @@ const StudioWorld = memo(function StudioWorld() {
       earthGroup = new THREE.Group();
       rootGroup.add(earthGroup);
 
-      const earthGeometry = new THREE.SphereGeometry(1, 96, 96);
+      const earthGeometry = new THREE.SphereGeometry(1.62, 96, 96);
       const earthMaterial = new THREE.ShaderMaterial({
         uniforms: {
           dayMap: { value: dayMap },
@@ -178,20 +178,20 @@ const StudioWorld = memo(function StudioWorld() {
             float facingLight = dot(normalize(vWorldNormal), normalize(lightDirection));
 
             // Wider blend makes the planet visibly fade from day into night as it rotates.
-            float dayAmount = smoothstep(-0.24, 0.34, facingLight);
+            float dayAmount = smoothstep(0.48, 0.92, facingLight);
             float nightAmount = 1.0 - dayAmount;
 
             vec3 dayColor = texture2D(dayMap, vUv).rgb;
             vec3 nightColor = texture2D(nightMap, vUv).rgb;
 
             // Keep the night texture visible, not just the city dots.
-            vec3 dimNightSurface = nightColor * 1.55 + vec3(0.015, 0.026, 0.055) * nightAmount;
-            vec3 litDaySurface = dayColor * (0.46 + 0.72 * dayAmount);
+            vec3 dimNightSurface = nightColor * 2.75 + vec3(0.008, 0.016, 0.042) * nightAmount;
+            vec3 litDaySurface = dayColor * (0.52 + 0.42 * dayAmount);
 
             vec3 color = mix(dimNightSurface, litDaySurface, dayAmount);
 
             // Add a soft blue terminator edge so the day/night transition reads clearly.
-            float edgeGlow = smoothstep(0.22, 0.0, abs(facingLight)) * 0.12;
+            float edgeGlow = smoothstep(0.24, 0.03, abs(facingLight)) * 0.06;
             color += vec3(0.08, 0.19, 0.34) * edgeGlow;
 
             gl_FragColor = vec4(color, 1.0);
@@ -202,7 +202,142 @@ const StudioWorld = memo(function StudioWorld() {
       earth = new THREE.Mesh(earthGeometry, earthMaterial);
       earthGroup.add(earth);
 
-      const cloudGeometry = new THREE.SphereGeometry(1.018, 64, 64);
+      const ringConfigs = [
+        {
+          radius: 2.35,
+          tube: 0.0297,
+          color: 0x2f5fbf,
+          glowColor: 0x75aef6,
+          opacity: 0.9,
+          tilt: { x: 74, y: 12, z: 10 },
+          speed: { x: 0.11, y: 0.195, z: 0.07 },
+          textureRate: 0.014,
+        },
+        {
+          radius: 2.81,
+          tube: 0.0331,
+          color: 0x3ea9c8,
+          glowColor: 0x86def2,
+          opacity: 0.76,
+          tilt: { x: 24, y: 52, z: -34 },
+          speed: { x: -0.07, y: 0.135, z: -0.095 },
+          textureRate: -0.011,
+        },
+        {
+          radius: 3.22,
+          tube: 0.0281,
+          color: 0x2ca38c,
+          glowColor: 0x73dec6,
+          opacity: 0.66,
+          tilt: { x: 108, y: -18, z: 44 },
+          speed: { x: 0.055, y: -0.09, z: 0.12 },
+          textureRate: 0.009,
+        },
+        {
+          radius: 3.61,
+          tube: 0.0264,
+          color: 0x5840b8,
+          glowColor: 0xa08fff,
+          opacity: 0.58,
+          tilt: { x: 62, y: -46, z: 78 },
+          speed: { x: -0.045, y: 0.08, z: -0.105 },
+          textureRate: -0.007,
+        },
+      ];
+
+      const ringSystem = new THREE.Group();
+      earthGroup.add(ringSystem);
+
+      ringConfigs.forEach((config) => {
+        const ringGroup = new THREE.Group();
+        ringGroup.rotation.set(
+          THREE.MathUtils.degToRad(config.tilt.x),
+          THREE.MathUtils.degToRad(config.tilt.y),
+          THREE.MathUtils.degToRad(config.tilt.z),
+        );
+
+        const ringGeometry = new THREE.TorusGeometry(config.radius, config.tube, 24, 240);
+
+        const ringMaterial = new THREE.ShaderMaterial({
+          uniforms: {
+            dayMap: { value: dayMap },
+            nightMap: { value: nightMap },
+            lightDirection: { value: sun.position.clone().normalize() },
+            baseColor: { value: new THREE.Color(config.color) },
+            glowColor: { value: new THREE.Color(config.glowColor) },
+            ringOpacity: { value: config.opacity },
+            textureOffset: { value: 0 },
+          },
+          vertexShader: `
+            varying vec2 vUv;
+            varying vec3 vWorldNormal;
+            varying vec3 vViewNormal;
+
+            void main() {
+              vUv = uv;
+              vWorldNormal = normalize(mat3(modelMatrix) * normal);
+              vViewNormal = normalize(normalMatrix * normal);
+              gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            }
+          `,
+          fragmentShader: `
+            uniform sampler2D dayMap;
+            uniform sampler2D nightMap;
+            uniform vec3 lightDirection;
+            uniform vec3 baseColor;
+            uniform vec3 glowColor;
+            uniform float ringOpacity;
+            uniform float textureOffset;
+            varying vec2 vUv;
+            varying vec3 vWorldNormal;
+            varying vec3 vViewNormal;
+
+            void main() {
+              float facingLight = dot(normalize(vWorldNormal), normalize(lightDirection));
+              float dayAmount = smoothstep(0.12, 0.74, facingLight);
+              float nightAmount = 1.0 - dayAmount;
+
+              vec2 texUv = vec2(fract(vUv.x * 2.8 + textureOffset), fract(vUv.y * 1.15));
+              vec3 dayTex = texture2D(dayMap, texUv).rgb;
+              vec3 nightTex = texture2D(nightMap, texUv).rgb;
+
+              vec3 ringDay = dayTex * 0.72 + baseColor * 0.62;
+              vec3 ringNight = nightTex * 1.65 + baseColor * 0.28 + vec3(0.01, 0.018, 0.04) * nightAmount;
+              vec3 color = mix(ringNight, ringDay, dayAmount);
+              color = mix(baseColor * 0.58, color, 0.78);
+
+              float fresnel = pow(1.0 - abs(normalize(vViewNormal).z), 2.0);
+              color += glowColor * (0.16 + fresnel * 0.22);
+
+              gl_FragColor = vec4(color, ringOpacity);
+            }
+          `,
+          transparent: true,
+          side: THREE.DoubleSide,
+          depthWrite: false,
+        });
+
+        const glowMaterial = new THREE.MeshBasicMaterial({
+          color: new THREE.Color(config.glowColor),
+          transparent: true,
+          opacity: config.opacity * 0.2,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false,
+          side: THREE.DoubleSide,
+        });
+
+        const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+        const glow = new THREE.Mesh(new THREE.TorusGeometry(config.radius, config.tube * 2.3, 20, 240), glowMaterial);
+        ringGroup.add(glow);
+        ringGroup.add(ring);
+        ringGroup.userData.spin = config.speed;
+        ringGroup.userData.textureRate = config.textureRate;
+        ringGroup.userData.ringMaterial = ringMaterial;
+        ringSystem.add(ringGroup);
+        ringGroups.push(ringGroup);
+      });
+
+      const cloudGeometry = new THREE.SphereGeometry(1.65, 64, 64);
       const cloudMaterial = new THREE.MeshPhongMaterial({
         color: new THREE.Color(0xf5fbff),
         alphaMap: cloudMap,
@@ -217,7 +352,7 @@ const StudioWorld = memo(function StudioWorld() {
       clouds.rotation.z = THREE.MathUtils.degToRad(0.8);
       rootGroup.add(clouds);
 
-      const atmosphereGeometry = new THREE.SphereGeometry(1.08, 48, 48);
+      const atmosphereGeometry = new THREE.SphereGeometry(1.78, 48, 48);
       const atmosphereMaterial = new THREE.MeshBasicMaterial({
         color: new THREE.Color(0x59c7ff),
         transparent: true,
@@ -245,10 +380,20 @@ const StudioWorld = memo(function StudioWorld() {
 
         // Move both the meshes and the textures so the continent motion is obvious,
         // even behind the hero glass card.
-        if (earthGroup) earthGroup.rotation.y += delta * 0.52;
-        if (clouds) clouds.rotation.y += delta * 0.68;
-        if (atmosphere) atmosphere.rotation.y += delta * 0.1;
+        if (earthGroup) earthGroup.rotation.y += delta * 0.17;
+        if (clouds) clouds.rotation.y += delta * 0.22;
+        if (atmosphere) atmosphere.rotation.y += delta * 0.03;
+        ringGroups.forEach((ringGroup) => {
+          const spin = ringGroup.userData.spin;
+          ringGroup.rotation.x += delta * spin.x;
+          ringGroup.rotation.y += delta * spin.y;
+          ringGroup.rotation.z += delta * spin.z;
 
+          const ringMaterial = ringGroup.userData.ringMaterial;
+          if (ringMaterial?.uniforms?.textureOffset) {
+            ringMaterial.uniforms.textureOffset.value = (ringMaterial.uniforms.textureOffset.value + delta * ringGroup.userData.textureRate) % 1;
+          }
+        });
 
         renderer.render(scene, camera);
         rafId = window.requestAnimationFrame(renderFrame);
